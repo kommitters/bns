@@ -1,3 +1,5 @@
+require_relative "../dispatcher"
+
 module Services
     module Custom
         class DiscordDispatcher < Dispatcher

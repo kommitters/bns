@@ -1,15 +1,18 @@
-require_relative "business_notification_system/structs/birthday"
+require_relative "../../structs/birthday"
+require_relative "../formatter"
 
 module Services
     module Custom
         class NotionFormatter
-            includes Formatter
+            include Formatter
 
             def format(data)
                 data.map do |birthday|
-                    Birthday.new(birthday.individual_name, birthday.date)
+                    Structs::Birthday.new(birthday['individual_name'], birthday['date'])
                 end
 
                 return data
             end
         end
+    end
+end

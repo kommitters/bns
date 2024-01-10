@@ -6,5 +6,6 @@ require_relative "business_notification_system/use_cases/birthday_notifier"
 module BusinessNotificationSystem
   class Error < StandardError; end
   # Your code goes here...
-  use_case = BirthdayNotifier.new
+  use_case = UseCases::BirthdayNotifier.new
+  use_case.perform()
 end
