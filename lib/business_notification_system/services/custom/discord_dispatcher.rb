@@ -1,8 +1,8 @@
-require_relative "../dispatcher"
+require_relative "../base_dispatcher"
 
 module Services
     module Custom
-        class DiscordDispatcher < Dispatcher
+        class DiscordDispatcher < BaseDispatcher
             def dispatch(data)
                 puts 'Dispatching data to discord via webhook...'
             end

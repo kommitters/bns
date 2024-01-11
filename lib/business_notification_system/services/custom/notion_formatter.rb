@@ -1,10 +1,10 @@
 require_relative "../../structs/birthday"
-require_relative "../formatter"
+require_relative "../base_formatter"
 
 module Services
     module Custom
         class NotionFormatter
-            include Formatter
+            include BaseFormatter
 
             def format(data)
                 data.map do |birthday|

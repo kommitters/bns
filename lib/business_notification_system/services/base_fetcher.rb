@@ -1,5 +1,5 @@
 module Services
-    class Fetcher
+    class BaseFetcher
         attr_reader :connection_config
         attr_reader :data
         attr_reader :formatter

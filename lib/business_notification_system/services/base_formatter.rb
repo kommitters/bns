@@ -1,5 +1,5 @@
 module Services
-    module Formatter
+    module BaseFormatter
         def format() 
             raise "Not implemented yet."
         end

@@ -1,11 +1,11 @@
 require 'uri'
 require 'net/http'
-require_relative "../fetcher"
+require_relative "../base_fetcher"
 require_relative "notion_formatter"
 
 module Services
     module Custom
-        class NotionFetcher < Fetcher
+        class NotionFetcher < BaseFetcher
 
             def initialize(database_id)
                 @data = []
