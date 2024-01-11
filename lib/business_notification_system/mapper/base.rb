@@ -1,6 +1,6 @@
-module Services
-    module BaseFormatter
-        def format() 
+module Mapper
+    module Base
+        def map() 
             raise "Not implemented yet."
         end
     end

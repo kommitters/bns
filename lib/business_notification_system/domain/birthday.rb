@@ -1,7 +1,6 @@
-module Structs
+module Domain
     class Birthday
-        attr_reader :individual_name
-        attr_reader :date
+        attr_reader :individual_name, :date
 
         def initialize(individual_name, date)
             @individual_name = individual_name

@@ -1,5 +1,5 @@
-module Services
-    class BaseDispatcher
+module Dispatcher
+    class Base
         def dispatch() 
             raise "Not implemented yet."
         end

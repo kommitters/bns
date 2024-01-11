@@ -1,11 +1,22 @@
 module UseCases
     class UseCase
-        attr_reader :fetcher
-        attr_reader :dispatcher
-        attr_reader :formatter
+        attr_reader :fetcher, :mapper, :formatter, :dispatcher
+
+        def initialize(options)
+            @fetcher = options[:fetcher]
+            @mapper = options[:mapper]
+            @formatter = options[:formatter]
+            @dispatcher = options[:dispatcher]
+        end
 
         def perform
-            raise "Not implemented yet"
+            response = fetcher.fetch()
+
+            mappings = mapper.map(response)
+
+            formatted_payload = formatter.format(mappings)
+
+            dispatcher.dispatch(formatted_payload)
         end
     end
 end
