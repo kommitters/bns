@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "business_notification_system"
+require "bns"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in business_notification_system.gemspec
+# Specify your gem's dependencies in bns.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
@@ -10,3 +10,5 @@ gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
+
+gem "httparty"

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/business_notification_system/version"
+require_relative "lib/bns/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "business_notification_system"
-  spec.version = BusinessNotificationSystem::VERSION
+  spec.name = "bns"
+  spec.version = Bns::VERSION
   spec.authors = ["kommit"]
   spec.email = ["info@kommit.co"]
 
   spec.summary = "Business notification system"
   spec.description = "A versatile business notification system designed to accommodate a wide range of use cases"
-  spec.homepage = "https://github.com/kommitters/business-notification-system"
+  spec.homepage = "https://github.com/kommitters/bns"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
