@@ -14,24 +14,9 @@ module Fetcher
 
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
-        today = DateTime.now.strftime("%F").to_s
-
-        filter = {
-          "filter": {
-            "or": [
-              {
-                "property": "BD_this_year",
-                "date": {
-                  "equals": today
-                }
-              }
-            ]
-          },
-          "sorts": []
-        }.to_json
 
         response = HTTParty.post(url, {
-                                   body: filter,
+                                   body: config[:filter].to_json,
                                    headers: {
                                      "Authorization" => "Bearer #{config[:secret]}",
                                      "Content-Type" => "application/json",
