@@ -1,9 +1,11 @@
-module Dispatcher
-    class Base
-        attr_reader :webhook, :name
+# frozen_string_literal: true
 
-        def dispatch(payload)
-            raise "Not implemented yet."
-        end
+module Dispatcher
+  class Base
+    attr_reader :webhook, :name
+
+    def dispatch(_payload)
+      raise "Not implemented yet."
     end
+  end
 end
