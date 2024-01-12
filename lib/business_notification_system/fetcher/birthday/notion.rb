@@ -5,7 +5,6 @@ require_relative "../base"
 module Fetcher
     module Birthday
         class Notion < Base
-
             def initialize(config)
                 @config = config
             end
@@ -29,7 +28,6 @@ module Fetcher
 
             def format_response(response)
                 formatted_response = []
-                response.delete_at(0)
 
                 response.map do |value|
                     formatted_value = {}
