@@ -1,6 +1,8 @@
 module Dispatcher
     class Base
-        def dispatch() 
+        attr_reader :webhook, :name
+
+        def dispatch(payload)
             raise "Not implemented yet."
         end
     end

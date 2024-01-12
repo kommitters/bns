@@ -11,9 +11,6 @@ module Mapper
                     Domain::Birthday.new(birthday['name'], birthday['birth_date'])
                 end
 
-                puts "Mapper Response"
-                puts mapped_data
-
                 mapped_data
             end
         end

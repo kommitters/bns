@@ -7,16 +7,15 @@ require_relative "use_case"
 module UseCases 
     def self.notify_birthday_from_notion_to_discord(options)
         options = {
-            fetcher: Fetcher::Birthday::Notion.new(options[:fetch_options]), # Use a class for specific configs for fetcher and dispatcher, after everything is working
+            fetcher: Fetcher::Birthday::Notion.new(options[:fetch_options]), #!TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
             mapper: Mapper::Birthday::Notion.new,
             formatter: Formatter::Birthday::Discord.new,
             dispatcher: Dispatcher::Discord.new(options[:dispatch_options])
         }
         
-        # use_case = UseCases::UseCase.new(fetcher, dispatcher, mapper, formatter)
         use_case = UseCases::UseCase.new(options)
 
-        return use_case
+        use_case
     end
 
     # def notify_birthday_from_notion_to_email(options)

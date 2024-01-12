@@ -7,15 +7,13 @@ module Formatter
             include Base
 
             def format(data)
-                template = "{NAME}, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
+                template = "NAME, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
                 payload = ""
                 
                 data.each do |birthday|
-                    payload += template.gsub("{NAME}", birthday.individual_name) + '\n'
+                    payload += template.gsub("NAME", birthday.individual_name) + '\n '
                 end
 
-                puts "Formatter Response"
-                puts payload
                 payload
             end
         end

@@ -5,23 +5,59 @@ require_relative "../base"
 module Fetcher
     module Birthday
         class Notion < Base
+
             def initialize(config)
-                @data = []
                 @config = config
             end
 
             def fetch()
-                formatted_response = [{'name' => 'name1', 'birth_date' => '12-10-1994'}, {'name' => 'name2', 'birth_date' => '12-10-1996'}]
-                puts "Fetcher Response => "
-                puts formatted_response
+                url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
+                ### for filters include a filter attribute in the query params.
+
+                response = HTTParty.post(url, {
+                    headers: {
+                        "Authorization" => "Bearer #{config[:secret]}",
+                        "Content-Type" => 'application/json',
+                        "Notion-Version" => '2022-06-28'
+                    }
+                })
+
+                formatted_response = format_response(response['results'])
+
+                formatted_response
+            end
+
+            def format_response(response)
+                formatted_response = []
+                response.delete_at(0)
+
+                response.map do |value|
+                    formatted_value = {}
+                    properties = value['properties']
+                    properties.delete('Name')
+
+                    properties.each do |k, v|
+                        if k == 'Full Name'
+                            formatted_value['name'] = extract_rich_text_field_value(v)
+                        else
+                            formatted_value['birth_date'] = extract_date_field_value(v)
+                        end
+                    end
+
+                    formatted_response.append(formatted_value)
+                end
 
                 formatted_response
             end
 
             private
 
-            def format_response()
+            def extract_rich_text_field_value(data)
+                data['rich_text'][0]['plain_text']
+            end
 
+            def extract_date_field_value(data)
+                data['date']['start']
             end
         end
     end
