@@ -1,4 +1,5 @@
 require "httparty"
+require 'date'
 
 require_relative "../base"
 
@@ -11,9 +12,24 @@ module Fetcher
 
             def fetch()
                 url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
-                ### for filters include a filter attribute in the query params.
+                today = DateTime.now().strftime("%F").to_s
+
+                filter = {
+                    "filter": {
+                        "or": [
+                            {
+                                "property": "BD_this_year",
+                                "date": {
+                                    "equals": today
+                                }
+                            }
+                        ]
+                    },
+                    "sorts": []
+                }.to_json
 
                 response = HTTParty.post(url, {
+                    body: filter,
                     headers: {
                         "Authorization" => "Bearer #{config[:secret]}",
                         "Content-Type" => 'application/json',
