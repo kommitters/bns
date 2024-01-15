@@ -2,7 +2,7 @@
 
 module Formatter
   module Base
-    def format
+    def format(_data)
       raise "Not implemented yet."
     end
   end

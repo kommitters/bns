@@ -4,11 +4,6 @@ require_relative "base"
 
 module Dispatcher
   class Discord < Base
-    def initialize(config)
-      @webhook = config[:webhook]
-      @name = config[:name]
-    end
-
     def dispatch(payload)
       body = {
         username: name,
@@ -16,14 +11,12 @@ module Dispatcher
         content: payload
       }.to_json
 
-      HTTParty.post(webhook, {
-                      body: body,
-                      headers: {
-                        "Content-Type" => "application/json"
-                      }
-                    })
-
-      puts "Dispatch successfully!"
+      response = HTTParty.post(webhook, {
+                                 body: body,
+                                 headers: {
+                                   "Content-Type" => "application/json"
+                                 }
+                               })
     end
   end
 end

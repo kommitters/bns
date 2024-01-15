@@ -8,10 +8,6 @@ require_relative "../base"
 module Fetcher
   module Birthday
     class Notion < Base
-      def initialize(config)
-        @config = config
-      end
-
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
 

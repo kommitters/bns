@@ -2,7 +2,7 @@
 
 module Mapper
   module Base
-    def map
+    def map(_data)
       raise "Not implemented yet."
     end
   end
