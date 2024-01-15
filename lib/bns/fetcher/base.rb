@@ -12,7 +12,7 @@ module Fetcher
       raise "Not implemented yet."
     end
 
-    def format_response(_response)
+    def normalize_response(_response)
       raise "Not implemented yet."
     end
   end

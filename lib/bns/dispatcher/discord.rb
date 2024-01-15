@@ -11,12 +11,7 @@ module Dispatcher
         content: payload
       }.to_json
 
-      response = HTTParty.post(webhook, {
-                                 body: body,
-                                 headers: {
-                                   "Content-Type" => "application/json"
-                                 }
-                               })
+      HTTParty.post(webhook, { body: body, headers: { "Content-Type" => "application/json" } })
     end
   end
 end
