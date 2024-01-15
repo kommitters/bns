@@ -11,7 +11,7 @@ RSpec.describe Fetcher::Base do
 
     it { expect(described_class).to respond_to(:new).with(1).arguments }
     it { expect(@fetcher).to respond_to(:fetch).with(0).arguments }
-    it { expect(@fetcher).to respond_to(:format_response).with(1).arguments }
+    it { expect(@fetcher).to respond_to(:normalize_response).with(1).arguments }
   end
 
   describe ".fetch" do
@@ -23,7 +23,7 @@ RSpec.describe Fetcher::Base do
   describe ".format_response" do
     it "provides no implementation of the method" do
       response = {}
-      expect { @fetcher.format_response(response) }.to raise_exception("Not implemented yet.")
+      expect { @fetcher.normalize_response(response) }.to raise_exception("Not implemented yet.")
     end
   end
 end
