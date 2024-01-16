@@ -6,7 +6,7 @@ RSpec.describe Formatter::Base do
   describe ".format" do
     let(:testing_class) { Class.new { include Formatter::Base } }
 
-    it "provides no implementation of the method" do
+    it "provides no implementation for the method" do
       instace = testing_class.new
       data = []
       expect { instace.format(data) }.to raise_exception("Not implemented yet.")
