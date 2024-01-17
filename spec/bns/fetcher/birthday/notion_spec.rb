@@ -90,7 +90,7 @@ RSpec.describe Fetcher::Birthday::Notion do
       end
     end
 
-    it "provided database_id doesn't match any database" do
+    it "with provided database_id not matching any database" do
       VCR.use_cassette("notion_birthdays_with_invalid_database_id") do
         config = @config
         config[:database_id] = "a17e556d16c84272beb4ee73ab709630"
@@ -100,7 +100,7 @@ RSpec.describe Fetcher::Birthday::Notion do
       end
     end
 
-    it "provided api_key is invalid or incorrect" do
+    it "with invalid or incorrect api_key provided" do
       VCR.use_cassette("notion_birthdays_with_invalid_api_key") do
         config = @config
         config[:secret] = "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
