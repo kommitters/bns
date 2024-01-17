@@ -22,6 +22,7 @@ module Fetcher
       end
 
       def normalize_response(response)
+        return [] if response == nil
         normalized_response = []
 
         response.map do |value|

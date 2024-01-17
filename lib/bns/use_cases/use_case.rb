@@ -14,11 +14,13 @@ module UseCases
     def perform
       response = fetcher.fetch
 
-      mappings = mapper.map(response)
+      if response.length > 0
+        mappings = mapper.map(response)
 
-      formatted_payload = formatter.format(mappings)
+        formatted_payload = formatter.format(mappings)
 
-      dispatcher.dispatch(formatted_payload)
+        dispatcher.dispatch(formatted_payload)
+      end
     end
   end
 end
