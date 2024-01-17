@@ -5,7 +5,8 @@ RSpec.describe Fetcher::Birthday::Notion do
     @config = {
       base_url: "https://api.notion.com",
       database_id: "c17e556d16c84272beb4ee73ab709631",
-      secret: "secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B"
+      secret: "secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B",
+      filter: {}
     }
 
     @fetcher = described_class.new(@config)
@@ -78,29 +79,34 @@ RSpec.describe Fetcher::Birthday::Notion do
       VCR.use_cassette("notion_birthdays_with_empty_database") do
         today = DateTime.now.strftime("%F").to_s
 
-        config = @config.merge(
-          {
-            filter: {
-              "filter": {
-                "or": [
-                  {
-                    "property": "BD_this_year",
-                    "date": {
-                      "equals": today
-                    }
-                  }
-                ]
-              },
-              "sorts": []
-            }
-          }
-        )
+        config = @config
+        config[:database_id] = "w17e556d16c84272beb4ee73ab709639"
 
         birthday_fetcher = described_class.new(config)
         fetched_data = birthday_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Array)
         expect(fetched_data.length).to eq(0)
+      end
+    end
+
+    it "provided database_id doesn't match any database" do
+      VCR.use_cassette("notion_birthdays_with_invalid_database_id") do
+        config = @config
+        config[:database_id] = "a17e556d16c84272beb4ee73ab709630"
+        birthday_fetcher = described_class.new(@config)
+
+        expect { birthday_fetcher.fetch }.to raise_exception("Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. Make sure the relevant pages and databases are shared with your integration.")
+      end
+    end
+
+    it "provided api_key is invalid or incorrect" do
+      VCR.use_cassette("notion_birthdays_with_invalid_api_key") do
+        config = @config
+        config[:secret] = "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
+        birthday_fetcher = described_class.new(config)
+
+        expect { birthday_fetcher.fetch }.to raise_exception("API token is invalid.")
       end
     end
   end

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.notion.com/v1/databases/c17e556d16c84272beb4ee73ab709631/query
+    uri: https://api.notion.com/v1/databases/w17e556d16c84272beb4ee73ab709639/query
     body:
       encoding: UTF-8
       string: '{"filter":{"or":[{"property":"BD_this_year","date":{"equals":"2024-01-17"}}]},"sorts":[]}'
