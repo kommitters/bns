@@ -73,6 +73,36 @@ RSpec.describe Fetcher::Birthday::Notion do
         expect(fetched_data).to match_array(expected)
       end
     end
+
+    it "fetch empty data from the given configured notion database" do
+      VCR.use_cassette("notion_birthdays_with_empty_database") do
+        today = DateTime.now.strftime("%F").to_s
+
+        config = @config.merge(
+          {
+            filter: {
+              "filter": {
+                "or": [
+                  {
+                    "property": "BD_this_year",
+                    "date": {
+                      "equals": today
+                    }
+                  }
+                ]
+              },
+              "sorts": []
+            }
+          }
+        )
+
+        birthday_fetcher = described_class.new(config)
+        fetched_data = birthday_fetcher.fetch
+
+        expect(fetched_data).to be_an_instance_of(Array)
+        expect(fetched_data.length).to eq(0)
+      end
+    end
   end
 
   # Confirm if the normalize function will be part of the fetcher, or we should handle that as a separate class/module
