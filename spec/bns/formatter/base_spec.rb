@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe Formatter::Base do
-  #   it { is_expected.to respond_to(:format).with(1).arguments }
-
   describe ".format" do
     let(:testing_class) { Class.new { include Formatter::Base } }
 

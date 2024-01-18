@@ -22,7 +22,8 @@ module Fetcher
       end
 
       def normalize_response(response)
-        return [] if response == nil
+        return [] if response.nil?
+
         normalized_response = []
 
         response.map do |value|
@@ -40,14 +41,12 @@ module Fetcher
       private
 
       def validate_response(response)
-        error_codes  = [401, 404]
+        error_codes = [401, 404]
 
         begin
-          if error_codes.include?(response["status"])
-            raise response["message"]
-          else
-            return response
-          end
+          raise response["message"] if error_codes.include?(response["status"])
+
+          response
         rescue ArgumentError => e
           puts "Fetcher::Birthday::Notion Error: #{e.message}"
         end
