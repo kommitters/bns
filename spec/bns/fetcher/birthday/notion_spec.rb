@@ -12,7 +12,7 @@ RSpec.describe Fetcher::Birthday::Notion do
     @fetcher = described_class.new(@config)
   end
 
-  describe "Arguments and methods" do
+  describe "attributes and arguments" do
     it { expect(@fetcher).to respond_to(:config) }
 
     it { expect(described_class).to respond_to(:new).with(1).arguments }
@@ -77,8 +77,6 @@ RSpec.describe Fetcher::Birthday::Notion do
 
     it "fetch empty data from the given configured notion database" do
       VCR.use_cassette("notion_birthdays_with_empty_database") do
-        today = DateTime.now.strftime("%F").to_s
-
         config = @config
         config[:database_id] = "w17e556d16c84272beb4ee73ab709639"
 
@@ -90,17 +88,19 @@ RSpec.describe Fetcher::Birthday::Notion do
       end
     end
 
-    it "with provided database_id not matching any database" do
+    it "raises an exception caused by invalid database_id provided" do
       VCR.use_cassette("notion_birthdays_with_invalid_database_id") do
         config = @config
         config[:database_id] = "a17e556d16c84272beb4ee73ab709630"
         birthday_fetcher = described_class.new(@config)
 
-        expect { birthday_fetcher.fetch }.to raise_exception("Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. Make sure the relevant pages and databases are shared with your integration.")
+        expect {
+          birthday_fetcher.fetch
+        }.to raise_exception("Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. Make sure the relevant pages and databases are shared with your integration.")
       end
     end
 
-    it "with invalid or incorrect api_key provided" do
+    it "raise an exception caused by invalid or incorrect api_key provided" do
       VCR.use_cassette("notion_birthdays_with_invalid_api_key") do
         config = @config
         config[:secret] = "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
