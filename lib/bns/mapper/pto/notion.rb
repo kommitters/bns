@@ -10,7 +10,7 @@ module Mapper
 
       def map(data)
         data.map do |pto|
-          Domain::Pto.new(pto["name"], format_date(pto["from"]), format_date(pto["to"]))
+          Domain::Pto.new(pto["name"], format_date(pto["start"]), format_date(pto["to"]))
         end
       end
 
