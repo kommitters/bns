@@ -30,9 +30,9 @@ module Fetcher
           properties = value["properties"]
           properties.delete("Name")
 
-          formatted_value = normalize(properties)
+          normalized_value = normalize(properties)
 
-          normalized_response.append(formatted_value)
+          normalized_response.append(normalized_value)
         end
 
         normalized_response
