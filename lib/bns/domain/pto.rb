@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Structs
+module Domain
   class Pto
     attr_reader :individual_name, :start_date, :end_date
 
