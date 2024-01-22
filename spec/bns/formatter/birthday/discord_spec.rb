@@ -14,11 +14,13 @@ RSpec.describe Formatter::Birthday::Discord do
   describe ".format" do
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
+      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\nJohn Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
 
       expect(formatted_message).to be_an_instance_of(String)
+      expect(formatted_message).to eq(expectation)
     end
 
-    it "format the given data into a specific message" do
+    it "raises an exception when the data is not Domain::Birthday type" do
       invalid_data = [{ name: "John Doe", birth_date: "2024-01-18" },
                       { name: "Jane Doe", birth_date: "2024-01-19" }]
 
