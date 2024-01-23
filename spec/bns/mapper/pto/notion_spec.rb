@@ -15,24 +15,12 @@ RSpec.describe Mapper::Pto::Notion do
   describe ".format" do
     it "maps the given data into a domain specific one" do
       mapped_data = @mapper.map(@data)
-      # expected_data = [
-      #   Domain::Pto.new("Range PTO", "2024-01-11", "2024-01-13"),
-      #   Domain::Pto.new("Time PTO", "2024-01-20|12:00 AM", "2024-01-20|03:00 PM"),
-      #   Domain::Pto.new("Day PTO", "2024-01-11", "")
-      # ]
 
       are_ptos = mapped_data.all? { |element| element.is_a?(Domain::Pto) }
 
       expect(mapped_data).to be_an_instance_of(Array)
       expect(mapped_data.length).to eq(3)
       expect(are_ptos).to be_truthy
-
-      # expect { mapped_data }.to eq(expected_data)
-
-      # mapped_data.each_with_index do |e, i|
-      #   expect(e).to have_attributes(individual_name: @data[i]["name"],
-      #                                start_date: @data[i]["start"], end_date: @data[i]["end"])
-      # end
     end
   end
 end
