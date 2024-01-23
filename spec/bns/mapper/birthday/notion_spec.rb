@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mapper::Birthday::Notion do
   before do
     @data = [{ name: "Jane Doe", birth_date: "2024-01-11" }, { name: "Jhon Doe", birth_date: "2024-01-11" }]

@@ -9,7 +9,8 @@ require_relative "use_case"
 module UseCases
   def self.notify_birthday_from_notion_to_discord(options)
     options = {
-      fetcher: Fetcher::Birthday::Notion.new(options[:fetch_options]), # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
+      # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
+      fetcher: Fetcher::Birthday::Notion.new(options[:fetch_options]),
       mapper: Mapper::Birthday::Notion.new,
       formatter: Formatter::Birthday::Discord.new,
       dispatcher: Dispatcher::Discord.new(options[:dispatch_options])

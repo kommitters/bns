@@ -94,9 +94,12 @@ RSpec.describe Fetcher::Birthday::Notion do
         config[:database_id] = "a17e556d16c84272beb4ee73ab709630"
         birthday_fetcher = described_class.new(@config)
 
-        expect {
+        expected_exception = "Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. " \
+                             "Make sure the relevant pages and databases are shared with your integration."
+
+        expect do
           birthday_fetcher.fetch
-        }.to raise_exception("Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. Make sure the relevant pages and databases are shared with your integration.")
+        end.to raise_exception(expected_exception)
       end
     end
 
