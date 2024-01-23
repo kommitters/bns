@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notion.com/v1/databases/b68d11061aad43bd89f8f525ede2b598/query
+    body:
+      encoding: UTF-8
+      string: '{"filter":{"and":[{"property":"Today?","formula":{"checkbox":{"equals":true}}}]},"sorts":[]}'
+    headers:
+      Authorization:
+      - Bearer secret_4x5x2CH9WKwhnptlUIJfI211CGyTTcgkjjcbr3AAO1q
+      Content-Type:
+      - application/json
+      Notion-Version:
+      - '2022-06-28'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 23 Jan 2024 00:29:15 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - f13b3230-e8a2-49ba-8987-78964245408c
+      Etag:
+      - W/"5e4-xS44Eak6AGK4nICnAMqyETZl2ek"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=xuUHwVqHSTE4x4_3VrODj.42pY6t01Gs7ak3FLDfqtQ-1705969755-1-Aco2o4byyul5beu8z8O/DRWzNLAtEZSqajxnaeoZKdE3b76AyyQN+afpVP9wWzCdrbZho4zy86hRe9+MS8yIQ1A=;
+        path=/; expires=Tue, 23-Jan-24 00:59:15 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 849bebda8f53f79c-BOG
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJvYmplY3QiOiJsaXN0IiwicmVzdWx0cyI6W3sib2JqZWN0IjoicGFnZSIsImlkIjoiY2M4NDlmMjAtODZlNC00ZGMyLWIyYWMtM2VmYjA1MjQxYjRlIiwiY3JlYXRlZF90aW1lIjoiMjAyNC0wMS0xOVQyMToyOTowMC4wMDBaIiwibGFzdF9lZGl0ZWRfdGltZSI6IjIwMjQtMDEtMjJUMTQ6NTY6MDAuMDAwWiIsImNyZWF0ZWRfYnkiOnsib2JqZWN0IjoidXNlciIsImlkIjoiYzZiOGExZDctYWQyMS00YmFkLTkyYTktNmM1MzEwZWM4MjVhIn0sImxhc3RfZWRpdGVkX2J5Ijp7Im9iamVjdCI6InVzZXIiLCJpZCI6ImM2YjhhMWQ3LWFkMjEtNGJhZC05MmE5LTZjNTMxMGVjODI1YSJ9LCJjb3ZlciI6bnVsbCwiaWNvbiI6bnVsbCwicGFyZW50Ijp7InR5cGUiOiJkYXRhYmFzZV9pZCIsImRhdGFiYXNlX2lkIjoiYjY4ZDExMDYtMWFhZC00M2JkLTg5ZjgtZjUyNWVkZTJiNTY3In0sImFyY2hpdmVkIjpmYWxzZSwicHJvcGVydGllcyI6eyJQZXJzb24iOnsiaWQiOiIlM0QlM0RhJTQwIiwidHlwZSI6InBlb3BsZSIsInBlb3BsZSI6W3sib2JqZWN0IjoidXNlciIsImlkIjoiN2I2YTA4MzktZDVhZC00NjM2LTk1MDktODQxMWNjNzA2ODhkIiwibmFtZSI6IkZlbGlwZSBHdXptw6FuIiwiYXZhdGFyX3VybCI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBVFhBSnpCc3ExNFU2N3hpMHlsc2tkLUR0eG5OVEN6TDVMZXJqS0RMVGViPXMxMDAiLCJ0eXBlIjoicGVyc29uIiwicGVyc29uIjp7fX1dfSwiQ3JlYXRlZCI6eyJpZCI6IiUzRCU1RE1wIiwidHlwZSI6ImNyZWF0ZWRfdGltZSIsImNyZWF0ZWRfdGltZSI6IjIwMjQtMDEtMTlUMjE6Mjk6MDAuMDAwWiJ9LCJEZXNjcmlwdGlvbiI6eyJpZCI6Ik9aVngiLCJ0eXBlIjoibXVsdGlfc2VsZWN0IiwibXVsdGlfc2VsZWN0IjpbXX0sIkRlc2RlPyB5IEhhc3RhPyI6eyJpZCI6IiU1RGQlNjBoIiwidHlwZSI6ImRhdGUiLCJkYXRlIjp7InN0YXJ0IjoiMjAyNC0wMS0yMiIsImVuZCI6IjIwMjQtMDEtMjUiLCJ0aW1lX3pvbmUiOm51bGx9fSwiUHJveWVjdG8iOnsiaWQiOiJhZUtyIiwidHlwZSI6InNlbGVjdCIsInNlbGVjdCI6eyJpZCI6ImQ0N2Q0NDgwLTA4ZjQtNDE4OS1hZTNiLWFkZjJiMDZkYzVjYiIsIm5hbWUiOiJDb2xsYWJyYSIsImNvbG9yIjoib3JhbmdlIn19LCJUb2RheT8iOnsiaWQiOiJjJTQwJTYwJTdEIiwidHlwZSI6ImZvcm11bGEiLCJmb3JtdWxhIjp7InR5cGUiOiJib29sZWFuIiwiYm9vbGVhbiI6dHJ1ZX19LCJOYW1lIjp7ImlkIjoidGl0bGUiLCJ0eXBlIjoidGl0bGUiLCJ0aXRsZSI6W119fSwidXJsIjoiaHR0cHM6Ly93d3cubm90aW9uLnNvL2NjODQ5ZjIwODZlNDRkYzJiMmFjM2VmYjA1MjQxYjRlIiwicHVibGljX3VybCI6bnVsbH1dLCJuZXh0X2N1cnNvciI6bnVsbCwiaGFzX21vcmUiOmZhbHNlLCJ0eXBlIjoicGFnZV9vcl9kYXRhYmFzZSIsInBhZ2Vfb3JfZGF0YWJhc2UiOnt9LCJyZXF1ZXN0X2lkIjoiZjEzYjMyMzAtZThhMi00OWJhLTg5ODctNzg5NjQyNDU0MDhjIn0=
+  recorded_at: Tue, 23 Jan 2024 00:29:15 GMT
+recorded_with: VCR 6.2.0
