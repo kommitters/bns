@@ -33,13 +33,4 @@ module UseCases
 
     UseCases::UseCase.new(options)
   end
-
-  # def notify_birthday_from_notion_to_email(options)
-  #     @fetcher = Services::Custom::NotionFetcher.new(options[:fetch_options])
-  #     @dispatcher = Services::Custom::EmailDispatcher.new(options[:dispatch_options])
-  #     @mapper = Services::Custom::NotionBirthdaysMapper.new
-  #     @formatter = Services::Custom::EmailBirthdaysFormatter.new
-
-  #     use_case = UseCases::UseCase.new(fetcher, dispatcher, mapper, formatter)
-  # end
 end
