@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Formatter::Pto::Discord do
   before do
     @data = [

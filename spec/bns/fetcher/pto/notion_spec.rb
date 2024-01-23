@@ -43,8 +43,6 @@ RSpec.describe Fetcher::Pto::Notion do
 
     it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("notion_pto_with_filter") do
-        today = Date.today
-
         config = @config.merge(
           {
             filter: {

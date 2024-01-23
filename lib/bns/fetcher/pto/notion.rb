@@ -11,7 +11,7 @@ module Fetcher
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
 
-        response = HTTParty.post(url, { body: config[:filter].to_json, headers: get_headers })
+        response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
         validated_response = validate_response(response)
 
         normalize_response(validated_response["results"])
@@ -36,7 +36,7 @@ module Fetcher
 
       private
 
-      def get_headers
+      def headers
         {
           "Authorization" => "Bearer #{config[:secret]}",
           "Content-Type" => "application/json",

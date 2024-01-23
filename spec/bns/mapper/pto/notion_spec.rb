@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mapper::Pto::Notion do
   before do
     @data = [{ "name" => "Range PTO", "start" => "2024-01-11", "to" => "2024-01-13" },
