@@ -44,14 +44,6 @@ module Fetcher
         }
       end
 
-      def get_user_by_id(id)
-        url = "https://api.notion.com/v1/users/#{id}"
-
-        response = HTTParty.get(url, { body: config[:filter].to_json, headers: get_headers })
-
-        validate_response(response)
-      end
-
       def validate_response(response)
         error_codes = [401, 404]
 
@@ -76,19 +68,18 @@ module Fetcher
 
       def extract_pto_fields(key, value, normalized_value)
         if key == "Person"
-          user_id = extract_person_field_value(value)
-          user = get_user_by_id(user_id)
+          user_name = extract_person_field_value(value)
 
-          normalized_value["name"] = user["name"]
+          normalized_value["name"] = user_name
         elsif key == "Desde? y Hasta?"
           dates = extract_complete_date_field_value(value)
-          normalized_value["from"] = dates["start"]
-          normalized_value["to"] = dates["end"]
+          normalized_value["start"] = dates["start"]
+          normalized_value["end"] = dates["end"]
         end
       end
 
       def extract_person_field_value(data)
-        data["people"][0]["id"]
+        data["people"][0]["name"]
       end
 
       def extract_complete_date_field_value(data)
