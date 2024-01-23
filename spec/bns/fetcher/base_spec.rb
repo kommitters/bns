@@ -15,13 +15,13 @@ RSpec.describe Fetcher::Base do
   end
 
   describe ".fetch" do
-    it "provides no implementation of the method" do
+    it "provides no implementation for the method" do
       expect { @fetcher.fetch }.to raise_exception("Not implemented yet.")
     end
   end
 
   describe ".format_response" do
-    it "provides no implementation of the method" do
+    it "provides no implementation for the method" do
       response = {}
       expect { @fetcher.normalize_response(response) }.to raise_exception("Not implemented yet.")
     end

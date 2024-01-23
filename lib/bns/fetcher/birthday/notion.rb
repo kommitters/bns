@@ -15,13 +15,15 @@ module Fetcher
           "Content-Type" => "application/json",
           "Notion-Version" => "2022-06-28"
         }
-
         response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
+        validated_response = validate_response(response)
 
-        normalize_response(response["results"])
+        normalize_response(validated_response["results"])
       end
 
       def normalize_response(response)
+        return [] if response.nil?
+
         normalized_response = []
 
         response.map do |value|
@@ -37,6 +39,18 @@ module Fetcher
       end
 
       private
+
+      def validate_response(response)
+        error_codes = [401, 404]
+
+        begin
+          raise response["message"] if error_codes.include?(response["status"])
+
+          response
+        rescue ArgumentError => e
+          puts "Fetcher::Birthday::Notion Error: #{e.message}"
+        end
+      end
 
       def normalize(properties)
         normalized_value = {}

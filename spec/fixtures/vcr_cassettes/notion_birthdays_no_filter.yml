@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notion.com/v1/databases/c17e556d16c84272beb4ee73ab709631/query
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Authorization:
+      - Bearer secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B
+      Content-Type:
+      - application/json
+      Notion-Version:
+      - '2022-06-28'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 16 Jan 2024 13:17:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      X-Notion-Request-Id:
+      - c169d957-4b2b-4295-844d-aa1754ff6fc2
+      Etag:
+      - W/"1783-3St9Y1mxbCzjXnFPSZt5EhHg+iI"
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=C7XirQHgLDYUZSv3EVyPYdzopLn_FF1vNfaZj7nDSag-1705411028-1-AfvONDKWf2pahxQds6l6T+oZX4rSdKEb1jftlHxhpvXict+AA04jWCfRd3nWQTQBPEKPoUhrUXQFJpC8z5Ggt74=;
+        path=/; expires=Tue, 16-Jan-24 13:47:08 GMT; domain=.notion.com; HttpOnly;
+        Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8466a30b3bfcf79c-BOG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"object":"list","results":[{"object":"page","id":"3f9e55d5-1bb3-47a2-aaf0-dd07e45f8266","created_time":"2024-01-12T14:53:00.000Z","last_edited_time":"2024-01-12T14:53:00.000Z","created_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"last_edited_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"cover":null,"icon":null,"parent":{"type":"database_id","database_id":"c17e556d-16c8-4272-beb4-ee73ab709440"},"archived":false,"properties":{"Full
+        Name":{"id":"CkmY","type":"rich_text","rich_text":[{"type":"text","text":{"content":"Laura
+        Villada","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Laura
+        Villada","href":null}]},"BD_this_year":{"id":"Qo%3Cj","type":"date","date":{"start":"2024-01-31","end":null,"time_zone":null}},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"Laura
+        Villada","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Laura
+        Villada","href":null}]}},"url":"https://www.notion.so/Laura-Villada-3f9e55d51bb347a2aaf0dd07e45f8266","public_url":null},{"object":"page","id":"1e7d9b28-d186-4f2e-9967-36c319cc77da","created_time":"2024-01-12T05:11:00.000Z","last_edited_time":"2024-01-12T05:11:00.000Z","created_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"last_edited_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"cover":null,"icon":null,"parent":{"type":"database_id","database_id":"c17e556d-16c8-4272-beb4-ee73ab709440"},"archived":false,"properties":{"Full
+        Name":{"id":"CkmY","type":"rich_text","rich_text":[{"type":"text","text":{"content":"Luz
+        Maria Quintero","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Luz
+        Maria Quintero","href":null}]},"BD_this_year":{"id":"Qo%3Cj","type":"date","date":{"start":"2024-01-12","end":null,"time_zone":null}},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"Luzma","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Luzma","href":null}]}},"url":"https://www.notion.so/Luzma-1e7d9b28d1864f2e996736c319cc77da","public_url":null},{"object":"page","id":"2187c3fe-346a-4c76-b51a-f3b95e268885","created_time":"2024-01-11T14:01:00.000Z","last_edited_time":"2024-01-12T03:29:00.000Z","created_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"last_edited_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"cover":null,"icon":null,"parent":{"type":"database_id","database_id":"c17e556d-16c8-4272-beb4-ee73ab709440"},"archived":false,"properties":{"Full
+        Name":{"id":"CkmY","type":"rich_text","rich_text":[{"type":"text","text":{"content":"Juan
+        Hurtado","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Juan
+        Hurtado","href":null}]},"BD_this_year":{"id":"Qo%3Cj","type":"date","date":{"start":"2024-01-29","end":null,"time_zone":null}},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"Juan
+        H","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Juan
+        H","href":null}]}},"url":"https://www.notion.so/Juan-H-2187c3fe346a4c76b51af3b95e268885","public_url":null},{"object":"page","id":"51309b7f-da9a-4685-9473-7e71f7bd9279","created_time":"2024-01-11T14:01:00.000Z","last_edited_time":"2024-01-15T19:54:00.000Z","created_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"last_edited_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"cover":null,"icon":null,"parent":{"type":"database_id","database_id":"c17e556d-16c8-4272-beb4-ee73ab709440"},"archived":false,"properties":{"Full
+        Name":{"id":"CkmY","type":"rich_text","rich_text":[{"type":"text","text":{"content":"Lorenzo
+        Zuluaga","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Lorenzo
+        Zuluaga","href":null}]},"BD_this_year":{"id":"Qo%3Cj","type":"date","date":{"start":"2024-01-15","end":null,"time_zone":null}},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"Lorenzo","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Lorenzo","href":null}]}},"url":"https://www.notion.so/Lorenzo-51309b7fda9a468594737e71f7bd9279","public_url":null},{"object":"page","id":"c05d68ca-dbff-4127-81ce-820f245d7061","created_time":"2024-01-11T14:01:00.000Z","last_edited_time":"2024-01-15T20:00:00.000Z","created_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"last_edited_by":{"object":"user","id":"c6b8a1d7-ad21-4bad-92a9-6c5310ec825a"},"cover":null,"icon":null,"parent":{"type":"database_id","database_id":"c17e556d-16c8-4272-beb4-ee73ab709440"},"archived":false,"properties":{"Full
+        Name":{"id":"CkmY","type":"rich_text","rich_text":[{"type":"text","text":{"content":"Luis
+        Hurtado","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"Luis
+        Hurtado","href":null}]},"BD_this_year":{"id":"Qo%3Cj","type":"date","date":{"start":"2024-01-15","end":null,"time_zone":null}},"Name":{"id":"title","type":"title","title":[{"type":"text","text":{"content":"LH","link":null},"annotations":{"bold":false,"italic":false,"strikethrough":false,"underline":false,"code":false,"color":"default"},"plain_text":"LH","href":null}]}},"url":"https://www.notion.so/LH-c05d68cadbff412781ce820f245d7061","public_url":null}],"next_cursor":null,"has_more":false,"type":"page_or_database","page_or_database":{},"request_id":"c169d957-4b2b-4295-844d-aa1754ff6fc2"}'
+  recorded_at: Tue, 16 Jan 2024 13:17:08 GMT
+recorded_with: VCR 6.2.0

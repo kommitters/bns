@@ -14,6 +14,8 @@ module UseCases
     def perform
       response = fetcher.fetch
 
+      return unless response.length.positive?
+
       mappings = mapper.map(response)
 
       formatted_payload = formatter.format(mappings)
