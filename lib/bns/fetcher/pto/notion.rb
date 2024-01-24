@@ -67,14 +67,14 @@ module Fetcher
       end
 
       def extract_pto_fields(key, value, normalized_value)
-        if key == "Person"
+        case key
+        when "Person"
           user_name = extract_person_field_value(value)
-
           normalized_value["name"] = user_name
-        elsif key == "Desde? y Hasta?"
-          dates = extract_complete_date_field_value(value)
-          normalized_value["start"] = dates["start"]
-          normalized_value["end"] = dates["end"]
+        when "Desde?"
+          normalized_value["start"] = extract_date_field_value(value)
+        when "Hasta?"
+          normalized_value["end"] = extract_date_field_value(value)
         end
       end
 
@@ -82,11 +82,8 @@ module Fetcher
         data["people"][0]["name"]
       end
 
-      def extract_complete_date_field_value(data)
-        {
-          "start" => data["date"]["start"],
-          "end" => data["date"]["end"]
-        }
+      def extract_date_field_value(data)
+        data["date"]["start"]
       end
     end
   end

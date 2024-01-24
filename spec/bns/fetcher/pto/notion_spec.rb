@@ -5,7 +5,7 @@ RSpec.describe Fetcher::Pto::Notion do
     @config = {
       base_url: "https://api.notion.com",
       database_id: "b68d11061aad43bd89f8f525ede2b598",
-      secret: "secret_4x5x2CH9WKwhnptlUIJfI211CGyTTcgkjjcbr3AAO2w",
+      secret: "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C",
       filter: {}
     }
 
@@ -24,52 +24,62 @@ RSpec.describe Fetcher::Pto::Notion do
     it "fetch data from the given configured notion database" do
       VCR.use_cassette("notion_pto_no_filter") do
         expected = [
-          { "name" => "Lorenzo Zuluaga", "start" => "2024-01-22", "end" => nil },
-          { "name" => "Felipe Guzmán", "start" => "2023-01-22", "end" => nil },
-          { "name" => "Lorenzo Zuluaga", "start" => "2024-01-20T00:00:00.000-05:00",
-            "end" => "2024-01-20T15:00:00.000-05:00" },
-          { "name" => "Lorenzo Zuluaga", "start" => "2024-01-29", "end" => nil },
-          { "name" => "Felipe Guzmán", "start" => "2024-01-22", "end" => "2024-01-25" }
+          { "name" => "Felipe Guzmán", "end" => "2024-01-23T16:00:00.000-05:00",
+            "start" => "2024-01-23T11:00:00.000-05:00" },
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-26", "start" => "2024-01-23" },
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-26", "start" => "2024-01-23" },
+          { "name" => "Felipe Guzmán", "end" => "2023-01-22", "start" => "2023-01-22" },
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-23T18:00:00.000-05:00",
+            "start" => "2024-01-23T12:00:00.000-05:00" },
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-29", "start" => "2024-01-29" },
+          { "name" => "Felipe Guzmán", "end" => "2024-01-25", "start" => "2024-01-22" }
         ]
 
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Array)
-        expect(fetched_data.length).to eq(5)
+        expect(fetched_data.length).to eq(7)
         expect(fetched_data).to match_array(expected)
       end
     end
 
     it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("notion_pto_with_filter") do
+        today = Date.today
         config = @config.merge(
-          {
-            filter: {
-              "filter": {
-                "and": [
-                  {
-                    property: "Today?",
-                    formula: {
-                      "checkbox": { equals: true }
-                    }
+          filter: {
+            "filter": {
+              "and": [
+                {
+                  property: "Desde?",
+                  date: {
+                    "on_or_before": today
                   }
-                ]
-              },
-              "sorts": []
-            }
+                },
+                {
+                  property: "Hasta?",
+                  date: {
+                    "on_or_after": today
+                  }
+                }
+              ]
+            },
+            "sorts": []
           }
         )
 
         expected = [
-          { "name" => "Felipe Guzmán", "start" => "2024-01-22", "end" => "2024-01-25" }
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-26", "start" => "2024-01-23" },
+          { "name" => "Lorenzo Zuluaga", "end" => "2024-01-26", "start" => "2024-01-23" },
+          { "name" => "Felipe Guzmán", "end" => "2024-01-25", "start" => "2024-01-22" }
         ]
 
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Array)
-        expect(fetched_data.length).to eq(1)
+        expect(fetched_data.length).to eq(3)
         expect(fetched_data).to match_array(expected)
       end
     end
