@@ -9,7 +9,7 @@ RSpec.describe Mapper::Base do
     it "provides no implementation for the method" do
       instace = testing_class.new
       data = []
-      expect { instace.map(data) }.to raise_exception("Not implemented yet.")
+      expect { instace.map(data) }.to raise_exception(Exceptions::FunctionNotImplemented)
     end
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../exceptions/function_not_implemented"
+
 module Dispatcher
   class Base
     attr_reader :webhook, :name
@@ -10,7 +12,7 @@ module Dispatcher
     end
 
     def dispatch(_payload)
-      raise "Not implemented yet."
+      raise Exceptions::FunctionNotImplemented
     end
   end
 end
