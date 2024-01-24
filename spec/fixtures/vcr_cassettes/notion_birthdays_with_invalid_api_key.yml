@@ -8,7 +8,7 @@ http_interactions:
       string: "{}"
     headers:
       Authorization:
-      - Bearer secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C
+      - Bearer secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B
       Content-Type:
       - application/json
       Notion-Version:

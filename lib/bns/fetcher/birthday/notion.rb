@@ -56,9 +56,9 @@ module Fetcher
         normalized_value = {}
 
         properties.each do |k, v|
-          if k == "Full Name"
+          if k == "Complete Name"
             normalized_value["name"] = extract_rich_text_field_value(v)
-          else
+          elsif k == "BD_this_year"
             normalized_value["birth_date"] = extract_date_field_value(v)
           end
         end
@@ -71,7 +71,7 @@ module Fetcher
       end
 
       def extract_date_field_value(data)
-        data["date"]["start"]
+        data["formula"]["date"]["start"]
       end
     end
   end
