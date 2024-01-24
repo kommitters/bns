@@ -24,18 +24,40 @@ RSpec.describe Fetcher::Birthday::Notion do
     it "fetch data from the given configured notion database" do
       VCR.use_cassette("notion_birthdays_no_filter") do
         expected = [
-          { "name" => "Laura Villada", "birth_date" => "2024-01-31" },
-          { "name" => "Luz Maria Quintero", "birth_date" => "2024-01-12" },
-          { "name" => "Juan Hurtado", "birth_date" => "2024-01-29" },
-          { "name" => "Lorenzo Zuluaga", "birth_date" => "2024-01-15" },
-          { "name" => "Luis Hurtado", "birth_date" => "2024-01-15" }
+          { "name" => "Juan Manuel Hurtado Rendon", "birth_date" => "2024-10-12" },
+          { "name" => "Mario Andrés Yusti Mejía", "birth_date" => "2024-01-25" },
+          { "name" => "Andrea Cuesta Tangarife", "birth_date" => "2024-08-11" },
+          { "name" => "Juan Camilo Perilla Jaramillo", "birth_date" => "2024-09-04" },
+          { "name" => "Jose Orlando Castro Arias", "birth_date" => "2024-12-04" },
+          { "name" => "Luz Maria Quintero", "birth_date" => "2024-10-28" },
+          { "name" => "Elisabet Castaño Salazar", "birth_date" => "2024-06-20" },
+          { "name" => "Laura Villada", "birth_date" => "2024-08-10" },
+          { "name" => "Franco Esteban Cordoba Perez", "birth_date" => "2024-05-12" },
+          { "name" => "Felipe Guzmán Sierra", "birth_date" => "2024-02-03" },
+          { "name" => "Juan Manuel Roa Mejía", "birth_date" => "2024-09-07" },
+          { "name" => "Julián David Sánchez Gallego", "birth_date" => "2024-02-22" },
+          { "name" => "Brayan Stiven Vasquez Villa", "birth_date" => "2024-07-06" },
+          { "name" => "Juan Pablo Botina Carlosama", "birth_date" => "2024-11-22" },
+          { "name" => "Cristhian Camilo Rodriguez Molina", "birth_date" => "2024-04-25" },
+          { "name" => "Luis Felipe Tejada Padilla", "birth_date" => "2024-10-14" },
+          { "name" => "Luis Humberto López", "birth_date" => "2024-12-09" },
+          { "name" => "Mario Alejandro Rodríguez", "birth_date" => "2024-01-24" },
+          { "name" => "Kelium Joja", "birth_date" => "2024-03-28" },
+          { "name" => "Alan Gerardo Buenhombre Parra", "birth_date" => "2024-07-14" },
+          { "name" => "Juan David Gaviria Agudelo", "birth_date" => "2024-12-10" },
+          { "name" => "Miguel Angel Nieto Arias", "birth_date" => "2024-05-02" },
+          { "name" => "Elsa Victoria Hurtado", "birth_date" => "2024-08-09" },
+          { "name" => "Lorenzo Zuluaga Urrea", "birth_date" => "2024-10-12" },
+          { "name" => "Peter D’loise Chicaiza Cortez", "birth_date" => "2024-06-27" },
+          { "name" => "Sergio Alejandro Guerrero Ruiz", "birth_date" => "2024-02-12" },
+          { "name" => "Manuela Bernal Toro", "birth_date" => "2024-08-27" }
         ]
 
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Array)
-        expect(fetched_data.length).to eq(5)
+        expect(fetched_data.length).to eq(27)
         expect(fetched_data).to match_array(expected)
       end
     end
@@ -63,7 +85,7 @@ RSpec.describe Fetcher::Birthday::Notion do
         )
 
         expected = [
-          { "name" => "Luis Hurtado", "birth_date" => "2024-01-16" }
+          { "name" => "Mario Alejandro Rodríguez", "birth_date" => "2024-01-24" }
         ]
 
         birthdays_fetcher = described_class.new(config)

@@ -6,15 +6,11 @@ require "date"
 require_relative "../base"
 
 module Fetcher
-  module Birthday
+  module Pto
     class Notion < Base
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
-        headers = {
-          "Authorization" => "Bearer #{config[:secret]}",
-          "Content-Type" => "application/json",
-          "Notion-Version" => "2022-06-28"
-        }
+
         response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
         validated_response = validate_response(response)
 
@@ -40,6 +36,14 @@ module Fetcher
 
       private
 
+      def headers
+        {
+          "Authorization" => "Bearer #{config[:secret]}",
+          "Content-Type" => "application/json",
+          "Notion-Version" => "2022-06-28"
+        }
+      end
+
       def validate_response(response)
         error_codes = [401, 404]
 
@@ -48,7 +52,7 @@ module Fetcher
 
           response
         rescue ArgumentError => e
-          puts "Fetcher::Birthday::Notion Error: #{e.message}"
+          puts "Fetcher::Pto::Notion Error: #{e.message}"
         end
       end
 
@@ -56,22 +60,30 @@ module Fetcher
         normalized_value = {}
 
         properties.each do |k, v|
-          if k == "Complete Name"
-            normalized_value["name"] = extract_rich_text_field_value(v)
-          elsif k == "BD_this_year"
-            normalized_value["birth_date"] = extract_date_field_value(v)
-          end
+          extract_pto_fields(k, v, normalized_value)
         end
 
         normalized_value
       end
 
-      def extract_rich_text_field_value(data)
-        data["rich_text"][0]["plain_text"]
+      def extract_pto_fields(key, value, normalized_value)
+        case key
+        when "Person"
+          user_name = extract_person_field_value(value)
+          normalized_value["name"] = user_name
+        when "Desde?"
+          normalized_value["start"] = extract_date_field_value(value)
+        when "Hasta?"
+          normalized_value["end"] = extract_date_field_value(value)
+        end
+      end
+
+      def extract_person_field_value(data)
+        data["people"][0]["name"]
       end
 
       def extract_date_field_value(data)
-        data["formula"]["date"]["start"]
+        data["date"]["start"]
       end
     end
   end
