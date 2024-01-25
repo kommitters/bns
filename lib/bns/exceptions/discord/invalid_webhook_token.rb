@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exceptions
   module Discord
     class InvalidWebook < StandardError
