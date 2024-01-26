@@ -2,6 +2,10 @@
 
 require "bns"
 require "vcr"
+require "simplecov"
+require "simplecov-lcov"
+SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+SimpleCov.start
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
