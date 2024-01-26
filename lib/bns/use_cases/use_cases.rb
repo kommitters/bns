@@ -4,6 +4,10 @@ require_relative "../fetcher/notion/birthday"
 require_relative "../mapper/notion/birthday"
 require_relative "../formatter/discord/birthday"
 
+require_relative "../fetcher/notion/pto"
+require_relative "../mapper/notion/pto"
+require_relative "../formatter/discord/pto"
+
 require_relative "../dispatcher/discord"
 require_relative "use_case"
 
@@ -22,9 +26,10 @@ module UseCases
 
   def self.notify_pto_from_notion_to_discord(options)
     options = {
-      fetcher: Fetcher::Pto::Notion.new(options[:fetch_options]),
-      mapper: Mapper::Pto::Notion.new,
-      formatter: Formatter::Pto::Discord.new,
+      # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
+      fetcher: Fetcher::Notion::Pto.new(options[:fetch_options]),
+      mapper: Mapper::Notion::Pto.new,
+      formatter: Formatter::Discord::Pto.new,
       dispatcher: Dispatcher::Discord.new(options[:dispatch_options])
     }
 
