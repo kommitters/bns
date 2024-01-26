@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Formatter::Pto::Discord do
+RSpec.describe Formatter::Discord::Pto do
   before do
     @data = [
       Domain::Pto.new("Range PTO", "2024-01-11", "2024-01-13"),
