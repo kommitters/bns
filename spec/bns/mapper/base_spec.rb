@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mapper::Base do
-  #   it { is_expected.to respond_to(:format).with(1).arguments }
-
-  describe ".format" do
+  describe ".map" do
     let(:testing_class) { Class.new { include Mapper::Base } }
 
     it "provides no implementation for the method" do
       instace = testing_class.new
       data = []
-      expect { instace.map(data) }.to raise_exception(Exceptions::FunctionNotImplemented)
+      expect { instace.map(data) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
     end
   end
 end

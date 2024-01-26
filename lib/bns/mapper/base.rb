@@ -5,13 +5,7 @@ require_relative "../domain/exceptions/function_not_implemented"
 module Mapper
   module Base
     def map(_response)
-      raise Exceptions::FunctionNotImplemented
-    end
-
-    private
-
-    def normalize_response(_response)
-      raise Exceptions::FunctionNotImplemented
+      raise Domain::Exceptions::FunctionNotImplemented
     end
   end
 end
