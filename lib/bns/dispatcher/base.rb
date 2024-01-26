@@ -12,7 +12,7 @@ module Dispatcher
     end
 
     def dispatch(_payload)
-      raise Exceptions::FunctionNotImplemented
+      raise Domain::Exceptions::FunctionNotImplemented
     end
   end
 end

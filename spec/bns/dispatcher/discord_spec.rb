@@ -48,7 +48,9 @@ RSpec.describe Dispatcher::Discord do
 
         discords_dispatcher = described_class.new(config)
 
-        expect { discords_dispatcher.dispatch(@payload) }.to raise_exception(Exceptions::Discord::InvalidWebook)
+        expect do
+          discords_dispatcher.dispatch(@payload)
+        end.to raise_exception(Dispatcher::Exceptions::Discord::InvalidWebook)
       end
     end
   end
