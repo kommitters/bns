@@ -14,7 +14,7 @@ module Fetcher
       raise Exceptions::FunctionNotImplemented
     end
 
-    def normalize_response(_response)
+    def validate_response(_response)
       raise Exceptions::FunctionNotImplemented
     end
   end

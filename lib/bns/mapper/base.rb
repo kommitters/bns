@@ -4,7 +4,13 @@ require_relative "../exceptions/function_not_implemented"
 
 module Mapper
   module Base
-    def map(_data)
+    def map(_response)
+      raise Exceptions::FunctionNotImplemented
+    end
+
+    private
+
+    def normalize_response(_response)
       raise Exceptions::FunctionNotImplemented
     end
   end
