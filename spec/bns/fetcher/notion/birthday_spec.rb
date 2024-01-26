@@ -34,7 +34,6 @@ RSpec.describe Fetcher::Notion::Birthday do
 
     it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("/notion/birthdays/fetch_with_filter") do
-        today = Date.today
         config = @config.merge(
           {
             filter: {
@@ -43,7 +42,7 @@ RSpec.describe Fetcher::Notion::Birthday do
                   {
                     "property": "BD_this_year",
                     "date": {
-                      "equals": today - 2
+                      "equals": "2024-01-24"
                     }
                   }
                 ]

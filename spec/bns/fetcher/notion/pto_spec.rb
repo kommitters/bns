@@ -34,7 +34,6 @@ RSpec.describe Fetcher::Notion::Pto do
 
     it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("/notion/ptos/fetch_with_filter") do
-        today = Date.today
         config = @config.merge(
           filter: {
             "filter": {
@@ -42,13 +41,13 @@ RSpec.describe Fetcher::Notion::Pto do
                 {
                   property: "Desde?",
                   date: {
-                    "on_or_before": today
+                    "on_or_before": "2024-01-24"
                   }
                 },
                 {
                   property: "Hasta?",
                   date: {
-                    "on_or_after": today
+                    "on_or_after": "2024-01-24"
                   }
                 }
               ]

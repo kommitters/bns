@@ -2,7 +2,6 @@
 
 RSpec.describe Mapper::Notion::Birthday do
   before do
-    @today = Date.today(-2)
     @mapper = described_class.new
     fetcher_config = {
       base_url: "https://api.notion.com",
@@ -14,7 +13,7 @@ RSpec.describe Mapper::Notion::Birthday do
             {
               "property": "BD_this_year",
               "date": {
-                "equals": @today
+                "equals": "2024-01-24"
               }
             }
           ]
