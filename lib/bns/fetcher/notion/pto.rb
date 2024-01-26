@@ -20,9 +20,9 @@ module Fetcher
       def validate_response(response)
         case response["status"]
         when 401
-          raise Exceptions::InvalidApiKey, response["message"]
+          raise Exceptions::Notion::InvalidApiKey, response["message"]
         when 404
-          raise Exceptions::InvalidDatabaseId, response["message"]
+          raise Exceptions::Notion::InvalidDatabaseId, response["message"]
         else
           response
         end
