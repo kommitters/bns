@@ -17,7 +17,7 @@ RSpec.describe Dispatcher::Base do
   describe ".dispatch" do
     it "provides no implementation for the method" do
       payload = ""
-      expect { @dispatcher.dispatch(payload) }.to raise_exception("Not implemented yet.")
+      expect { @dispatcher.dispatch(payload) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
     end
   end
 end

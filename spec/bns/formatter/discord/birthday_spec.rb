@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Formatter::Birthday::Discord do
+RSpec.describe Formatter::Discord::Birthday do
   before do
     @data = [Domain::Birthday.new("Jane Doe", "2024-01-11"), Domain::Birthday.new("John Doe", "2024-01-18")]
     @formatter = described_class.new

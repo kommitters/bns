@@ -4,11 +4,12 @@ require_relative "../../domain/pto"
 require_relative "../base"
 
 module Formatter
-  module Pto
-    class Discord
+  module Discord
+    class Pto
       include Base
 
       def format(data)
+        # !TODO create exception
         raise "Invalid data format" unless data.all? { |element| element.is_a?(Domain::Pto) }
 
         template = ":beach: NAME is on PTO"

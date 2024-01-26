@@ -48,10 +48,9 @@ RSpec.describe Dispatcher::Discord do
 
         discords_dispatcher = described_class.new(config)
 
-        response = discords_dispatcher.dispatch(@payload)
-
-        expect(response.code).to eq(401)
-        expect(response["message"]).to eq("Invalid Webhook Token")
+        expect do
+          discords_dispatcher.dispatch(@payload)
+        end.to raise_exception(Dispatcher::Exceptions::Discord::InvalidWebook)
       end
     end
   end

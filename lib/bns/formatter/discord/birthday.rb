@@ -4,11 +4,12 @@ require_relative "../../domain/birthday"
 require_relative "../base"
 
 module Formatter
-  module Birthday
-    class Discord
+  module Discord
+    class Birthday
       include Base
 
       def format(data)
+        # !TODO create exception
         raise "Invalid data format" unless data.all? { |element| element.is_a?(Domain::Birthday) }
 
         template = "NAME, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"

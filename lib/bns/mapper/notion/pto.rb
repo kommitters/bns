@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require "httparty"
-require "date"
-
+require_relative "../../domain/pto"
 require_relative "../base"
 
-module Fetcher
-  module Pto
-    class Notion < Base
-      def fetch
-        url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
+module Mapper
+  module Notion
+    class Pto
+      include Base
 
-        response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
-        validated_response = validate_response(response)
+      def map(notion_response)
+        return [] if notion_response.body.empty?
 
-        normalize_response(validated_response["results"])
+        normalized_notion_data = normalize_response(notion_response["results"])
+        normalized_notion_data.map do |pto|
+          Domain::Pto.new(pto["name"], format_date(pto["start"]), format_date(pto["end"]))
+        end
       end
 
       def normalize_response(response)
@@ -35,26 +35,6 @@ module Fetcher
       end
 
       private
-
-      def headers
-        {
-          "Authorization" => "Bearer #{config[:secret]}",
-          "Content-Type" => "application/json",
-          "Notion-Version" => "2022-06-28"
-        }
-      end
-
-      def validate_response(response)
-        error_codes = [401, 404]
-
-        begin
-          raise response["message"] if error_codes.include?(response["status"])
-
-          response
-        rescue ArgumentError => e
-          puts "Fetcher::Pto::Notion Error: #{e.message}"
-        end
-      end
 
       def normalize(properties)
         normalized_value = {}
@@ -84,6 +64,18 @@ module Fetcher
 
       def extract_date_field_value(data)
         data["date"]["start"]
+      end
+
+      def format_date(str_date)
+        return "" if str_date.nil?
+
+        if str_date.include?("T")
+          format = "%Y-%m-%d|%I:%M %p"
+          datetime = Time.new(str_date)
+          datetime.strftime(format)
+        else
+          str_date
+        end
       end
     end
   end

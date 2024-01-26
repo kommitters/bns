@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../domain/exceptions/function_not_implemented"
+
 module Fetcher
   class Base
     attr_reader :config
@@ -9,11 +11,11 @@ module Fetcher
     end
 
     def fetch
-      raise "Not implemented yet."
+      raise Domain::Exceptions::FunctionNotImplemented
     end
 
-    def normalize_response(_response)
-      raise "Not implemented yet."
+    def validate_response(_response)
+      raise Domain::Exceptions::FunctionNotImplemented
     end
   end
 end

@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
-require "httparty"
-require "date"
-
+require_relative "../../domain/birthday"
 require_relative "../base"
 
-module Fetcher
-  module Birthday
-    class Notion < Base
-      def fetch
-        url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
-        headers = {
-          "Authorization" => "Bearer #{config[:secret]}",
-          "Content-Type" => "application/json",
-          "Notion-Version" => "2022-06-28"
-        }
-        response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
-        validated_response = validate_response(response)
+module Mapper
+  module Notion
+    class Birthday
+      include Base
+      # !TODO: refactor with NotionResponse type
+      def map(notion_response)
+        return [] if notion_response.body.empty?
 
-        normalize_response(validated_response["results"])
+        normalized_notion_data = normalize_response(notion_response["results"])
+
+        normalized_notion_data.map do |birthday|
+          Domain::Birthday.new(birthday["name"], birthday["birth_date"])
+        end
       end
+
+      private
 
       def normalize_response(response)
         return [] if response.nil?
@@ -36,20 +35,6 @@ module Fetcher
         end
 
         normalized_response
-      end
-
-      private
-
-      def validate_response(response)
-        error_codes = [401, 404]
-
-        begin
-          raise response["message"] if error_codes.include?(response["status"])
-
-          response
-        rescue ArgumentError => e
-          puts "Fetcher::Birthday::Notion Error: #{e.message}"
-        end
       end
 
       def normalize(properties)

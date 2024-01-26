@@ -7,7 +7,7 @@ RSpec.describe Formatter::Base do
     it "provides no implementation for the method" do
       instace = testing_class.new
       data = []
-      expect { instace.format(data) }.to raise_exception("Not implemented yet.")
+      expect { instace.format(data) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
     end
   end
 end
