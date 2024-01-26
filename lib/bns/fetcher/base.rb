@@ -11,11 +11,11 @@ module Fetcher
     end
 
     def fetch
-      raise Exceptions::FunctionNotImplemented
+      raise Domain::Exceptions::FunctionNotImplemented
     end
 
     def validate_response(_response)
-      raise Exceptions::FunctionNotImplemented
+      raise Domain::Exceptions::FunctionNotImplemented
     end
   end
 end
