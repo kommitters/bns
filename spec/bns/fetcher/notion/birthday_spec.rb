@@ -26,9 +26,9 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(27)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(27)
       end
     end
 
@@ -55,9 +55,9 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthdays_fetcher = described_class.new(config)
         fetched_data = birthdays_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(1)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(1)
       end
     end
 
@@ -69,9 +69,9 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthday_fetcher = described_class.new(config)
         fetched_data = birthday_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(0)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(0)
       end
     end
 
