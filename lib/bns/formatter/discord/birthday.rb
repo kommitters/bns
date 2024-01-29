@@ -2,6 +2,7 @@
 
 require_relative "../../domain/birthday"
 require_relative "../base"
+require_relative "./exceptions/invalid_data"
 
 module Formatter
   module Discord
@@ -9,8 +10,9 @@ module Formatter
       include Base
 
       def format(data)
-        # !TODO create exception
-        raise "Invalid data format" unless data.all? { |element| element.is_a?(Domain::Birthday) }
+        raise Formatter::Discord::Exceptions::InvalidData unless data.all? do |element|
+                                                                   element.is_a?(Domain::Birthday)
+                                                                 end
 
         template = "NAME, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
         payload = ""
@@ -20,8 +22,6 @@ module Formatter
         end
 
         payload
-      rescue ArgumentError => e
-        puts "Formatter::Birthday::Notion Error: #{e.message}"
       end
     end
   end

@@ -7,7 +7,6 @@ module Mapper
   module Notion
     class Birthday
       include Base
-      # !TODO: refactor with NotionResponse type
       def map(notion_response)
         return [] if notion_response.results.empty?
 
@@ -21,7 +20,7 @@ module Mapper
       private
 
       def normalize_response(results)
-        return [] if results.nil? # Raise EmptyResponseError
+        return [] if results.nil?
 
         normalized_results = []
 
