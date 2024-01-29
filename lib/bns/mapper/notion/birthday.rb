@@ -9,9 +9,9 @@ module Mapper
       include Base
       # !TODO: refactor with NotionResponse type
       def map(notion_response)
-        return [] if notion_response.body.empty?
+        return [] if notion_response.results.empty?
 
-        normalized_notion_data = normalize_response(notion_response["results"])
+        normalized_notion_data = normalize_response(notion_response.results)
 
         normalized_notion_data.map do |birthday|
           Domain::Birthday.new(birthday["name"], birthday["birth_date"])
@@ -20,21 +20,21 @@ module Mapper
 
       private
 
-      def normalize_response(response)
-        return [] if response.nil?
+      def normalize_response(results)
+        return [] if results.nil? # Raise EmptyResponseError
 
-        normalized_response = []
+        normalized_results = []
 
-        response.map do |value|
+        results.map do |value|
           properties = value["properties"]
           properties.delete("Name")
 
           normalized_value = normalize(properties)
 
-          normalized_response.append(normalized_value)
+          normalized_results.append(normalized_value)
         end
 
-        normalized_response
+        normalized_results
       end
 
       def normalize(properties)

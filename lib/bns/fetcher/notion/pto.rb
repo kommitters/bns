@@ -13,19 +13,11 @@ module Fetcher
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
 
-        response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
-        validate_response(response)
-      end
+        httparty_response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
 
-      def validate_response(response)
-        case response["status"]
-        when 401
-          raise Exceptions::Notion::InvalidApiKey, response["message"]
-        when 404
-          raise Exceptions::Notion::InvalidDatabaseId, response["message"]
-        else
-          response
-        end
+        notion_response = Fetcher::Notion::Types::NotionResponse.new(httparty_response)
+
+        Fetcher::Notion::Helper.validate_response(notion_response)
       end
 
       private
