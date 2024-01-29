@@ -29,9 +29,3 @@ jobs:
       uses: aki77/simplecov-report-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload coverage results
-      uses: actions/upload-artifact@master
-      with:
-        name: coverage-report
-        path: coverage
-      if: always()
