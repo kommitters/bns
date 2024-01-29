@@ -2,6 +2,8 @@
 
 The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
 
+[![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://github.com/kommitters/bns)
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
