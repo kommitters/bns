@@ -26,9 +26,9 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(@config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(7)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(7)
       end
     end
 
@@ -59,9 +59,9 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(3)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(3)
       end
     end
 
@@ -73,9 +73,9 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(HTTParty::Response)
-        expect(fetched_data["results"]).to be_an_instance_of(Array)
-        expect(fetched_data["results"].length).to eq(0)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data.results).to be_an_instance_of(Array)
+        expect(fetched_data.results.length).to eq(0)
       end
     end
 

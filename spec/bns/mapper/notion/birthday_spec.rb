@@ -33,6 +33,7 @@ RSpec.describe Mapper::Notion::Birthday do
     it "maps the given data into a domain specific one" do
       VCR.use_cassette("/notion/birthdays/fetch_with_filter") do
         birthdays_response = @fetcher.fetch
+
         mapped_data = @mapper.map(birthdays_response)
 
         are_birthdays = mapped_data.all? { |element| element.is_a?(Domain::Birthday) }

@@ -11,9 +11,9 @@ module Dispatcher
         avatar_url: "",
         content: payload
       }.to_json
-      response = HTTParty.post(webhook, { body: body, headers: { "Content-Type" => "application/json" } })
+      discord_response = HTTParty.post(webhook, { body: body, headers: { "Content-Type" => "application/json" } })
 
-      validate_response(response)
+      validate_response(discord_response)
     end
 
     private
@@ -21,7 +21,7 @@ module Dispatcher
     def validate_response(response)
       case response["code"]
       when 50_027
-        raise Exceptions::Discord::InvalidWebook, response["message"]
+        raise Exceptions::Discord::InvalidWebookToken, response["message"]
       else
         response
       end

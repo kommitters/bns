@@ -29,7 +29,7 @@ RSpec.describe Formatter::Discord::Pto do
       invalid_data = [{ name: "John Doe", start: "2024-01-18", end: "2024-01-18" },
                       { name: "Jane Doe", start: "2024-01-19", end: "2024-01-23" }]
 
-      expect { @formatter.format(invalid_data) }.to raise_exception("Invalid data format")
+      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Discord::Exceptions::InvalidData)
     end
   end
 end

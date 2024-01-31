@@ -24,7 +24,7 @@ RSpec.describe Formatter::Discord::Birthday do
       invalid_data = [{ name: "John Doe", birth_date: "2024-01-18" },
                       { name: "Jane Doe", birth_date: "2024-01-19" }]
 
-      expect { @formatter.format(invalid_data) }.to raise_exception("Invalid data format")
+      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Discord::Exceptions::InvalidData)
     end
   end
 end

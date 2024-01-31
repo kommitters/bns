@@ -9,8 +9,7 @@ module Formatter
       include Base
 
       def format(data)
-        # !TODO create exception
-        raise "Invalid data format" unless data.all? { |element| element.is_a?(Domain::Pto) }
+        raise Formatter::Discord::Exceptions::InvalidData unless data.all? { |element| element.is_a?(Domain::Pto) }
 
         template = ":beach: NAME is on PTO"
         payload = ""
@@ -20,8 +19,6 @@ module Formatter
         end
 
         payload
-      rescue ArgumentError => e
-        puts "Formatter::Pto::Notion Error: #{e.message}"
       end
 
       private

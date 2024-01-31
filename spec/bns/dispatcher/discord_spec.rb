@@ -50,7 +50,7 @@ RSpec.describe Dispatcher::Discord do
 
         expect do
           discords_dispatcher.dispatch(@payload)
-        end.to raise_exception(Dispatcher::Exceptions::Discord::InvalidWebook)
+        end.to raise_exception(Dispatcher::Exceptions::Discord::InvalidWebookToken)
       end
     end
   end

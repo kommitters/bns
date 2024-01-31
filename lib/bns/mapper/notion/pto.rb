@@ -9,9 +9,9 @@ module Mapper
       include Base
 
       def map(notion_response)
-        return [] if notion_response.body.empty?
+        return [] if notion_response.results.empty?
 
-        normalized_notion_data = normalize_response(notion_response["results"])
+        normalized_notion_data = normalize_response(notion_response.results)
         normalized_notion_data.map do |pto|
           Domain::Pto.new(pto["name"], format_date(pto["start"]), format_date(pto["end"]))
         end
