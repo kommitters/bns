@@ -11,7 +11,12 @@ require_relative "../formatter/discord/pto"
 require_relative "../dispatcher/discord/implementation"
 require_relative "use_case"
 
+##
+# This module provides factory methods for use cases within the system. Each method
+# represents a use case implementation introduced in the system.
 module UseCases
+  # Method intended to instantiate the following use case:
+  # Birthdays notifications from Notion to Discord.
   def self.notify_birthday_from_notion_to_discord(options)
     options = {
       # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
@@ -24,6 +29,8 @@ module UseCases
     UseCases::UseCase.new(options)
   end
 
+  # Method intended to instantiate the following use case:
+  # PTO's notifications from Notion to Discord.
   def self.notify_pto_from_notion_to_discord(options)
     options = {
       # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working

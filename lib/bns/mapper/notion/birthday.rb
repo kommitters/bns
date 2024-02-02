@@ -5,8 +5,18 @@ require_relative "../base"
 
 module Mapper
   module Notion
+    ##
+    # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
+    # shaping birthdays data coming from a Fetcher::Base implementation.
     class Birthday
       include Base
+
+      # Implements the logic for shaping the results from a fetcher response.
+      #
+      #  @param [Fetcher::Notion::Types::Response] notion_response, Notion response object.
+      #
+      #  @return [List<Domain::Birthday>] birthdays_list, mapped birthdays to be used by a
+      #     Formatter::Base implementation.
       def map(notion_response)
         return [] if notion_response.results.empty?
 

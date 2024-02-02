@@ -10,7 +10,17 @@ require_relative "./types/response"
 
 module Fetcher
   module Notion
+    ##
+    # This class is an implementation of the Fetcher::Base interface, specifically designed
+    # for fetching Paid Time Off (PTO) data from Notion.
+    #
     class Pto < Base
+      # Implements the data fetching logic for PTO's data from Notion. It sends a POST
+      # request to the Notion API to query the specified database and returns a validated response.
+      #
+      #  @raise [Exceptions::Notion::InvalidApiKey] if the API key provided is incorrect or invalid.
+      #  @raise [Exceptions::Notion::InvalidDatabaseId] if the Database id provided is incorrect or invalid.
+      #
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
 

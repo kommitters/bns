@@ -8,13 +8,3 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
-
-Layout/LineLength:
-  Max: 120
-  Severity: info
-
-Style/Documentation:
-  Severity: info
-
-Metrics/BlockLength:
-  Severity: info
