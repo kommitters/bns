@@ -8,13 +8,13 @@ module Formatter
     class Pto
       include Base
 
-      def format(data)
-        raise Formatter::Discord::Exceptions::InvalidData unless data.all? { |element| element.is_a?(Domain::Pto) }
+      def format(ptos_list)
+        raise Formatter::Discord::Exceptions::InvalidData unless ptos_list.all? { |pto| pto.is_a?(Domain::Pto) }
 
         template = ":beach: NAME is on PTO"
         payload = ""
 
-        data.each do |pto|
+        ptos_list.each do |pto|
           payload += "#{template.gsub("NAME", pto.individual_name)} #{build_pto_message(pto)}\n"
         end
 

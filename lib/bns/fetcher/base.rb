@@ -13,9 +13,5 @@ module Fetcher
     def fetch
       raise Domain::Exceptions::FunctionNotImplemented
     end
-
-    def validate_response(_response)
-      raise Domain::Exceptions::FunctionNotImplemented
-    end
   end
 end

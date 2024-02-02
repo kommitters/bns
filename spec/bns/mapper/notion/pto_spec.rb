@@ -43,7 +43,6 @@ RSpec.describe Mapper::Notion::Pto do
       VCR.use_cassette("/notion/ptos/fetch_with_filter") do
         ptos_response = @fetcher.fetch
         mapped_data = @mapper.map(ptos_response)
-        puts mapped_data
 
         are_ptos = mapped_data.all? { |element| element.is_a?(Domain::Pto) }
 

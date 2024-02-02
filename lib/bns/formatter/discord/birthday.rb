@@ -9,15 +9,15 @@ module Formatter
     class Birthday
       include Base
 
-      def format(data)
-        raise Formatter::Discord::Exceptions::InvalidData unless data.all? do |element|
-                                                                   element.is_a?(Domain::Birthday)
+      def format(birthdays_list)
+        raise Formatter::Discord::Exceptions::InvalidData unless birthdays_list.all? do |brithday|
+                                                                   brithday.is_a?(Domain::Birthday)
                                                                  end
 
         template = "NAME, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
         payload = ""
 
-        data.each do |birthday|
+        birthdays_list.each do |birthday|
           payload += "#{template.gsub("NAME", birthday.individual_name)}\n"
         end
 

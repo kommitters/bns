@@ -3,7 +3,9 @@
 module Fetcher
   module Notion
     module Types
-      class NotionResponse
+      ##
+      # Represents a response from the Notion API implementation of a Dispatcher.
+      class Response
         attr_reader :status_code, :message, :results
 
         def initialize(response)

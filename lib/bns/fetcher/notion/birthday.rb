@@ -6,7 +6,7 @@ require "date"
 require_relative "../base"
 require_relative "./exceptions/invalid_api_key"
 require_relative "./exceptions/invalid_database_id"
-require_relative "./types/notion_response"
+require_relative "./types/response"
 require_relative "./helper"
 
 module Fetcher
@@ -17,7 +17,7 @@ module Fetcher
 
         httparty_response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
 
-        notion_response = Fetcher::Notion::Types::NotionResponse.new(httparty_response)
+        notion_response = Fetcher::Notion::Types::Response.new(httparty_response)
 
         Fetcher::Notion::Helper.validate_response(notion_response)
       end
