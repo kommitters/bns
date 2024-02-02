@@ -19,7 +19,9 @@ RSpec.describe Formatter::Discord::Pto do
   describe ".format" do
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = ":beach: Range PTO is on PTO all day\n:beach: Time PTO is on PTO all day\n:beach: Day PTO is on PTO all day\n"
+      expectation = ":beach: Range PTO is on PTO all day\n" \
+                    ":beach: Time PTO is on PTO all day\n" \
+                    ":beach: Day PTO is on PTO all day\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)

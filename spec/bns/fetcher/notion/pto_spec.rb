@@ -86,7 +86,8 @@ RSpec.describe Fetcher::Notion::Pto do
 
         expect do
           pto_fetcher.fetch
-        end.to raise_exception("Could not find database with ID: b68d1106-1aad-43bd-89f8-f525ede2b598. Make sure the relevant pages and databases are shared with your integration.")
+        end.to raise_exception("Could not find database with ID: b68d1106-1aad-43bd-89f8-f525ede2b598. " \
+                                "Make sure the relevant pages and databases are shared with your integration.")
       end
     end
 

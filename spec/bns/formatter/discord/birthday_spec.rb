@@ -14,7 +14,8 @@ RSpec.describe Formatter::Discord::Birthday do
   describe ".format" do
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\nJohn Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
+      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n" \
+                    "John Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)
