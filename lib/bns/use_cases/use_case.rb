@@ -8,12 +8,12 @@ module UseCases
     attr_reader :fetcher, :mapper, :formatter, :dispatcher
 
     # Initializes the use case with the necessary components.
-    #  @param [Hash] options, Components required to run a use case
-    def initialize(options)
-      @fetcher = options[:fetcher]
-      @mapper = options[:mapper]
-      @formatter = options[:formatter]
-      @dispatcher = options[:dispatcher]
+    #  @param [Usecases::Types::Config] config, The components required to instantiate a use case.
+    def initialize(config)
+      @fetcher = config.fetcher
+      @mapper = config.mapper
+      @formatter = config.formatter
+      @dispatcher = config.dispatcher
     end
 
     # Executes the use case by orchestrating the sequential execution of the fetcher, mapper, formatter, and dispatcher.

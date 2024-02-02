@@ -10,6 +10,7 @@ require_relative "../formatter/discord/pto"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "use_case"
+require_relative "./types/config"
 
 ##
 # This module provides factory methods for use cases within the system. Each method
@@ -18,28 +19,24 @@ module UseCases
   # Method intended to instantiate the following use case:
   # Birthdays notifications from Notion to Discord.
   def self.notify_birthday_from_notion_to_discord(options)
-    options = {
-      # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
-      fetcher: Fetcher::Notion::Birthday.new(options[:fetch_options]),
-      mapper: Mapper::Notion::Birthday.new,
-      formatter: Formatter::Discord::Birthday.new,
-      dispatcher: Dispatcher::Discord::Implementation.new(options[:dispatch_options])
-    }
+    fetcher = Fetcher::Notion::Birthday.new(options[:fetch_options])
+    mapper = Mapper::Notion::Birthday.new
+    formatter = Formatter::Discord::Birthday.new
+    dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
+    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(options)
+    UseCases::UseCase.new(use_case_cofig)
   end
 
   # Method intended to instantiate the following use case:
   # PTO's notifications from Notion to Discord.
   def self.notify_pto_from_notion_to_discord(options)
-    options = {
-      # !TODO: Use a class for specific configs for fetcher and dispatcher, after everything is working
-      fetcher: Fetcher::Notion::Pto.new(options[:fetch_options]),
-      mapper: Mapper::Notion::Pto.new,
-      formatter: Formatter::Discord::Pto.new,
-      dispatcher: Dispatcher::Discord::Implementation.new(options[:dispatch_options])
-    }
+    fetcher = Fetcher::Notion::Pto.new(options[:fetch_options])
+    mapper = Mapper::Notion::Pto.new
+    formatter = Formatter::Discord::Pto.new
+    dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
+    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(options)
+    UseCases::UseCase.new(use_case_cofig)
   end
 end
