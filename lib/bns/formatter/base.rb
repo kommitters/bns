@@ -7,7 +7,6 @@ module Formatter
   # The Formatter::Base module serves as the foundation for implementing specific data presentation logic
   # within the Formatter module. Defines essential methods, that provide a blueprint for creating custom
   # formatters tailored to different use cases.
-
   module Base
     # A method meant to give an specified format depending on the implementation to the data coming from an
     # implementation of the Mapper::Base interface.

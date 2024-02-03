@@ -22,7 +22,7 @@ module Fetcher
       #  @raise [Exceptions::Notion::InvalidApiKey] if the API key provided is incorrect or invalid.
       #  @raise [Exceptions::Notion::InvalidDatabaseId] if the Database id provided is incorrect or invalid.
       def fetch
-        url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"
+        url = build_url(config[:base_url], config[:database_id])
 
         httparty_response = HTTParty.post(url, { body: config[:filter].to_json, headers: headers })
 
@@ -39,6 +39,10 @@ module Fetcher
           "Content-Type" => "application/json",
           "Notion-Version" => "2022-06-28"
         }
+      end
+
+      def build_url(base, database_id)
+        "#{base}/v1/databases/#{database_id}/query"
       end
     end
   end
