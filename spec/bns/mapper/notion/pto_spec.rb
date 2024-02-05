@@ -2,9 +2,7 @@
 
 RSpec.describe Mapper::Notion::Pto do
   before do
-    @fetcher =
-      @mapper = described_class.new
-
+    @mapper = described_class.new
     fetcher_config = {
       base_url: "https://api.notion.com",
       database_id: "b68d11061aad43bd89f8f525ede2b598",
@@ -29,7 +27,6 @@ RSpec.describe Mapper::Notion::Pto do
         "sorts": []
       }
     }
-
     @fetcher = Fetcher::Notion::Pto.new(fetcher_config)
   end
 

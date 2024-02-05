@@ -21,7 +21,7 @@ module Formatter
       # <b>raises</b> <tt>Formatter::Discord::Exceptions::InvalidData</tt> when invalid data is provided.
       #
       # <br>
-      # <b>returns</b> <tt>String<tt> payload, formatted payload suitable for a Discord message.
+      # <b>returns</b> <tt>String</tt> payload, formatted payload suitable for a Discord message.
       #
       def format(ptos_list)
         raise Formatter::Discord::Exceptions::InvalidData unless ptos_list.all? { |pto| pto.is_a?(Domain::Pto) }

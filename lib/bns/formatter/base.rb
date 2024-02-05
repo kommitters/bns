@@ -20,7 +20,7 @@ module Formatter
     # <br>
     # <b>raises</b> <tt>Domain::Exceptions::FunctionNotImplemented</tt> when missing implementation.
     #
-    # <b>returns</b> <tt>String</tt> Formatted payload suitable for a Discord dispatch.
+    # <b>returns</b> <tt>String</tt> Formatted payload suitable for a Dispatcher::Base implementation.
     #
     def format(_domain_data)
       raise Domain::Exceptions::FunctionNotImplemented
