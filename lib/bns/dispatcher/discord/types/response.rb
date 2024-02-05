@@ -6,6 +6,7 @@ module Dispatcher
       ##
       # Represents a response received from Discord. It encapsulates essential information about the response,
       # providing a structured way to handle and analyze Discord server responses.
+      #
       class Response
         attr_reader :code, :http_code, :message, :response
 

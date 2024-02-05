@@ -9,14 +9,20 @@ module Dispatcher
     ##
     # This class is an implementation of the Dispatcher::Base interface, specifically designed
     # for dispatching messages to Discord.
+    #
     class Implementation < Base
       # Implements the dispatching logic for the Discord use case. It sends a POST request to
       # the Discord webhook with the specified payload.
       #
-      #  @param [String] payload, Payload to be dispatched to discord.
+      # <br>
+      # <b>Params:</b>
+      # * <tt>String</tt> payload: Payload to be dispatched to discord.
+      # <br>
+      # <b>raises</b> <tt>Exceptions::Discord::InvalidWebookToken</tt> if the provided webhook token is invalid.
       #
-      #  @raise [Exceptions::Discord::InvalidWebookToken] if the provided webhook token is invalid.
-      #  @return [Exceptions::Discord::Types::Response]
+      # <br>
+      # <b>returns</b> <tt>Dispatcher::Discord::Types::Response</tt>
+      #
       def dispatch(payload)
         body = {
           username: name,

@@ -4,11 +4,16 @@ module UseCases
   ##
   # The UseCases::UseCase class represents a generic structure for use cases within the system. It encapsulates the
   # logic flow by coordinating the execution of its components to fulfill a specific use case.
+  #
   class UseCase
     attr_reader :fetcher, :mapper, :formatter, :dispatcher
 
     # Initializes the use case with the necessary components.
-    #  @param [Usecases::Types::Config] config, The components required to instantiate a use case.
+    #
+    # <br>
+    # <b>Params:</b>
+    # * <tt>Usecases::Types::Config</tt> config, The components required to instantiate a use case.
+    #
     def initialize(config)
       @fetcher = config.fetcher
       @mapper = config.mapper
@@ -17,7 +22,10 @@ module UseCases
     end
 
     # Executes the use case by orchestrating the sequential execution of the fetcher, mapper, formatter, and dispatcher.
-    #  @return [Dispatcher::Discord::Types::Response]
+    #
+    # <br>
+    # <b>returns</b> <tt>Dispatcher::Discord::Types::Response</tt>
+    #
     def perform
       response = fetcher.fetch
 

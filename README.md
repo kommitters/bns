@@ -82,6 +82,7 @@ With the following formula for the **BD_this_year** column: `dateAdd(prop("BD"),
 
 ```
 #### file.rb ####
+today = Date.now
 {
     "filter": {
       "or": [
@@ -94,7 +95,7 @@ With the following formula for the **BD_this_year** column: `dateAdd(prop("BD"),
       ]
     },
     "sorts": []
-  }
+}
 ```
 
 * A template for the formatter to be used for formatting the payload to dispatch to Discord. For this specific case, the format of the messages should be:

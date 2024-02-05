@@ -4,6 +4,7 @@ module UseCases
   module Types
     ##
     # Represents a the configuration composing the initial components required by a UseCases::UseCase implementation.
+    #
     class Config
       attr_reader :fetcher, :mapper, :formatter, :dispatcher
 

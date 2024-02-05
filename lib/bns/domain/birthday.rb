@@ -10,8 +10,11 @@ module Domain
 
     # Initializes a Domain::Birthday instance with the specified individual name, and date of birth.
     #
-    # * @param [String] individual_name Name of the individual
-    # * @param [Date] birth_date Birthdate from the individual
+    # <br>
+    # <b>Params:</b>
+    # * <tt>String</tt> individual_name Name of the individual
+    # * <tt>Date</tt> birth_date Birthdate from the individual
+    #
     def initialize(individual_name, date)
       @individual_name = individual_name
       @birth_date = date

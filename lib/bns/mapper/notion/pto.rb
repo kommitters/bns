@@ -8,14 +8,20 @@ module Mapper
     ##
     # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
     # shaping PTO's data coming from a Fetcher::Base implementation.
+    #
     class Pto
       include Base
 
       # Implements the logic for shaping the results from a fetcher response.
       #
-      #  @param [Fetcher::Notion::Types::Response] notion_response, Notion response object.
+      # <br>
+      # <b>Params:</b>
+      # * <tt>Fetcher::Notion::Types::Response</tt> notion_response: Notion response object.
       #
-      #  @return [List<Domain::Pto>] ptos_list, mapped PTO's to be used by a Formatter::Base implementation.
+      # <br>
+      # <b>returns</b> <tt>List<Domain::Pto></tt> ptos_list, mapped PTO's to be used by a Formatter::Base
+      # implementation.
+      #
       def map(notion_response)
         return [] if notion_response.results.empty?
 

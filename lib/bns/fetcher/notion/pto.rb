@@ -18,8 +18,11 @@ module Fetcher
       # Implements the data fetching logic for PTO's data from Notion. It sends a POST
       # request to the Notion API to query the specified database and returns a validated response.
       #
-      #  @raise [Exceptions::Notion::InvalidApiKey] if the API key provided is incorrect or invalid.
-      #  @raise [Exceptions::Notion::InvalidDatabaseId] if the Database id provided is incorrect or invalid.
+      # <br>
+      # <b>raises</b> <tt>Exceptions::Notion::InvalidApiKey</tt> if the API key provided is incorrect or invalid.
+      #
+      # <b>raises</b> <tt>Exceptions::Notion::InvalidDatabaseId</tt> if the Database id provided is incorrect
+      # or invalid.
       #
       def fetch
         url = "#{config[:base_url]}/v1/databases/#{config[:database_id]}/query"

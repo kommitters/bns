@@ -14,10 +14,16 @@ module Formatter
 
       # Implements the logic for building a formatted payload with the given template for birthdays.
       #
-      #  @param [List<Domain::Birthday>] birthdays_list, list of mapped birthdays.
+      # <br>
+      # <b>Params:</b>
+      # * <tt>List<Domain::Birthday></tt> birthdays_list: list of mapped birthdays.
       #
-      #  @raise [Formatter::Discord::Exceptions::InvalidData] when invalid data is provided.
-      #  @return [String] payload, formatted payload suitable for a Discord message.
+      # <br>
+      # <b>raises</b> <tt>Formatter::Discord::Exceptions::InvalidData</tt> when invalid data is provided.
+      #
+      # <br>
+      # <b>returns</b> <tt>String</tt> payload: formatted payload suitable for a Discord message.
+      #
       def format(birthdays_list)
         raise Formatter::Discord::Exceptions::InvalidData unless birthdays_list.all? do |brithday|
                                                                    brithday.is_a?(Domain::Birthday)

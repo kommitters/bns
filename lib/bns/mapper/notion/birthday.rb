@@ -13,10 +13,14 @@ module Mapper
 
       # Implements the logic for shaping the results from a fetcher response.
       #
-      #  @param [Fetcher::Notion::Types::Response] notion_response, Notion response object.
+      # <br>
+      # <b>Params:</b>
+      # * <tt>Fetcher::Notion::Types::Response</tt> notion_response: Notion response object.
       #
-      #  @return [List<Domain::Birthday>] birthdays_list, mapped birthdays to be used by a
-      #     Formatter::Base implementation.
+      # <br>
+      # <b>return</b> <tt>List<Domain::Birthday></tt> birthdays_list, mapped birthdays to be used by a
+      # Formatter::Base implementation.
+      #
       def map(notion_response)
         return [] if notion_response.results.empty?
 
