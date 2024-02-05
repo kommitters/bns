@@ -59,8 +59,7 @@ in the channel should be provided with the initial use case configurations. It c
 
 ## Examples
 
-In this example is showed, how you can instantiate a birthdays notification use case, and execute it on a simple ruby project and using a serverless configuration
-and a simple lambda deployment.
+In this example, we demonstrate how to instantiate a birthday notification use case and execute it in a basic Ruby project. We'll also cover its deployment in a serverless configuration, specifically using a simple Lambda deployment.
 
 ### Preparing the configurations
 
