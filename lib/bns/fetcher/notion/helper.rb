@@ -2,6 +2,9 @@
 
 module Fetcher
   module Notion
+    ##
+    # Provides common fuctionalities along the Notion domain.
+    #
     module Helper
       def self.validate_response(response)
         case response.status_code

@@ -18,11 +18,4 @@ RSpec.describe Fetcher::Base do
       expect { @fetcher.fetch }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
     end
   end
-
-  describe ".validate_response" do
-    it "provides no implementation for the method" do
-      response = {}
-      expect { @fetcher.validate_response(response) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
-    end
-  end
 end

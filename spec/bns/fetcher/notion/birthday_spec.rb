@@ -17,7 +17,6 @@ RSpec.describe Fetcher::Notion::Birthday do
 
     it { expect(described_class).to respond_to(:new).with(1).arguments }
     it { expect(@fetcher).to respond_to(:fetch).with(0).arguments }
-    it { expect(@fetcher).to respond_to(:validate_response).with(1).arguments }
   end
 
   describe ".fetch" do
@@ -26,7 +25,7 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(27)
       end
@@ -55,7 +54,7 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthdays_fetcher = described_class.new(config)
         fetched_data = birthdays_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(1)
       end
@@ -69,7 +68,7 @@ RSpec.describe Fetcher::Notion::Birthday do
         birthday_fetcher = described_class.new(config)
         fetched_data = birthday_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(0)
       end

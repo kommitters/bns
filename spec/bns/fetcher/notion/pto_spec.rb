@@ -17,7 +17,6 @@ RSpec.describe Fetcher::Notion::Pto do
 
     it { expect(described_class).to respond_to(:new).with(1).arguments }
     it { expect(@fetcher).to respond_to(:fetch).with(0).arguments }
-    it { expect(@fetcher).to respond_to(:validate_response).with(1).arguments }
   end
 
   describe ".fetch" do
@@ -26,7 +25,7 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(@config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(7)
       end
@@ -59,7 +58,7 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(3)
       end
@@ -73,7 +72,7 @@ RSpec.describe Fetcher::Notion::Pto do
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
 
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::NotionResponse)
+        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
         expect(fetched_data.results).to be_an_instance_of(Array)
         expect(fetched_data.results.length).to eq(0)
       end
@@ -87,7 +86,8 @@ RSpec.describe Fetcher::Notion::Pto do
 
         expect do
           pto_fetcher.fetch
-        end.to raise_exception("Could not find database with ID: b68d1106-1aad-43bd-89f8-f525ede2b598. Make sure the relevant pages and databases are shared with your integration.")
+        end.to raise_exception("Could not find database with ID: b68d1106-1aad-43bd-89f8-f525ede2b598. " \
+                                "Make sure the relevant pages and databases are shared with your integration.")
       end
     end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Dispatcher::Discord do
+RSpec.describe Dispatcher::Discord::Implementation do
   before do
     @config = {
       webhook: "https://discord.com/api/webhooks/1196541734138691615/lFFCvFdMVEvfKWtFID2TSBjNjjBvEwqRbG2czOz3X_HfHfIgmXh6SDlFRXaXLOignsOj",
@@ -22,27 +22,26 @@ RSpec.describe Dispatcher::Discord do
 
   describe ".dispatch" do
     it "dispatch a notification message to discord" do
-      VCR.use_cassette("discord_success_dispatch") do
+      VCR.use_cassette("/discord/success_dispatch") do
         discords_dispatcher = described_class.new(@config)
 
         response = discords_dispatcher.dispatch(@payload)
 
-        expect(response.code).to eq(204)
+        expect(response.http_code).to eq(204)
       end
     end
 
-    it "doest dispatch a notification message to discord" do
-      VCR.use_cassette("discord_success_dispatch_empty_name") do
+    it "doesn't dispatch a notification message to discord" do
+      VCR.use_cassette("/discord/success_dispatch_empty_name") do
         discords_dispatcher = described_class.new(@config)
 
         response = discords_dispatcher.dispatch(@payload)
-
-        expect(response.code).to eq(204)
+        expect(response.http_code).to eq(204)
       end
     end
 
     it "raises an exception caused by incorrect webhook provided" do
-      VCR.use_cassette("discord_failed_dispatch_invalid_webhook") do
+      VCR.use_cassette("/discord/failed_dispatch_invalid_webhook") do
         config = @config
         config[:webhook] = "https://discord.com/api/webhooks/1196541734138691615/lFFCvFdMVEvfKWtFID2TSBjNjjBvEwqRbG2czOz3X_JfHfIgmXh6SDlFRXaXLOignsIP"
 
