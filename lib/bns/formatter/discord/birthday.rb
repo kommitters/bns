@@ -9,9 +9,7 @@ module Formatter
     ##
     # This class implementats the methods of the Formatter::Base module, specifically designed for formatting birthday
     # data in a way suitable for Discord messages.
-    class Birthday
-      include Base
-
+    class Birthday < Base
       # Implements the logic for building a formatted payload with the given template for birthdays.
       #
       # <br>
@@ -29,14 +27,9 @@ module Formatter
                                                                    brithday.is_a?(Domain::Birthday)
                                                                  end
 
-        template = "NAME, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
-        payload = ""
-
-        birthdays_list.each do |birthday|
-          payload += "#{template.gsub("NAME", birthday.individual_name)}\n"
+        birthdays_list.reduce("") do |payload, birthday|
+          payload + build_template(Domain::Birthday::ATTRIBUTES, birthday)
         end
-
-        payload
       end
     end
   end
