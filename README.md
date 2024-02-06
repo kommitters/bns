@@ -2,8 +2,10 @@
 
 The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
 
-[![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://github.com/kommitters/bns)
+![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/bns/ci.yml?branch=project-opensource-config&style=for-the-badge)
+[![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://coveralls.io/github/kommitters/bns?branch=main)
 [![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/bns?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/bns)
+![GitHub License](https://img.shields.io/github/license/kommitters/bns?style=for-the-badge)
 
 ## Installation
 
@@ -79,7 +81,7 @@ With the following formula for the **BD_this_year** column: `dateAdd(prop("BD"),
 
 * A Notion secret, which can be obtained, by creating an integration here: `https://developers.notion.com/`, browsing on the **View my integations** option, and selecting the **New Integration** or **Create new integration** buttons.
 
-* A webhook key, which can be generated directly on discrod on the desired channel, following this instructions: `https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks`
+* A webhook key, which can be generated directly on discord on the desired channel, following this instructions: `https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks`
 
 * A filter, to determine which data to bring from the database, for this specific case, the filter we used is:
 
@@ -145,7 +147,7 @@ use_case.perform
 
 ```
 
-**Serverles**
+**Serverless**
 
 Examples of different use cases, and how to configure and deploy the lambdas can be found on: `https://github.com/kommitters/bns_serverless`
 
@@ -186,7 +188,11 @@ The gem is is licensed under an MIT license. See [LICENSE][license] for details.
 
 </sub>
 
-[license]: https://github.com/kommitters/.template/blob/main/LICENSE
-[coc]: https://github.com/kommitters/.template/blob/main/CODE_OF_CONDUCT.md
-[changelog]: https://github.com/kommitters/.template/blob/main/CHANGELOG.md
-[contributing]: https://github.com/kommitters/.template/blob/main/CONTRIBUTING.md
+[license]: https://github.com/kommitters/bns/blob/main/LICENSE
+[coc]: https://github.com/kommitters/bns/blob/main/CODE_OF_CONDUCT.md
+[changelog]: https://github.com/kommitters/bns/blob/main/CHANGELOG.md
+[contributing]: https://github.com/kommitters/bns/blob/main/CONTRIBUTING.md
+[kommit-website]: https://kommit.co
+[kommit-github]: https://github.com/kommitters
+[kommit-x]: https://twitter.com/kommitco
+[kommit-linkedin]: https://www.linkedin.com/company/kommit-co
