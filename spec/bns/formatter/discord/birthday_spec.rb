@@ -11,11 +11,16 @@ RSpec.describe Formatter::Discord::Birthday do
     it { expect(@formatter).to respond_to(:format).with(1).arguments }
   end
 
-  describe ".format" do
+  describe ".format with a custom template" do
+    before do
+      config = { template: "individual_name, Wishing you a very happy birthday! :birthday: :gift:" }
+      @formatter = described_class.new(config)
+    end
+
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n" \
-                    "John Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
+      expectation = "Jane Doe, Wishing you a very happy birthday! :birthday: :gift:\n" \
+                    "John Doe, Wishing you a very happy birthday! :birthday: :gift:\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)
