@@ -5,7 +5,7 @@ require_relative "lib/bns/version"
 Gem::Specification.new do |spec|
   spec.name = "bns"
   spec.version = Bns::VERSION
-  spec.authors = ["kommit"]
+  spec.authors = ["kommitters Open Source"]
   spec.summary = "BNS - Business notification system"
 
   spec.email = ["oss@kommit.co"]

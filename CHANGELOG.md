@@ -1,6 +1,6 @@
-## [Unreleased]
+# Changelog
 
-## [0.1.0] - 2024-06-02
+## 0.1.0 (06.02.2024)
 
 - [Build initial codebase](https://github.com/kommitters/bns/issues/6)
 - [Birthdays use case implementation](https://github.com/kommitters/bns/issues/7)
