@@ -171,7 +171,7 @@ For information on how to contribute, please refer to our [CONTRIBUTING][contrib
 
 ## License
 
-The gem is is licensed under an MIT license. See [LICENSE][license] for details.
+The gem is licensed under an MIT license. See [LICENSE][license] for details.
 
 <br/>
 
