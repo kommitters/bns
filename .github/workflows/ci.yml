@@ -3,7 +3,7 @@ name: Ruby
 on:
   push:
     branches:
-      - master
+      - main
 
   pull_request:
 
@@ -25,7 +25,7 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: chmod +x bin/console && bundle exec rake
-    - name: Simplecov Report
-      uses: aki77/simplecov-report-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.2.3
+  
+    
