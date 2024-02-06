@@ -1,5 +1,11 @@
 # BNS - Business Notification System
-**BNS** is a flexible solution for building your own notification use cases, connecting your datasources with your daily tools.
+
+The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
+
+![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/bns/ci.yml?branch=project-opensource-config&style=for-the-badge)
+[![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://coveralls.io/github/kommitters/bns?branch=main)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/bns?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/bns)
+![GitHub License](https://img.shields.io/github/license/kommitters/bns?style=for-the-badge)
 
 ## Installation
 
@@ -75,7 +81,7 @@ With the following formula for the **BD_this_year** column: `dateAdd(prop("BD"),
 
 * A Notion secret, which can be obtained, by creating an integration here: `https://developers.notion.com/`, browsing on the **View my integations** option, and selecting the **New Integration** or **Create new integration** buttons.
 
-* A webhook key, which can be generated directly on discrod on the desired channel, following this instructions: `https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks`
+* A webhook key, which can be generated directly on discord on the desired channel, following this instructions: `https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks`
 
 * A filter, to determine which data to bring from the database, for this specific case, the filter we used is:
 
@@ -141,7 +147,7 @@ use_case.perform
 
 ```
 
-**Serverles**
+**Serverless**
 
 Examples of different use cases, and how to configure and deploy the lambdas can be found on: `https://github.com/kommitters/bns_serverless`
 
@@ -151,10 +157,42 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+## Changelog
+
+Features and bug fixes are listed in the [CHANGELOG][changelog] file.
+
+## Code of conduct
+
+We welcome everyone to contribute. Make sure you have read the [CODE_OF_CONDUCT][coc] before.
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/business_notification_system.
+For information on how to contribute, please refer to our [CONTRIBUTING][contributing] guide.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is is licensed under an MIT license. See [LICENSE][license] for details.
+
+<br/>
+
+<hr/>
+
+[<img src="https://github.com/kommitters/chaincerts-smart-contracts/assets/1649973/d60d775f-166b-4968-89b6-8be847993f8c" width="80px" alt="kommit"/>](https://kommit.co)
+
+<sub>
+
+[Website][kommit-website] •
+[Github][kommit-github] •
+[X][kommit-x] •
+[LinkedIn][kommit-linkedin]
+
+</sub>
+
+[license]: https://github.com/kommitters/bns/blob/main/LICENSE
+[coc]: https://github.com/kommitters/bns/blob/main/CODE_OF_CONDUCT.md
+[changelog]: https://github.com/kommitters/bns/blob/main/CHANGELOG.md
+[contributing]: https://github.com/kommitters/bns/blob/main/CONTRIBUTING.md
+[kommit-website]: https://kommit.co
+[kommit-github]: https://github.com/kommitters
+[kommit-x]: https://twitter.com/kommitco
+[kommit-linkedin]: https://www.linkedin.com/company/kommit-co
