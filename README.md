@@ -2,9 +2,12 @@
 
 The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
 
+![Gem Version](https://img.shields.io/gem/v/bns)
+![Gem Downloads (for specified version)](https://img.shields.io/gem/dv/bns/0.1.0)
 ![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/bns/ci.yml?branch=project-opensource-config&style=for-the-badge)
 [![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://coveralls.io/github/kommitters/bns?branch=main)
 [![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/bns?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/bns)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8383/badge)](https://www.bestpractices.dev/projects/8383)
 ![GitHub License](https://img.shields.io/github/license/kommitters/bns?style=for-the-badge)
 
 ## Installation

@@ -38,5 +38,3 @@ jobs:
       run: chmod +x bin/console && bundle exec rake
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@3dfc5567390f6fa9267c0ee9c251e4c8c3f18949 # v2.2.3
-  
-    
