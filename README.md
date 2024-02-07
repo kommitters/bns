@@ -3,13 +3,11 @@
 The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
 
 ![Gem Version](https://img.shields.io/gem/v/bns?style=for-the-badge)
-![Gem Downloads (for specified version)](https://img.shields.io/gem/dv/bns/0.1.0?style=for-the-badge)
+![Gem Total Downloads](https://img.shields.io/gem/dt/bns?style=for-the-badge)
 ![Build Badge](https://img.shields.io/github/actions/workflow/status/kommitters/bns/ci.yml?branch=project-opensource-config&style=for-the-badge)
 [![Coverage Status](https://img.shields.io/coveralls/github/kommitters/bns?style=for-the-badge)](https://coveralls.io/github/kommitters/bns?branch=main)
 ![GitHub License](https://img.shields.io/github/license/kommitters/bns?style=for-the-badge)
-
-
-[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/bns?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/bns)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kommitters/bns?label=openssf%20scorecard&style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/kommitters/bns)
 [![OpenSSF Best Practices](https://img.shields.io/cii/summary/8383?label=openssf%20best%20practices&style=for-the-badge)](https://bestpractices.coreinfrastructure.org/projects/8383)
 
 ## Installation
