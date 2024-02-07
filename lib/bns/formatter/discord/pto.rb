@@ -26,19 +26,22 @@ module Formatter
         raise Formatter::Discord::Exceptions::InvalidData unless ptos_list.all? { |pto| pto.is_a?(Domain::Pto) }
 
         ptos_list.reduce("") do |payload, pto|
-          payload + build_template(Domain::Pto::ATTRIBUTES, pto)
+          built_template = build_template(Domain::Pto::ATTRIBUTES, pto)
+          payload + format_message_by_case(built_template.gsub("\n", ""), pto)
         end
       end
 
       private
 
-      def build_pto_message(pto)
+      def format_message_by_case(built_template, pto)
         if pto.start_date.include?("|")
           start_time = pto.start_date.split("|")
           end_time = pto.end_date.split("|")
-          "#{start_time[1]} - #{end_time[1]}"
+          "#{built_template} #{start_time[1]} - #{end_time[1]}\n"
+        elsif pto.start_date == pto.end_date
+          "#{built_template} all day\n"
         else
-          "all day"
+          "#{built_template} #{pto.start_date} - #{pto.end_date}\n"
         end
       end
     end
