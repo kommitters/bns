@@ -2,13 +2,9 @@
 
 RSpec.describe Formatter::Discord::Pto do
   before do
-    format = "%Y-%m-%d|%I:%M %p"
-    start_datetime = Time.new("2024-01-20T00:00:00.000-05:00")
-    end_datetime = Time.new("2024-01-20T15:00:00.000-05:00")
-
     @data = [
       Domain::Pto.new("Range PTO", "2024-01-11", "2024-01-13"),
-      Domain::Pto.new("Time PTO", start_datetime.strftime(format), end_datetime.strftime(format)),
+      Domain::Pto.new("Time PTO", "2024-01-20|12:00 PM", "2024-01-20|03:00 PM"),
       Domain::Pto.new("Day PTO", "2024-01-11", "2024-01-11")
     ]
   end
@@ -29,7 +25,7 @@ RSpec.describe Formatter::Discord::Pto do
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
       expectation = ":beach: Range PTO is on PTO 2024-01-11 - 2024-01-13\n" \
-                    ":beach: Time PTO is on PTO 12:00 AM - 03:00 PM\n" \
+                    ":beach: Time PTO is on PTO 12:00 PM - 03:00 PM\n" \
                     ":beach: Day PTO is on PTO all day\n"
 
       expect(formatted_message).to be_an_instance_of(String)
