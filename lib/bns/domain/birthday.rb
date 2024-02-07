@@ -8,6 +8,8 @@ module Domain
   class Birthday
     attr_reader :individual_name, :birth_date
 
+    ATTRIBUTES = %w[individual_name birth_date].freeze
+
     # Initializes a Domain::Birthday instance with the specified individual name, and date of birth.
     #
     # <br>

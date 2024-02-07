@@ -73,7 +73,7 @@ module UseCases
   def self.notify_birthday_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::Birthday.new(options[:fetch_options])
     mapper = Mapper::Notion::Birthday.new
-    formatter = Formatter::Discord::Birthday.new
+    formatter = Formatter::Discord::Birthday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -141,7 +141,7 @@ module UseCases
   def self.notify_pto_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::Pto.new(options[:fetch_options])
     mapper = Mapper::Notion::Pto.new
-    formatter = Formatter::Discord::Pto.new
+    formatter = Formatter::Discord::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 

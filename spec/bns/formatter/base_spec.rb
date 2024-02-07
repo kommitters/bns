@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe Formatter::Base do
-  describe ".format" do
-    let(:testing_class) { Class.new { include Formatter::Base } }
+  before do
+    config = {}
+    @formatter = described_class.new(config)
+  end
 
+  describe ".format" do
     it "provides no implementation for the method" do
-      instace = testing_class.new
       data = []
-      expect { instace.format(data) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
+      expect { @formatter.format(data) }.to raise_exception(Domain::Exceptions::FunctionNotImplemented)
     end
   end
 end

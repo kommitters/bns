@@ -9,6 +9,8 @@ module Domain
   class Pto
     attr_reader :individual_name, :start_date, :end_date
 
+    ATTRIBUTES = %w[individual_name start_date end_date].freeze
+
     # Initializes a Domain::Pto instance with the specified individual name, start date, and end date.
     #
     # <br>

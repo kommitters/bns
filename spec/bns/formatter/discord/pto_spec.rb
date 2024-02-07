@@ -7,16 +7,21 @@ RSpec.describe Formatter::Discord::Pto do
       Domain::Pto.new("Time PTO", "2024-01-20T00:00:00.000-05:00", "2024-01-20T15:00:00.000-05:00"),
       Domain::Pto.new("Day PTO", "2024-01-11", "")
     ]
-
-    @formatter = described_class.new
   end
 
   describe "attributes and arguments" do
+    before { @formatter = described_class.new }
+
     it { expect(described_class).to respond_to(:new).with(0).arguments }
     it { expect(@formatter).to respond_to(:format).with(1).arguments }
   end
 
-  describe ".format" do
+  describe ".format with custom template" do
+    before do
+      config = { template: ":beach: individual_name is on PTO <%= build_pto_message(instance) %>" }
+      @formatter = described_class.new(config)
+    end
+
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
       expectation = ":beach: Range PTO is on PTO all day\n" \
