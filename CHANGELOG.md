@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (07.02.2024)
+- [Add custom templates option](https://github.com/kommitters/bns/issues/25)
+- [PTO's formatting use cases](https://github.com/kommitters/bns/issues/24)
+
 ## 0.1.0 (06.02.2024)
 
 - [Build initial codebase](https://github.com/kommitters/bns/issues/6)
