@@ -1,6 +1,8 @@
 # BNS - Business Notification System
 
-The business notification system is designed to be a versatile platform, offering key components for building various use cases. It provides an easy-to-use tool for implementing notifications without excessive complexity.
+Many organizations and individuals rely on automatic notifications across various contexts in their daily operations. With BNS, we aim to provide an open-source platform that empowers users to create customized notification systems tailored to their unique requirements. BNS consists of a series of abstract components designed to facilitate the creation of diverse use cases, regardless of context.
+
+The underlying idea is to develop generic components that can serve a wide range of needs, this approach ensures that all members of the community can leverage the platform's evolving suite of components and use cases to their advantage.
 
 ![Gem Version](https://img.shields.io/gem/v/bns?style=for-the-badge)
 ![Gem Total Downloads](https://img.shields.io/gem/dt/bns?style=for-the-badge)
@@ -150,9 +152,163 @@ use_case.perform
 
 ```
 
-**Serverless**
+### Serverless
+We'll explain how to configure and deploy a use case with serverless, this example will cover the PTO's notifications use case.
 
-Examples of different use cases, and how to configure and deploy the lambdas can be found on: `https://github.com/kommitters/bns_serverless`
+#### Configuring environment variables
+Create the environment variables configuration file.
+
+```bash
+cp env.yml.example env.yml
+```
+
+And put the following env variables
+```
+dev:
+  NOTION_DATABASE_ID: NOTION_DATABASE_ID
+  NOTION_SECRET: NOTION_SECRET
+  DISCORD_WEBHOOK: DISCORD_WEBHOOK
+  DISCORD_BOT_NAME: DISCORD_BOT_NAME
+prod:
+  NOTION_DATABASE_ID: NOTION_DATABASE_ID
+  NOTION_SECRET: NOTION_SECRET
+  DISCORD_WEBHOOK: DISCORD_WEBHOOK
+  DISCORD_BOT_NAME: DISCORD_BOT_NAME
+
+```
+
+The variables should be defined either in the custom settings section within the `serverless.yml` file to ensure accessibility by all lambdas, or in the environment configuration option for each lambda respectively. For example:
+
+```bash
+# Accessible by all the lambdas
+custom:
+  settings:
+      api:
+        NOTION_DATABASE_ID: ${file(./env.yml):${env:STAGE}.NOTION_DATABASE_ID}
+        NOTION_SECRET: ${file(./env.yml):${env:STAGE}.NOTION_SECRET}}
+
+# Accessible by the lambda
+functions:
+  lambdaName:
+    environment:
+      NOTION_DATABASE_ID: ${file(./env.yml):${env:STAGE}.NOTION_DATABASE_ID}
+      NOTION_SECRET: ${file(./env.yml):${env:STAGE}.NOTION_SECRET}}
+```
+
+#### Schedule
+the schedule is configured using an environment variable containing the cron configuration. For example:
+```bash
+# env.yml file
+SCHEDULER: cron(0 13 ? * MON-FRI *)
+
+# serverless.yml
+functions:
+  lambdaName:
+    events:
+      - schedule:
+        rate: ${file(./env.yml):${env:STAGE}.SCHEDULER}
+```
+
+To learn how to modify the cron configuration follow this guide: [Schedule expressions using rate or cron](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents-expressions.html)
+
+#### Building your lambda
+On your serverless configuration, create your lambda function, on your serverless `/src` folder.
+
+```ruby
+# frozen_string_literal: true
+
+require 'bns'
+
+# Initialize the environment variables
+NOTION_BASE_URL = 'https://api.notion.com'
+NOTION_DATABASE_ID = ENV.fetch('PTO_NOTION_DATABASE_ID')
+NOTION_SECRET = ENV.fetch('PTO_NOTION_SECRET')
+DISCORD_WEBHOOK = ENV.fetch('PTO_DISCORD_WEBHOOK')
+DISCORD_BOT_NAME = ENV.fetch('PTO_DISCORD_BOT_NAME')
+
+module Notifier
+  # Service description
+  class UseCaseName
+    def self.notify(*)
+      options = { fetch_options:, dispatch_options: }
+
+      begin
+        use_case = UseCases.use_case_build_function(options)
+
+        use_case.perform
+      rescue StandardError => e
+        { body: { message: e.message } }
+      end
+    end
+
+    def self.fetch_options
+      {
+        base_url: NOTION_BASE_URL,
+        database_id: NOTION_DATABASE_ID,
+        secret: NOTION_SECRET,
+        filter: {
+          filter: { "and": fetch_filter }
+        }
+      }
+    end
+
+    def self.fetch_filter
+      today = Common::TimeZone.set_colombia_time_zone.strftime('%F').to_s
+
+      [
+        { property: 'Desde?', date: { on_or_before: today } },
+        { property: 'Hasta?', date: { on_or_after: today } }
+      ]
+    end
+
+    def self.dispatch_options
+      {
+        webhook: DISCORD_WEBHOOK,
+        name: DISCORD_BOT_NAME
+      }
+    end
+
+    def self.format_options
+      {
+        template: ':beach: individual_name is on PTO'
+      }
+    end
+  end
+end
+```
+
+#### Configure the lambda
+In the `serverless.yml` file, add a new instance in the `functions` block with this structure:
+
+```bash
+functions:
+  ptoNotification:
+    handler: src/lambdas/pto_notification.Notifier::PTO.notify
+    environment:
+      PTO_NOTION_DATABASE_ID: ${file(./env.yml):${env:STAGE}.PTO_NOTION_DATABASE_ID}
+      PTO_NOTION_SECRET: ${file(./env.yml):${env:STAGE}.PTO_NOTION_SECRET}
+      PTO_DISCORD_WEBHOOK: ${file(./env.yml):${env:STAGE}.PTO_DISCORD_WEBHOOK}
+      PTO_DISCORD_BOT_NAME: ${file(./env.yml):${env:STAGE}.DISCORD_BOT_NAME}
+    events:
+      - schedule:
+          name: pto-daily-notification
+          description: "Notify every 24 hours at 8:30 a.m (UTC-5) from monday to friday"
+          rate: cron(${file(./env.yml):${env:STAGE}.PTO_SCHEDULER})
+          enabled: true
+```
+
+#### Deploying
+
+Configure the AWS keys:
+
+```bash
+serverless config credentials --provider aws --key YOUR_KEY --secret YOUR_SECRET
+```
+
+Deploy the project:
+```bash
+STAGE=prod sls deploy --verbose
+```
 
 ## Development
 
