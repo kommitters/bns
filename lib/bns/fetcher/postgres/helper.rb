@@ -7,7 +7,7 @@ module Fetcher
     #
     module Helper
       def self.validate_response(response)
-        response.response.check_result()
+        response.response.check_result
 
         response
       end

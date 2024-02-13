@@ -9,24 +9,32 @@ module Fetcher
       class Response
         attr_reader :status, :message, :response, :fields, :records
 
-        SUCCESS_STATUS = 'PGRES_TUPLES_OK'
+        SUCCESS_STATUS = "PGRES_TUPLES_OK"
 
         def initialize(response)
-          status = response.res_status()
-
-          if status == SUCCESS_STATUS
-            @status = status
-            @message = 'success'
-            @response = response
-            @fields = response.fields()
-            @records = response.values
+          if response.res_status == SUCCESS_STATUS
+            success_response(response)
           else
-            @status = status
-            @message = response.result_error_message()
-            @response = response
-            @fields = nil
-            @records = nil
+            unsuccess_response(response)
           end
+        end
+
+        private
+
+        def success_response(response)
+          @status = response.res_status
+          @message = "success"
+          @response = response
+          @fields = response.fields
+          @records = response.values
+        end
+
+        def unsuccess_response(response)
+          @status = response.res_status
+          @message = response.result_error_message
+          @response = response
+          @fields = nil
+          @records = nil
         end
       end
     end

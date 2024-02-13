@@ -2,7 +2,7 @@
 
 RSpec.describe Fetcher::Postgres::Pto do
   before do
-    today = '2024-02-14 16:40:08 UTC'
+    today = "2024-02-14 16:40:08 UTC"
     query = "SELECT * FROM pto WHERE start_date <= '#{today}' AND end_date >= '#{today}';"
 
     config = {
@@ -28,11 +28,11 @@ RSpec.describe Fetcher::Postgres::Pto do
 
   describe ".fetch" do
     let(:pg_conn) { instance_double(PG::Connection) }
-    let(:fields) { ['id', 'individual_name', 'start_date', 'end_date'] }
-    let(:values) { [["5", "2024-02-13", "user1", "2024-02-13", "2024-02-14"]] }
+    let(:fields) { %w[id individual_name start_date end_date] }
+    let(:values) { [%w[5 2024-02-13 user1 2024-02-13 2024-02-14]] }
 
     before do
-      @pg_result = double()
+      @pg_result = double
 
       allow(@pg_result).to receive(:fields).and_return(fields)
       allow(@pg_result).to receive(:values).and_return(values)
@@ -42,13 +42,13 @@ RSpec.describe Fetcher::Postgres::Pto do
     end
 
     it "fetch data from the postgres database when there are results" do
-      allow(@pg_result).to receive(:res_status).and_return('PGRES_TUPLES_OK')
+      allow(@pg_result).to receive(:res_status).and_return("PGRES_TUPLES_OK")
       allow(@pg_result).to receive(:check_result).and_return(nil)
 
       pg_response = @fetcher.fetch
 
-      expect(pg_response.status).to eq('PGRES_TUPLES_OK')
-      expect(pg_response.message).to eq('success')
+      expect(pg_response.status).to eq("PGRES_TUPLES_OK")
+      expect(pg_response.message).to eq("success")
       expect(pg_response.fields).to eq(fields)
       expect(pg_response.records).to eq(values)
     end
@@ -56,38 +56,38 @@ RSpec.describe Fetcher::Postgres::Pto do
     it "fetch data from the postgres database when there are not results" do
       allow(@pg_result).to receive(:fields).and_return([])
       allow(@pg_result).to receive(:values).and_return([])
-      allow(@pg_result).to receive(:res_status).and_return('PGRES_TUPLES_OK')
+      allow(@pg_result).to receive(:res_status).and_return("PGRES_TUPLES_OK")
       allow(@pg_result).to receive(:check_result).and_return(nil)
 
       pg_response = @fetcher.fetch
 
-      expect(pg_response.status).to eq('PGRES_TUPLES_OK')
-      expect(pg_response.message).to eq('success')
+      expect(pg_response.status).to eq("PGRES_TUPLES_OK")
+      expect(pg_response.message).to eq("success")
       expect(pg_response.fields).to eq([])
       expect(pg_response.records).to eq([])
     end
 
     it "fetch data from the postgres databases with an unsucess status" do
-      allow(@pg_result).to receive(:res_status).and_return('PGRES_EMPTY_QUERY')
-      allow(@pg_result).to receive(:result_error_message).and_return('the query is empty')
+      allow(@pg_result).to receive(:res_status).and_return("PGRES_EMPTY_QUERY")
+      allow(@pg_result).to receive(:result_error_message).and_return("the query is empty")
       allow(@pg_result).to receive(:check_result).and_return(nil)
 
       pg_response = @fetcher.fetch
 
-      expect(pg_response.status).to eq('PGRES_EMPTY_QUERY')
-      expect(pg_response.message).to eq('the query is empty')
+      expect(pg_response.status).to eq("PGRES_EMPTY_QUERY")
+      expect(pg_response.message).to eq("the query is empty")
       expect(pg_response.fields).to eq(nil)
       expect(pg_response.records).to eq(nil)
     end
 
     it "fetch data from the postgres databases with a bad state" do
-      error_to_raise = PG::Error.new()
+      error_to_raise = PG::Error.new
 
-      allow(@pg_result).to receive(:res_status).and_return('PGRES_BAD_RESPONSE')
-      allow(@pg_result).to receive(:result_error_message).and_return('bad response')
+      allow(@pg_result).to receive(:res_status).and_return("PGRES_BAD_RESPONSE")
+      allow(@pg_result).to receive(:result_error_message).and_return("bad response")
       allow(@pg_result).to receive(:check_result).and_raise(error_to_raise)
 
-      expect {@fetcher.fetch}.to raise_exception(error_to_raise)
+      expect { @fetcher.fetch }.to raise_exception(error_to_raise)
     end
   end
 end
