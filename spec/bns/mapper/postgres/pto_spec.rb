@@ -12,7 +12,7 @@ RSpec.describe Mapper::Postgres::Pto do
     allow(pg_result).to receive(:values).and_return(values)
 
     @pg_response = Fetcher::Postgres::Types::Response.new(pg_result)
-    @mapper = described_class.new()
+    @mapper = described_class.new
   end
 
   describe "attributes and arguments" do
