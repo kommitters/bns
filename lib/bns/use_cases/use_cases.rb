@@ -4,6 +4,7 @@ require_relative "../fetcher/notion/birthday"
 require_relative "../mapper/notion/birthday"
 require_relative "../formatter/discord/birthday"
 
+require_relative "../fetcher/postgres/pto"
 require_relative "../fetcher/notion/pto"
 require_relative "../mapper/notion/pto"
 require_relative "../formatter/discord/pto"

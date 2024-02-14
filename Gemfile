@@ -16,3 +16,5 @@ gem "vcr"
 gem "webmock"
 
 gem "httparty"
+
+gem "pg", "~> 1.5", ">= 1.5.4"
