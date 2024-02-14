@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Dispatcher
-  module Exceptions
-    module Slack
+  module Slack
+    module Exceptions
       ##
       # Domain specific representation when an invalid webhook token is provided to Slack.
       #

@@ -41,7 +41,7 @@ module Dispatcher
       def validate_response(response)
         case response.http_code
         when 403
-          raise Exceptions::Slack::InvalidWebookToken, response.message
+          raise Dispatcher::Slack::Exceptions::InvalidWebookToken, response.message
         else
           response
         end

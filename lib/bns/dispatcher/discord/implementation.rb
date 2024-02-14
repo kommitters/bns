@@ -41,7 +41,7 @@ module Dispatcher
       def validate_response(response)
         case response.code
         when 50_027
-          raise Exceptions::Discord::InvalidWebookToken, response.message
+          raise Discord::Exceptions::InvalidWebookToken, response.message
         else
           response
         end

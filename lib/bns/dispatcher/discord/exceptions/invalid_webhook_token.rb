@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Dispatcher
-  module Exceptions
-    module Discord
+  module Discord
+    module Exceptions
       ##
       # Domain specific representation  when an invalid Discord webhook token is provided to Discord.
       #
