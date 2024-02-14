@@ -15,7 +15,7 @@ module Fetcher
           if response.res_status == SUCCESS_STATUS
             success_response(response)
           else
-            unsuccess_response(response)
+            failure_response(response)
           end
         end
 
@@ -29,7 +29,7 @@ module Fetcher
           @records = response.values
         end
 
-        def unsuccess_response(response)
+        def failure_response(response)
           @status = response.res_status
           @message = response.result_error_message
           @response = response

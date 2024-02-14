@@ -53,7 +53,7 @@ RSpec.describe Fetcher::Postgres::Pto do
       expect(pg_response.records).to eq(values)
     end
 
-    it "fetch data from the postgres database when there are not results" do
+    it "fetch data from the postgres database when there are no results" do
       allow(@pg_result).to receive(:fields).and_return([])
       allow(@pg_result).to receive(:values).and_return([])
       allow(@pg_result).to receive(:res_status).and_return("PGRES_TUPLES_OK")
@@ -67,7 +67,7 @@ RSpec.describe Fetcher::Postgres::Pto do
       expect(pg_response.records).to eq([])
     end
 
-    it "fetch data from the postgres databases with an unsucess status" do
+    it "fetch data from the postgres databases with a failure status" do
       allow(@pg_result).to receive(:res_status).and_return("PGRES_EMPTY_QUERY")
       allow(@pg_result).to receive(:result_error_message).and_return("the query is empty")
       allow(@pg_result).to receive(:check_result).and_return(nil)
