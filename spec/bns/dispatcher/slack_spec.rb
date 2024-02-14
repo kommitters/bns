@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../../../lib/bns/dispatcher/slack/implementation"
-require_relative "../../../lib/bns/dispatcher/slack/exceptions/invalid_webhook_token"
-
 RSpec.describe Dispatcher::Slack::Implementation do
   before do
     @config = {
@@ -30,6 +27,7 @@ RSpec.describe Dispatcher::Slack::Implementation do
 
         response = discords_dispatcher.dispatch(@payload)
 
+        expect(response).to be_an_instance_of(Dispatcher::Discord::Types::Response)
         expect(response.http_code).to eq(200)
       end
     end
@@ -39,6 +37,7 @@ RSpec.describe Dispatcher::Slack::Implementation do
         discords_dispatcher = described_class.new(@config)
 
         response = discords_dispatcher.dispatch("")
+        expect(response).to be_an_instance_of(Dispatcher::Discord::Types::Response)
         expect(response.http_code).to eq(400)
       end
     end
