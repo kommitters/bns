@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Dispatcher
-  module Discord
+  module Slack
     module Exceptions
       ##
-      # Domain specific representation  when an invalid Discord webhook token is provided to Discord.
+      # Domain specific representation when an invalid webhook token is provided to Slack.
       #
       class InvalidWebookToken < StandardError
         def initialize(message = "The provided Webhook token is invalid.")

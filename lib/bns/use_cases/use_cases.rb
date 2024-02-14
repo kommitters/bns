@@ -10,6 +10,7 @@ require_relative "../mapper/notion/pto"
 require_relative "../formatter/discord/pto"
 
 require_relative "../dispatcher/discord/implementation"
+require_relative "../dispatcher/slack/implementation"
 require_relative "use_case"
 require_relative "./types/config"
 
