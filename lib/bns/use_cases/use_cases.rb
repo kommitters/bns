@@ -153,4 +153,58 @@ module UseCases
 
     UseCases::UseCase.new(use_case_cofig)
   end
+
+  # Provides an instance of the PTO notifications from Postgres to Slack use case implementation.
+  #
+  # <br>
+  # <b>Example</b>
+  #
+  # options = {
+  #   fetch_options: {
+  #     connection: {
+  #       host: "localhost",
+  #       port: 5432,
+  #       dbname: "db_pto",
+  #       user: "postgres",
+  #       password: "postgres"
+  #     },
+  #     query: "SELECT * FROM db_pto"
+  #   },
+  #   dispatch_options:{
+  #     webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+  #     name: "Pto Bot"
+  #   },
+  #   format_options: {
+  #     template: "Custom template",
+  #     timezone: "-05:00"
+  #   }
+  # }
+  #
+  #   use_case = UseCases.notify_pto_from_postgres_to_slack(options)
+  #   use_case.perform
+  #
+  #   #################################################################################
+  #
+  #   Requirements:
+  #   * A connection to a Postgres database and a table with the following structure:
+  #
+  #         ________________________________________________________________________________________________________
+  #         |      Name (person)   |        start_date                       |       end_date                       |
+  #         | -------------------- | --------------------------------------- | ------------------------------------ |
+  #         |       John Doe       |       2024-02-19 00:00:00-05            |      2024-02-24 00:00:00-05          |
+  #         |       Jane Doe       |       2024-02-15 16:00:00-05            |      2024-02-15 17:00:00-05          |
+  #         ---------------------------------------------------------------------------------------------------------
+  #
+  #   * A webhook key, which can be generated directly on slack on the desired channel, following this instructions:
+  #     https://api.slack.com/messaging/webhooks#create_a_webhook
+  #
+  def self.notify_pto_from_postgres_to_slack(options)
+    fetcher = Fetcher::Postgres::Pto.new(options[:fetch_options])
+    mapper = Mapper::Postgres::Pto.new
+    formatter = Formatter::Slack::Pto.new(options[:format_options])
+    dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
+    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+
+    UseCases::UseCase.new(use_case_cofig)
+  end
 end
