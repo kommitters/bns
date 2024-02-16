@@ -6,9 +6,12 @@ require_relative "../formatter/discord/birthday"
 
 require_relative "../fetcher/postgres/pto"
 require_relative "../fetcher/notion/pto"
+
 require_relative "../mapper/notion/pto"
 require_relative "../mapper/postgres/pto"
+
 require_relative "../formatter/discord/pto"
+require_relative "../formatter/slack/pto"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
