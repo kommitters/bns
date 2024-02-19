@@ -26,7 +26,7 @@ module Mapper
         ptos = build_map(pg_response)
 
         ptos.map do |pto|
-          name = pto["individual_name"]
+          name = pto["name"]
           start_date = pto["start_date"]
           end_date = pto["end_date"]
 

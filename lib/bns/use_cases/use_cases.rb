@@ -188,12 +188,13 @@ module UseCases
   #   Requirements:
   #   * A connection to a Postgres database and a table with the following structure:
   #
-  #         ________________________________________________________________________________________________________
-  #         |      Name (person)   |        start_date                       |       end_date                       |
-  #         | -------------------- | --------------------------------------- | ------------------------------------ |
-  #         |       John Doe       |       2024-02-19 00:00:00-05            |      2024-02-24 00:00:00-05          |
-  #         |       Jane Doe       |       2024-02-15 16:00:00-05            |      2024-02-15 17:00:00-05          |
-  #         ---------------------------------------------------------------------------------------------------------
+  #          Column      |          Type          | Collation | Nullable |           Default
+  #     -----------------+------------------------+-----------+----------+------------------------------
+  #      id              | integer                |           | not null | generated always as identity
+  #      create_time     | date                   |           |          |
+  #      individual_name | character varying(255) |           |          |
+  #      start_date      | date                   |           |          |
+  #      end_date        | date                   |           |          |
   #
   #   * A webhook key, which can be generated directly on slack on the desired channel, following this instructions:
   #     https://api.slack.com/messaging/webhooks#create_a_webhook
