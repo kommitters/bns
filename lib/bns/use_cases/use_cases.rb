@@ -6,8 +6,12 @@ require_relative "../formatter/discord/birthday"
 
 require_relative "../fetcher/postgres/pto"
 require_relative "../fetcher/notion/pto"
+
 require_relative "../mapper/notion/pto"
+require_relative "../mapper/postgres/pto"
+
 require_relative "../formatter/discord/pto"
+require_relative "../formatter/slack/pto"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
@@ -145,6 +149,61 @@ module UseCases
     mapper = Mapper::Notion::Pto.new
     formatter = Formatter::Discord::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
+    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+
+    UseCases::UseCase.new(use_case_cofig)
+  end
+
+  # Provides an instance of the PTO notifications from Postgres to Slack use case implementation.
+  #
+  # <br>
+  # <b>Example</b>
+  #
+  # options = {
+  #   fetch_options: {
+  #     connection: {
+  #       host: "localhost",
+  #       port: 5432,
+  #       dbname: "db_pto",
+  #       user: "postgres",
+  #       password: "postgres"
+  #     },
+  #     query: "SELECT * FROM db_pto"
+  #   },
+  #   dispatch_options:{
+  #     webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+  #     name: "Pto Bot"
+  #   },
+  #   format_options: {
+  #     template: "Custom template",
+  #     timezone: "-05:00"
+  #   }
+  # }
+  #
+  #   use_case = UseCases.notify_pto_from_postgres_to_slack(options)
+  #   use_case.perform
+  #
+  #   #################################################################################
+  #
+  #   Requirements:
+  #   * A connection to a Postgres database and a table with the following structure:
+  #
+  #          Column      |          Type          | Collation | Nullable |           Default
+  #     -----------------+------------------------+-----------+----------+------------------------------
+  #      id              | integer                |           | not null | generated always as identity
+  #      create_time     | date                   |           |          |
+  #      individual_name | character varying(255) |           |          |
+  #      start_date      | date                   |           |          |
+  #      end_date        | date                   |           |          |
+  #
+  #   * A webhook key, which can be generated directly on slack on the desired channel, following this instructions:
+  #     https://api.slack.com/messaging/webhooks#create_a_webhook
+  #
+  def self.notify_pto_from_postgres_to_slack(options)
+    fetcher = Fetcher::Postgres::Pto.new(options[:fetch_options])
+    mapper = Mapper::Postgres::Pto.new
+    formatter = Formatter::Slack::Pto.new(options[:format_options])
+    dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
     UseCases::UseCase.new(use_case_cofig)

@@ -35,7 +35,7 @@ RSpec.describe Mapper::Notion::Pto do
     it { expect(@mapper).to respond_to(:map).with(1).arguments }
   end
 
-  describe ".format" do
+  describe ".map" do
     it "maps the given data into a domain specific one" do
       VCR.use_cassette("/notion/ptos/fetch_with_filter") do
         ptos_response = @fetcher.fetch
