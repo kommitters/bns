@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Fetcher::Notion::Pto do
+RSpec.describe Fetcher::Notion::PtoToday do
   before do
     @config = {
-      base_url: "https://api.notion.com",
       database_id: "b68d11061aad43bd89f8f525ede2b598",
-      secret: "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C",
-      filter: {}
+      secret: "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
     }
 
     @fetcher = described_class.new(@config)

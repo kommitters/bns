@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Fetcher::Notion::Birthday do
+RSpec.describe Fetcher::Notion::BirthdayToday do
   before do
     @config = {
-      base_url: "https://api.notion.com",
       database_id: "c17e556d16c84272beb4ee73ab709631",
-      secret: "secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B",
-      filter: {}
+      secret: "secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B"
     }
 
     @fetcher = described_class.new(@config)
