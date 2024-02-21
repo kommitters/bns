@@ -13,7 +13,7 @@ module Fetcher
           if response["results"].nil?
             @status_code = response["status"]
             @message = response["message"]
-            @results = nil
+            @results = []
           else
             @status_code = 200
             @message = "success"

@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require_relative "../fetcher/notion/birthday"
-require_relative "../mapper/notion/birthday"
-require_relative "../formatter/discord/birthday"
-
+require_relative "../fetcher/notion/use_case/birthday"
+require_relative "../fetcher/notion/use_case/pto"
 require_relative "../fetcher/postgres/pto"
-require_relative "../fetcher/notion/pto"
 
+require_relative "../mapper/notion/birthday"
 require_relative "../mapper/notion/pto"
 require_relative "../mapper/postgres/pto"
 
+require_relative "../formatter/discord/birthday"
 require_relative "../formatter/discord/pto"
 require_relative "../formatter/slack/pto"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
+
 require_relative "use_case"
 require_relative "./types/config"
 
@@ -77,7 +77,7 @@ module UseCases
   #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
   #
   def self.notify_birthday_from_notion_to_discord(options)
-    fetcher = Fetcher::Notion::Birthday.new(options[:fetch_options])
+    fetcher = Fetcher::Notion::BirthdayToday.new(options[:fetch_options])
     mapper = Mapper::Notion::Birthday.new
     formatter = Formatter::Discord::Birthday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
