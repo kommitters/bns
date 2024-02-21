@@ -145,7 +145,7 @@ module UseCases
   #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
   #
   def self.notify_pto_from_notion_to_discord(options)
-    fetcher = Fetcher::Notion::Pto.new(options[:fetch_options])
+    fetcher = Fetcher::Notion::PtoToday.new(options[:fetch_options])
     mapper = Mapper::Notion::Pto.new
     formatter = Formatter::Discord::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
