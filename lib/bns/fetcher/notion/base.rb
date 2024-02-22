@@ -12,14 +12,14 @@ module Fetcher
   module Notion
     ##
     # This class is an implementation of the Fetcher::Base interface, specifically designed
-    # for fetching birthday data from Notion.
+    # for fetching data from Notion.
     #
     class Base < Fetcher::Base
       NOTION_BASE_URL = "https://api.notion.com"
 
       protected
 
-      # Implements the data fetching logic for Birthdays data from Notion. It sends a POST
+      # Implements the data fetching logic for data from Notion. It sends a POST
       # request to the Notion API to query the specified database and returns a validated response.
       #
       # <br>

@@ -27,25 +27,10 @@ module UseCases
   #
   # <b>Example</b>
   #
-  #  "filter": {
-  #    "or": [
-  #        {
-  #         "property": "BD_this_year",
-  #         "date": {
-  #          "equals": today
-  #         }
-  #        }
-  #       ]
-  #     },
-  #    "sorts": []
-  #   }
-  #
   #   options = {
   #     fetch_options: {
-  #       base_url: "https://api.notion.com",
   #       database_id: NOTION_DATABASE_ID,
   #       secret: NOTION_API_INTEGRATION_SECRET,
-  #       filter: filter
   #     },
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
@@ -91,31 +76,10 @@ module UseCases
   # <br>
   # <b>Example</b>
   #
-  #   "filter": {
-  #     "and": [
-  #       {
-  #         property: "Desde?",
-  #         date: {
-  #           "on_or_before": today
-  #         }
-  #       },
-  #       {s
-  #         property: "Hasta?",
-  #         date: {
-  #           "on_or_after": today
-  #         }
-  #       }
-  #      ]
-  #    },
-  #    "sorts": []
-  #   }
-  #
   #   options = {
   #     fetch_options: {
-  #       base_url: "https://api.notion.com",
   #       database_id: NOTION_DATABASE_ID,
   #       secret: NOTION_API_INTEGRATION_SECRET,
-  #       filter: filter
   #     },
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
@@ -167,8 +131,7 @@ module UseCases
   #       dbname: "db_pto",
   #       user: "postgres",
   #       password: "postgres"
-  #     },
-  #     query: "SELECT * FROM db_pto"
+  #     }
   #   },
   #   dispatch_options:{
   #     webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",

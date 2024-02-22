@@ -5,14 +5,11 @@ require_relative "../base"
 module Fetcher
   module Postgres
     ##
-    # This class is an implementation of the Fetcher::Base interface, specifically designed
+    # This class is an implementation of the Fetcher::Postgres::Base interface, specifically designed
     # for fetching Paid Time Off (PTO) data from a Postgres Database.
     #
     class PtoToday < Base
-      # Implements the data fetching logic for PTO's data from a Postgres database. It use the PG gem
-      # to request data from a local or external database and returns a validated response.
-      #
-      # Gem: pg (https://rubygems.org/gems/pg)
+      # Implements the data fetching query for todays PTO data from a Postgres database.
       #
       def fetch
         execute(build_query)

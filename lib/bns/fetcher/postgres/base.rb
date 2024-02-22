@@ -10,11 +10,16 @@ module Fetcher
   module Postgres
     ##
     # This class is an implementation of the Fetcher::Base interface, specifically designed
-    # for fetching birthday data from Notion.
+    # for fetching data from Postgres.
     #
     class Base < Fetcher::Base
       protected
 
+      # Implements the data fetching logic from a Postgres database. It use the PG gem
+      # to request data from a local or external database and returns a validated response.
+      #
+      # Gem: pg (https://rubygems.org/gems/pg)
+      #
       def execute(query)
         pg_connection = PG::Connection.new(config[:connection])
 
