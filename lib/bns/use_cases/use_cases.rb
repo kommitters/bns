@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "../fetcher/notion/use_case/birthday"
-require_relative "../fetcher/notion/use_case/pto"
-require_relative "../fetcher/postgres/pto"
+require_relative "../fetcher/notion/use_case/birthday_today"
+require_relative "../fetcher/notion/use_case/pto_today"
+require_relative "../fetcher/postgres/use_case/pto_today"
 
 require_relative "../mapper/notion/birthday"
 require_relative "../mapper/notion/pto"
@@ -200,7 +200,7 @@ module UseCases
   #     https://api.slack.com/messaging/webhooks#create_a_webhook
   #
   def self.notify_pto_from_postgres_to_slack(options)
-    fetcher = Fetcher::Postgres::Pto.new(options[:fetch_options])
+    fetcher = Fetcher::Postgres::PtoToday.new(options[:fetch_options])
     mapper = Mapper::Postgres::Pto.new
     formatter = Formatter::Slack::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
