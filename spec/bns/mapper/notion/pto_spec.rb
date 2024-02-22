@@ -27,7 +27,7 @@ RSpec.describe Mapper::Notion::Pto do
         "sorts": []
       }
     }
-    @fetcher = Fetcher::Notion::Pto.new(fetcher_config)
+    @fetcher = Fetcher::Notion::PtoToday.new(fetcher_config)
   end
 
   describe "attributes and arguments" do

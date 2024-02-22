@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Fetcher::Postgres::Pto do
+RSpec.describe Fetcher::Postgres::PtoToday do
   before do
     today = "2024-02-14 16:40:08 UTC"
-    query = "SELECT * FROM pto WHERE start_date <= '#{today}' AND end_date >= '#{today}';"
 
     config = {
       connection: {
@@ -12,8 +11,7 @@ RSpec.describe Fetcher::Postgres::Pto do
         dbname: "db_pto",
         user: "postgres",
         password: "postgres"
-      },
-      query: query
+      }
     }
 
     @fetcher = described_class.new(config)
