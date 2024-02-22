@@ -15,14 +15,20 @@ module Fetcher
       # Gem: pg (https://rubygems.org/gems/pg)
       #
       def fetch
-        today = Time.now.utc.strftime('%F').to_s
+        execute(build_query)
+      end
+
+      private
+
+      def build_query
+        today = Time.now.utc.strftime("%F").to_s
 
         start_time = "#{today}T00:00:00"
         end_time = "#{today}T23:59:59"
 
-        query = "SELECT * FROM pto WHERE (start_date <= '#{today}' AND end_date >= '#{today}') OR (start_date>= '#{start_time}' AND end_date <= '#{end_time}')"
+        where = "(start_date <= $1 AND end_date >= $1) OR (start_date>= $2 AND end_date <= $3)"
 
-        execute(query)
+        ["SELECT * FROM pto WHERE #{where}", [today, start_time, end_time]]
       end
     end
   end

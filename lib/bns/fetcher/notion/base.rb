@@ -15,8 +15,7 @@ module Fetcher
     # for fetching birthday data from Notion.
     #
     class Base < Fetcher::Base
-
-      NOTION_BASE_URL = 'https://api.notion.com'
+      NOTION_BASE_URL = "https://api.notion.com"
 
       protected
 

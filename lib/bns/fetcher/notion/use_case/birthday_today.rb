@@ -19,15 +19,12 @@ module Fetcher
       # or invalid.
       #
       def fetch
-        today = Time.now.utc.strftime('%F').to_s
+        today = Time.now.utc.strftime("%F").to_s
 
         filter = {
-          filter:{
+          filter: {
             or: [
-              {
-                property: 'BD_this_year',
-                date: { equals: today }
-              }
+              { property: "BD_this_year", date: { equals: today } }
             ]
           }
         }

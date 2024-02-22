@@ -2,8 +2,6 @@
 
 RSpec.describe Fetcher::Postgres::PtoToday do
   before do
-    today = "2024-02-14 16:40:08 UTC"
-
     config = {
       connection: {
         host: "localhost",
@@ -36,7 +34,7 @@ RSpec.describe Fetcher::Postgres::PtoToday do
       allow(@pg_result).to receive(:values).and_return(values)
 
       allow(PG::Connection).to receive(:new).and_return(pg_conn)
-      allow(pg_conn).to receive(:exec).and_return(@pg_result)
+      allow(pg_conn).to receive(:exec_params).and_return(@pg_result)
     end
 
     it "fetch data from the postgres database when there are results" do

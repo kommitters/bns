@@ -19,13 +19,13 @@ module Fetcher
       # or invalid.
       #
       def fetch
-        today = Time.now.utc.strftime('%F').to_s
+        today = Time.now.utc.strftime("%F").to_s
 
         filter = {
           filter: {
             "and": [
-              { property: 'Desde?', date: { on_or_before: today } },
-              { property: 'Hasta?', date: { on_or_after: today } }
+              { property: "Desde?", date: { on_or_before: today } },
+              { property: "Hasta?", date: { on_or_after: today } }
             ]
           }
         }
