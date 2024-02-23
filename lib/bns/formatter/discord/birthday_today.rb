@@ -9,7 +9,7 @@ module Formatter
     ##
     # This class implementats the methods of the Formatter::Base module, specifically designed for formatting birthday
     # data in a way suitable for Discord messages.
-    class Birthday < Base
+    class BirthdayToday < Base
       # Implements the logic for building a formatted payload with the given template for birthdays.
       #
       # <br>

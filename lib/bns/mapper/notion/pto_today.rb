@@ -9,7 +9,7 @@ module Mapper
     # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
     # shaping PTO's data coming from a Fetcher::Base implementation.
     #
-    class Pto
+    class PtoToday
       include Base
 
       PTO_PARAMS = ["Person", "Desde?", "Hasta?"].freeze

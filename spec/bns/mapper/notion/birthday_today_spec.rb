@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mapper::Notion::Birthday do
+RSpec.describe Mapper::Notion::BirthdayToday do
   before do
     @mapper = described_class.new
     fetcher_config = {

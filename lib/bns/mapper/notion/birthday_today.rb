@@ -8,7 +8,7 @@ module Mapper
     ##
     # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
     # shaping birthdays data coming from a Fetcher::Base implementation.
-    class Birthday
+    class BirthdayToday
       include Base
 
       BIRTHDAY_PARAMS = ["Complete Name", "BD_this_year"].freeze

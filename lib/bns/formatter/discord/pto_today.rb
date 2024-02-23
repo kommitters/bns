@@ -8,7 +8,7 @@ module Formatter
     ##
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Discord messages.
-    class Pto < Base
+    class PtoToday < Base
       # Implements the logic for building a formatted payload with the given template for PTO's.
       #
       # <br>
@@ -47,8 +47,8 @@ module Formatter
       end
 
       def same_day_interval(pto)
-        time_start = format_timezone(pto.start_date).strftime("%I:%M:%S %P")
-        time_end = format_timezone(pto.end_date).strftime("%I:%M:%S %P")
+        time_start = format_timezone(pto.start_date).strftime("%I:%M %P")
+        time_end = format_timezone(pto.end_date).strftime("%I:%M %P")
 
         time_start == time_end ? "all day" : "today from #{time_start} to #{time_end}"
       end
