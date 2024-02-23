@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require_relative "../fetcher/notion/birthday"
-require_relative "../mapper/notion/birthday"
-require_relative "../formatter/discord/birthday"
+require_relative "../fetcher/notion/use_case/birthday_today"
+require_relative "../fetcher/notion/use_case/pto_today"
+require_relative "../fetcher/postgres/use_case/pto_today"
 
-require_relative "../fetcher/postgres/pto"
-require_relative "../fetcher/notion/pto"
+require_relative "../mapper/notion/birthday_today"
+require_relative "../mapper/notion/pto_today"
+require_relative "../mapper/postgres/pto_today"
 
-require_relative "../mapper/notion/pto"
-require_relative "../mapper/postgres/pto"
-
-require_relative "../formatter/discord/pto"
-require_relative "../formatter/slack/pto"
+require_relative "../formatter/discord/birthday_today"
+require_relative "../formatter/discord/pto_today"
+require_relative "../formatter/slack/pto_today"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
+
 require_relative "use_case"
 require_relative "./types/config"
 
@@ -27,25 +27,10 @@ module UseCases
   #
   # <b>Example</b>
   #
-  #  "filter": {
-  #    "or": [
-  #        {
-  #         "property": "BD_this_year",
-  #         "date": {
-  #          "equals": today
-  #         }
-  #        }
-  #       ]
-  #     },
-  #    "sorts": []
-  #   }
-  #
   #   options = {
   #     fetch_options: {
-  #       base_url: "https://api.notion.com",
   #       database_id: NOTION_DATABASE_ID,
   #       secret: NOTION_API_INTEGRATION_SECRET,
-  #       filter: filter
   #     },
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
@@ -77,9 +62,9 @@ module UseCases
   #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
   #
   def self.notify_birthday_from_notion_to_discord(options)
-    fetcher = Fetcher::Notion::Birthday.new(options[:fetch_options])
-    mapper = Mapper::Notion::Birthday.new
-    formatter = Formatter::Discord::Birthday.new(options[:format_options])
+    fetcher = Fetcher::Notion::BirthdayToday.new(options[:fetch_options])
+    mapper = Mapper::Notion::BirthdayToday.new
+    formatter = Formatter::Discord::BirthdayToday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -91,31 +76,10 @@ module UseCases
   # <br>
   # <b>Example</b>
   #
-  #   "filter": {
-  #     "and": [
-  #       {
-  #         property: "Desde?",
-  #         date: {
-  #           "on_or_before": today
-  #         }
-  #       },
-  #       {s
-  #         property: "Hasta?",
-  #         date: {
-  #           "on_or_after": today
-  #         }
-  #       }
-  #      ]
-  #    },
-  #    "sorts": []
-  #   }
-  #
   #   options = {
   #     fetch_options: {
-  #       base_url: "https://api.notion.com",
   #       database_id: NOTION_DATABASE_ID,
   #       secret: NOTION_API_INTEGRATION_SECRET,
-  #       filter: filter
   #     },
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
@@ -145,9 +109,9 @@ module UseCases
   #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
   #
   def self.notify_pto_from_notion_to_discord(options)
-    fetcher = Fetcher::Notion::Pto.new(options[:fetch_options])
-    mapper = Mapper::Notion::Pto.new
-    formatter = Formatter::Discord::Pto.new(options[:format_options])
+    fetcher = Fetcher::Notion::PtoToday.new(options[:fetch_options])
+    mapper = Mapper::Notion::PtoToday.new
+    formatter = Formatter::Discord::PtoToday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -167,8 +131,7 @@ module UseCases
   #       dbname: "db_pto",
   #       user: "postgres",
   #       password: "postgres"
-  #     },
-  #     query: "SELECT * FROM db_pto"
+  #     }
   #   },
   #   dispatch_options:{
   #     webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
@@ -200,9 +163,9 @@ module UseCases
   #     https://api.slack.com/messaging/webhooks#create_a_webhook
   #
   def self.notify_pto_from_postgres_to_slack(options)
-    fetcher = Fetcher::Postgres::Pto.new(options[:fetch_options])
-    mapper = Mapper::Postgres::Pto.new
-    formatter = Formatter::Slack::Pto.new(options[:format_options])
+    fetcher = Fetcher::Postgres::PtoToday.new(options[:fetch_options])
+    mapper = Mapper::Postgres::PtoToday.new
+    formatter = Formatter::Slack::PtoToday.new(options[:format_options])
     dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 

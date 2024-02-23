@@ -9,7 +9,7 @@ module Mapper
     # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
     # shaping PTO's data coming from the Fetcher::Postgres::Pto class.
     #
-    class Pto
+    class PtoToday
       # Implements the logic for shaping the results from a fetcher response.
       #
       # <br>

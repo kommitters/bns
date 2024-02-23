@@ -9,8 +9,10 @@ module Mapper
     # This class implementats the methods of the Mapper::Base module, specifically designed for preparing or
     # shaping PTO's data coming from a Fetcher::Base implementation.
     #
-    class Pto
+    class PtoToday
       include Base
+
+      PTO_PARAMS = ["Person", "Desde?", "Hasta?"].freeze
 
       # Implements the logic for shaping the results from a fetcher response.
       #
@@ -26,8 +28,9 @@ module Mapper
         return [] if notion_response.results.empty?
 
         normalized_notion_data = normalize_response(notion_response.results)
+
         normalized_notion_data.map do |pto|
-          Domain::Pto.new(pto["name"], format_date(pto["start"]), format_date(pto["end"]))
+          Domain::Pto.new(pto["Person"], pto["Desde?"], pto["Hasta?"])
         end
       end
 
@@ -36,39 +39,22 @@ module Mapper
       def normalize_response(response)
         return [] if response.nil?
 
-        normalized_response = []
-
         response.map do |value|
-          properties = value["properties"]
-          properties.delete("Name")
+          pto_fields = value["properties"].slice(*PTO_PARAMS)
 
-          normalized_value = normalize(properties)
+          pto_fields.each do |field, pto_value|
+            pto_fields[field] = extract_pto_value(field, pto_value)
+          end
 
-          normalized_response.append(normalized_value)
+          pto_fields
         end
-
-        normalized_response
       end
 
-      def normalize(properties)
-        normalized_value = {}
-
-        properties.each do |k, v|
-          extract_pto_fields(k, v, normalized_value)
-        end
-
-        normalized_value
-      end
-
-      def extract_pto_fields(key, value, normalized_value)
-        case key
-        when "Person"
-          user_name = extract_person_field_value(value)
-          normalized_value["name"] = user_name
-        when "Desde?"
-          normalized_value["start"] = extract_date_field_value(value)
-        when "Hasta?"
-          normalized_value["end"] = extract_date_field_value(value)
+      def extract_pto_value(field, value)
+        case field
+        when "Person" then extract_person_field_value(value)
+        when "Desde?" then extract_date_field_value(value)
+        when "Hasta?" then extract_date_field_value(value)
         end
       end
 
@@ -78,18 +64,6 @@ module Mapper
 
       def extract_date_field_value(data)
         data["date"]["start"]
-      end
-
-      def format_date(str_date)
-        return "" if str_date.nil?
-
-        if str_date.include?("T")
-          format = "%Y-%m-%d|%I:%M %p"
-          datetime = Time.new(str_date)
-          datetime.strftime(format)
-        else
-          str_date
-        end
       end
     end
   end

@@ -9,7 +9,7 @@ module Formatter
     ##
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Slack messages.
-    class Pto < Base
+    class PtoToday < Base
       # Initializes the Slack formatter with essential configuration parameters.
       #
       # <b>timezone</b> : expect an string with the time difference relative to the UTC: -05:00
@@ -56,8 +56,8 @@ module Formatter
       end
 
       def same_day_interval(pto)
-        time_start = format_timezone(pto.start_date).strftime("%I:%M:%S %P")
-        time_end = format_timezone(pto.end_date).strftime("%I:%M:%S %P")
+        time_start = format_timezone(pto.start_date).strftime("%I:%M %P")
+        time_end = format_timezone(pto.end_date).strftime("%I:%M %P")
 
         time_start == time_end ? "all day" : "today from #{time_start} to #{time_end}"
       end

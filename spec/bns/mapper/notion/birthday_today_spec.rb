@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mapper::Notion::Birthday do
+RSpec.describe Mapper::Notion::BirthdayToday do
   before do
     @mapper = described_class.new
     fetcher_config = {
@@ -21,7 +21,7 @@ RSpec.describe Mapper::Notion::Birthday do
         "sorts": []
       }
     }
-    @fetcher = Fetcher::Notion::Birthday.new(fetcher_config)
+    @fetcher = Fetcher::Notion::BirthdayToday.new(fetcher_config)
   end
 
   describe "attributes and arguments" do

@@ -8,7 +8,7 @@ module Formatter
     ##
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Discord messages.
-    class Pto < Base
+    class PtoToday < Base
       # Implements the logic for building a formatted payload with the given template for PTO's.
       #
       # <br>
@@ -34,15 +34,29 @@ module Formatter
       private
 
       def format_message_by_case(built_template, pto)
-        if pto.start_date.include?("|")
-          start_time = pto.start_date.split("|")
-          end_time = pto.end_date.split("|")
-          "#{built_template} #{start_time[1]} - #{end_time[1]}\n"
-        elsif pto.start_date == pto.end_date
-          "#{built_template} all day\n"
+        date_start = format_timezone(pto.start_date).strftime("%F")
+        date_end = format_timezone(pto.end_date).strftime("%F")
+
+        if date_start == date_end
+          interval = same_day_interval(pto)
+
+          "#{built_template} #{interval}\n"
         else
-          "#{built_template} #{pto.start_date} - #{pto.end_date}\n"
+          "#{built_template} from #{date_start} to #{date_end}\n"
         end
+      end
+
+      def same_day_interval(pto)
+        time_start = format_timezone(pto.start_date).strftime("%I:%M %P")
+        time_end = format_timezone(pto.end_date).strftime("%I:%M %P")
+
+        time_start == time_end ? "all day" : "today from #{time_start} to #{time_end}"
+      end
+
+      def format_timezone(date)
+        time_date = Time.new(date)
+
+        @timezone.nil? ? time_date : Time.at(time_date, in: @timezone)
       end
     end
   end

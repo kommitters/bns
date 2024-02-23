@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mapper::Postgres::Pto do
+RSpec.describe Mapper::Postgres::PtoToday do
   let(:fields) { %w[id individual_name start_date end_date] }
   let(:values) { [%w[5 2024-02-13 user1 2024-02-13 2024-02-14]] }
 
