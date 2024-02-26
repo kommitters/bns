@@ -9,6 +9,8 @@ module Formatter
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Discord messages.
     class PtoToday < Base
+      TEMPLATE = "individual_name is on PTO"
+
       # Implements the logic for building a formatted payload with the given template for PTO's.
       #
       # <br>
@@ -26,7 +28,7 @@ module Formatter
         raise Formatter::Discord::Exceptions::InvalidData unless ptos_list.all? { |pto| pto.is_a?(Domain::Pto) }
 
         ptos_list.reduce("") do |payload, pto|
-          built_template = build_template(Domain::Pto::ATTRIBUTES, pto)
+          built_template = build_template(TEMPLATE, Domain::Pto::ATTRIBUTES, pto)
           payload + format_message_by_case(built_template.gsub("\n", ""), pto)
         end
       end

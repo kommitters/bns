@@ -26,7 +26,7 @@ module Formatter
     attr_reader :template
 
     def initialize(config = {})
-      @template = config[:template]
+      @config = config
     end
 
     def format(_domain_data)
@@ -35,13 +35,13 @@ module Formatter
 
     protected
 
-    def build_template(attributes, instance)
-      formated_template = format_template(attributes, instance)
+    def build_template(template, attributes, instance)
+      formated_template = format_template(template, attributes, instance)
 
       "#{ERB.new(formated_template).result(binding)}\n"
     end
 
-    def format_template(attributes, _instance)
+    def format_template(template, attributes, _instance)
       attributes.reduce(template) do |formated_template, attribute|
         formated_template.gsub(attribute, "<%= instance.#{attribute} %>")
       end

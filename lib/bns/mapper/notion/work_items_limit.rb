@@ -17,7 +17,7 @@ module Mapper
         "kommit.engineering" => 5,
         "kommit.marketing" => 10,
         "kommit.ops" => 2
-      }
+      }.freeze
 
       # Implements the logic for shaping the results from a fetcher response.
       #

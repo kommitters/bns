@@ -10,6 +10,8 @@ module Formatter
     # This class implementats the methods of the Formatter::Base module, specifically designed for formatting birthday
     # data in a way suitable for Discord messages.
     class BirthdayToday < Base
+      TEMPLATE = "individual_name, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
+
       # Implements the logic for building a formatted payload with the given template for birthdays.
       #
       # <br>
@@ -28,7 +30,7 @@ module Formatter
                                                                  end
 
         birthdays_list.reduce("") do |payload, birthday|
-          payload + build_template(Domain::Birthday::ATTRIBUTES, birthday)
+          payload + build_template(TEMPLATE, Domain::Birthday::ATTRIBUTES, birthday)
         end
       end
     end

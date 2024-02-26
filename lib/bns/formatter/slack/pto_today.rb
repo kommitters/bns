@@ -10,6 +10,8 @@ module Formatter
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Slack messages.
     class PtoToday < Base
+      TEMPLATE = "individual_name is on PTO"
+
       # Initializes the Slack formatter with essential configuration parameters.
       #
       # <b>timezone</b> : expect an string with the time difference relative to the UTC: -05:00
@@ -35,7 +37,7 @@ module Formatter
         raise Formatter::Slack::Exceptions::InvalidData unless ptos_list.all? { |pto| pto.is_a?(Domain::Pto) }
 
         ptos_list.reduce("") do |payload, pto|
-          built_template = build_template(Domain::Pto::ATTRIBUTES, pto)
+          built_template = build_template(TEMPLATE, Domain::Pto::ATTRIBUTES, pto)
           payload + format_message_by_case(built_template.gsub("\n", ""), pto)
         end
       end
