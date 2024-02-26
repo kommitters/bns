@@ -15,13 +15,22 @@ module Fetcher
         filter = {
           filter: {
             "and": [
-              { property: "Status", status: { equals: "In Progress" } },
-              { property: "OK", formula: { string: { contains: "✅" } } }
+              { property: "OK", formula: { string: { contains: "✅" } } },
+              { "or": status_conditions }
             ]
           }
         }
 
         execute(filter)
+      end
+
+      private
+
+      def status_conditions
+        [
+          { property: "Status", status: { equals: "In Progress" } },
+          { property: "Status", status: { equals: "On Hold" } }
+        ]
       end
     end
   end

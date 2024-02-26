@@ -28,13 +28,11 @@ module Domain
 
     def domain_wip_limit(domain)
       case domain
-      when "kommit.admin" then 10
-      when "kommit.ops" then 10
-      when "kommit.solutions" then 10
-      when "kommit.sales" then 10
+      when "kommit.ops" then 5
+      when "kommit.sales" then 3
       when "kommit.marketing" then 4
       when "kommit.engineering" then 12
-      else 10
+      else 6
       end
     end
   end
