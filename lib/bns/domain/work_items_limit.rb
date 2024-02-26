@@ -2,15 +2,15 @@
 
 module Domain
   ##
-  # The Domain::WorkItem class provides a domain-specific representation of a Work Item object.
-  # It encapsulates information about a work item, including the title, status, and domain.
+  # The Domain::WorkItemsLimit class provides a domain-specific representation of a Work Item object.
+  # It encapsulates information about a work items limit, including the domain, total, and wip_limit.
   #
   class WorkItemsLimit
     attr_reader :domain, :total, :wip_limit
 
     ATTRIBUTES = %w[domain total wip_limit].freeze
 
-    # Initializes a Domain::WorkItem instance with the specified title and status.
+    # Initializes a Domain::WorkItemsLimit instance with the specified domain, total and wip_limit.
     #
     # <br>
     # <b>Params:</b>

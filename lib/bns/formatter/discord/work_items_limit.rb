@@ -13,11 +13,11 @@ module Formatter
 
       TEMPLATE = "The domain work-board wip limit was exceeded, total of wip_limit"
 
-      # Implements the logic for building a formatted payload with the given template for PTO's.
+      # Implements the logic for building a formatted payload with the given template for wip limits.
       #
       # <br>
       # <b>Params:</b>
-      # * <tt>List<Domain::Pto></tt> pto_list: List of mapped PTO's.
+      # * <tt>List<Domain::Pto></tt> work_items_list: List of mapped work items limits.
       #
       # <br>
       # <b>raises</b> <tt>Formatter::Discord::Exceptions::InvalidData</tt> when invalid data is provided.
