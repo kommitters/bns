@@ -2,7 +2,10 @@
 
 RSpec.describe Formatter::Discord::BirthdayToday do
   before do
-    @data = [Domain::Birthday.new("Jane Doe", "2024-01-11"), Domain::Birthday.new("John Doe", "2024-01-18")]
+    @data = [
+      Domain::Birthday.new("Jane Doe", "2024-01-11"),
+      Domain::Birthday.new("John Doe", "2024-01-18")
+    ]
     @formatter = described_class.new
   end
 
@@ -12,15 +15,12 @@ RSpec.describe Formatter::Discord::BirthdayToday do
   end
 
   describe ".format with a custom template" do
-    before do
-      config = { template: "individual_name, Wishing you a very happy birthday! :birthday: :gift:" }
-      @formatter = described_class.new(config)
-    end
+    before { @formatter = described_class.new }
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = "Jane Doe, Wishing you a very happy birthday! :birthday: :gift:\n" \
-                    "John Doe, Wishing you a very happy birthday! :birthday: :gift:\n"
+      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n" \
+                    "John Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)

@@ -9,7 +9,7 @@ module Formatter
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Discord messages.
     class PtoToday < Base
-      TEMPLATE = "individual_name is on PTO"
+      TEMPLATE = ":beach: individual_name is on PTO"
 
       # Implements the logic for building a formatted payload with the given template for PTO's.
       #

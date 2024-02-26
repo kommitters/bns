@@ -17,10 +17,7 @@ RSpec.describe Formatter::Discord::PtoToday do
   end
 
   describe ".format with custom template" do
-    before do
-      config = { template: ":beach: individual_name is on PTO" }
-      @formatter = described_class.new(config)
-    end
+    before { @formatter = described_class.new }
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)

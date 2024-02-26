@@ -18,11 +18,7 @@ RSpec.describe Formatter::Slack::PtoToday do
 
   describe ".format with custom template" do
     before do
-      config = {
-        template: ":beach: individual_name is on PTO",
-        timezone: "-05:00"
-      }
-
+      config = { timezone: "-05:00" }
       @formatter = described_class.new(config)
     end
 

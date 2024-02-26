@@ -10,7 +10,7 @@ module Formatter
     # This class is an implementation of the Formatter::Base interface, specifically designed for formatting PTO
     # data in a way suitable for Slack messages.
     class PtoToday < Base
-      TEMPLATE = "individual_name is on PTO"
+      TEMPLATE = ":beach: individual_name is on PTO"
 
       # Initializes the Slack formatter with essential configuration parameters.
       #
