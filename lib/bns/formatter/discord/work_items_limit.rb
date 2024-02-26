@@ -31,9 +31,15 @@ module Formatter
           work_item.is_a?(Domain::WorkItemsLimit)
         end
 
-        work_items_list.reduce("") do |payload, work_items_limit|
+        excedded_domains(work_items_list).reduce("") do |payload, work_items_limit|
           payload + build_template(TEMPLATE, Domain::WorkItemsLimit::ATTRIBUTES, work_items_limit)
         end
+      end
+
+      private
+
+      def excedded_domains(work_items_list)
+        work_items_list.filter { |work_item| work_item.total > work_item.wip_limit }
       end
     end
   end

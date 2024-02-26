@@ -18,10 +18,24 @@ module Domain
     # * <tt>String</tt> 'total' total 'in progress' work items.
     # * <tt>String</tt> 'wip_limit' maximum 'in progress' work items for the domain
     #
-    def initialize(domain, total, wip_limit)
+    def initialize(domain, total)
       @domain = domain
       @total = total
-      @wip_limit = wip_limit
+      @wip_limit = domain_wip_limit(domain)
+    end
+
+    private
+
+    def domain_wip_limit(domain)
+      case domain
+      when "kommit.admin" then 10
+      when "kommit.ops" then 10
+      when "kommit.solutions" then 10
+      when "kommit.sales" then 10
+      when "kommit.marketing" then 4
+      when "kommit.engineering" then 12
+      else 10
+      end
     end
   end
 end

@@ -13,12 +13,6 @@ module Mapper
 
       WORK_ITEM_PARAMS = ["Responsible domain"].freeze
 
-      DOMAIN_LIMITS = {
-        "kommit.engineering" => 5,
-        "kommit.marketing" => 10,
-        "kommit.ops" => 2
-      }.freeze
-
       # Implements the logic for shaping the results from a fetcher response.
       #
       # <br>
@@ -35,10 +29,9 @@ module Mapper
         normalized_notion_data = normalize_response(notion_response.results)
 
         domain_items_count = count_domain_items(normalized_notion_data)
-        exceeded_domains = filter_excedded_domains(domain_items_count)
 
-        exceeded_domains.map do |domain, items_count|
-          Domain::WorkItemsLimit.new(domain, items_count, DOMAIN_LIMITS[domain])
+        domain_items_count.map do |domain, items_count|
+          Domain::WorkItemsLimit.new(domain, items_count)
         end
       end
 
@@ -66,10 +59,6 @@ module Mapper
         domain_work_items = work_items_list.group_by { |work_item| work_item["Responsible domain"] }
 
         domain_work_items.transform_values(&:count)
-      end
-
-      def filter_excedded_domains(domain_items_count)
-        domain_items_count.filter { |domain, count| count > DOMAIN_LIMITS[domain] }
       end
     end
   end
