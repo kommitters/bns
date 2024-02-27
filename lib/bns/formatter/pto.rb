@@ -63,7 +63,7 @@ module Formatter
     end
 
     def format_timezone(date)
-      time_date = Time.new(date)
+      time_date = Time.new(date, in: "+00:00")
 
       @timezone.nil? ? time_date : Time.at(time_date, in: @timezone)
     end

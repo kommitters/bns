@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Formatter::Discord::WorkItemsLimit do
+RSpec.describe Formatter::WorkItemsLimit do
   before do
     @data = [
       Domain::WorkItemsLimit.new("kommit.admin", 1),
@@ -16,7 +16,13 @@ RSpec.describe Formatter::Discord::WorkItemsLimit do
   end
 
   describe ".format with custom template" do
-    before { @formatter = described_class.new }
+    before do
+      options = {
+        template: "The domain work-board wip limit was exceeded, total of wip_limit"
+      }
+
+      @formatter = described_class.new(options)
+    end
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
@@ -29,7 +35,7 @@ RSpec.describe Formatter::Discord::WorkItemsLimit do
     it "raises an exception when data is not Domain::Pto type" do
       invalid_data = [{ domain: "kommit.marketing", total: 6 }]
 
-      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Discord::Exceptions::InvalidData)
+      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Exceptions::InvalidData)
     end
   end
 end
