@@ -6,10 +6,10 @@ module Fetcher
   module Notion
     ##
     # This class is an implementation of the Fetcher::Notion::Base interface, specifically designed
-    # for counting "in progess" WI from the engineering work board in Notion.
+    # for counting "in progress" work items from work item database in Notion.
     #
     class WorkItemsLimit < Notion::Base
-      # Implements the data fetching count of "in progess" work items from Notion.
+      # Implements the data fetching count of "in progress" work items from Notion.
       #
       def fetch
         filter = {

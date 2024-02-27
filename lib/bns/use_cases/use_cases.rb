@@ -68,9 +68,9 @@ module UseCases
     mapper = Mapper::Notion::BirthdayToday.new
     formatter = Formatter::Birthday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
-    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(use_case_cofig)
+    UseCases::UseCase.new(use_case_config)
   end
 
   # Provides an instance of the PTO notifications from Notion to Discord use case implementation.
@@ -115,9 +115,9 @@ module UseCases
     mapper = Mapper::Notion::PtoToday.new
     formatter = Formatter::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
-    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(use_case_cofig)
+    UseCases::UseCase.new(use_case_config)
   end
 
   # Provides an instance of the PTO notifications from Postgres to Slack use case implementation.
@@ -169,9 +169,9 @@ module UseCases
     mapper = Mapper::Postgres::PtoToday.new
     formatter = Formatter::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
-    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(use_case_cofig)
+    UseCases::UseCase.new(use_case_config)
   end
 
   # Provides an instance of the Work Items wip limit notifications from Notion to Discord use case implementation.
@@ -216,8 +216,8 @@ module UseCases
     mapper = Mapper::Notion::WorkItemsLimit.new
     formatter = Formatter::WorkItemsLimit.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
-    use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
-    UseCases::UseCase.new(use_case_cofig)
+    UseCases::UseCase.new(use_case_config)
   end
 end
