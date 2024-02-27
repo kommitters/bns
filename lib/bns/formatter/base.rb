@@ -10,8 +10,17 @@ module Formatter
   # formatters tailored to different use cases.
   #
   class Base
-    # A method meant to give an specified format depending on the implementation to the data coming from an
-    # implementation of the Mapper::Base interface.
+    attr_reader :template
+
+    # Initializes the fetcher with essential configuration parameters.
+    #
+    def initialize(config = {})
+      @config = config
+      @template = config[:template]
+    end
+
+    # This method is designed to provide a specified format for data from any implementation of
+    # the Mapper::Base interface.
     # Must be overridden by subclasses, with specific logic based on the use case.
     #
     # <br>
@@ -23,25 +32,19 @@ module Formatter
     #
     # <b>returns</b> <tt>String</tt> Formatted payload suitable for a Dispatcher::Base implementation.
     #
-    attr_reader :template
-
-    def initialize(config = {})
-      @config = config
-    end
-
     def format(_domain_data)
       raise Domain::Exceptions::FunctionNotImplemented
     end
 
     protected
 
-    def build_template(template, attributes, instance)
-      formated_template = format_template(template, attributes, instance)
+    def build_template(attributes, instance)
+      formated_template = format_template(attributes, instance)
 
       "#{ERB.new(formated_template).result(binding)}\n"
     end
 
-    def format_template(template, attributes, _instance)
+    def format_template(attributes, _instance)
       attributes.reduce(template) do |formated_template, attribute|
         formated_template.gsub(attribute, "<%= instance.#{attribute} %>")
       end

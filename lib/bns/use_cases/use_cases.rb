@@ -10,10 +10,9 @@ require_relative "../mapper/notion/pto_today"
 require_relative "../mapper/notion/work_items_limit"
 require_relative "../mapper/postgres/pto_today"
 
-require_relative "../formatter/discord/birthday_today"
-require_relative "../formatter/discord/pto_today"
-require_relative "../formatter/discord/work_items_limit"
-require_relative "../formatter/slack/pto_today"
+require_relative "../formatter/birthday"
+require_relative "../formatter/pto"
+require_relative "../formatter/work_items_limit"
 
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
@@ -67,7 +66,7 @@ module UseCases
   def self.notify_birthday_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::BirthdayToday.new(options[:fetch_options])
     mapper = Mapper::Notion::BirthdayToday.new
-    formatter = Formatter::Discord::BirthdayToday.new
+    formatter = Formatter::Birthday.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -114,7 +113,7 @@ module UseCases
   def self.notify_pto_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::PtoToday.new(options[:fetch_options])
     mapper = Mapper::Notion::PtoToday.new
-    formatter = Formatter::Discord::PtoToday.new
+    formatter = Formatter::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -168,7 +167,7 @@ module UseCases
   def self.notify_pto_from_postgres_to_slack(options)
     fetcher = Fetcher::Postgres::PtoToday.new(options[:fetch_options])
     mapper = Mapper::Postgres::PtoToday.new
-    formatter = Formatter::Slack::PtoToday.new
+    formatter = Formatter::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Slack::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
@@ -215,7 +214,7 @@ module UseCases
   def self.notify_wip_limit_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::WorkItemsLimit.new(options[:fetch_options])
     mapper = Mapper::Notion::WorkItemsLimit.new
-    formatter = Formatter::Discord::WorkItemsLimit.new
+    formatter = Formatter::WorkItemsLimit.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_cofig = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
