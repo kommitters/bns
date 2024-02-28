@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2 (28.02.2024)
+- [Add a Postgres fetcher component](https://github.com/kommitters/bns/issues/28)
+- [Use case - PTO's Postgres-Slack implementation](https://github.com/kommitters/bns/issues/30)
+- [Slack dispatcher](https://github.com/kommitters/bns/issues/32)
+- [Refactor fetcher components](https://github.com/kommitters/bns/issues/34)
+- [Add Use Case - Boards WI alerts](https://github.com/kommitters/bns/issues/36)
+- [Add Use Case - Next Week Birthday](https://github.com/kommitters/bns/issues/38)
+- [Add Use Case - Next Week PTO's](https://github.com/kommitters/bns/issues/39)
+
 ## 0.1.1 (07.02.2024)
 - [Add custom templates option](https://github.com/kommitters/bns/issues/25)
 - [PTO's formatting use cases](https://github.com/kommitters/bns/issues/24)
