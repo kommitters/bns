@@ -86,6 +86,10 @@ module UseCases
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
   #       name: "Birthday Bot"
+  #     },
+  #     format_options: {
+  #       template: "individual_name, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:",
+  #       timezone: "-05:00"
   #     }
   #   }
   #

@@ -19,7 +19,7 @@ RSpec.describe Fetcher::Notion::BirthdayNextWeek do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/birthdays_next_week/fetch_without_filter") do
+      VCR.use_cassette("/notion/birthdays_next_week/fetch_with_filter") do
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 

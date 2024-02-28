@@ -19,37 +19,8 @@ RSpec.describe Fetcher::Notion::BirthdayToday do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/birthdays/fetch_without_filter") do
-        birthdays_fetcher = described_class.new(@config)
-        fetched_data = birthdays_fetcher.fetch
-
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
-        expect(fetched_data.results).to be_an_instance_of(Array)
-        expect(fetched_data.results.length).to eq(27)
-      end
-    end
-
-    it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("/notion/birthdays/fetch_with_filter") do
-        config = @config.merge(
-          {
-            filter: {
-              "filter": {
-                "or": [
-                  {
-                    "property": "BD_this_year",
-                    "date": {
-                      "equals": "2024-01-24"
-                    }
-                  }
-                ]
-              },
-              "sorts": []
-            }
-          }
-        )
-
-        birthdays_fetcher = described_class.new(config)
+        birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
