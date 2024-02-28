@@ -2,6 +2,7 @@
 
 require_relative "../fetcher/notion/use_case/birthday_today"
 require_relative "../fetcher/notion/use_case/pto_today"
+require_relative "../fetcher/notion/use_case/pto_next_week"
 require_relative "../fetcher/notion/use_case/work_items_limit"
 require_relative "../fetcher/postgres/use_case/pto_today"
 
@@ -112,6 +113,53 @@ module UseCases
   #
   def self.notify_pto_from_notion_to_discord(options)
     fetcher = Fetcher::Notion::PtoToday.new(options[:fetch_options])
+    mapper = Mapper::Notion::PtoToday.new
+    formatter = Formatter::Pto.new(options[:format_options])
+    dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+
+    UseCases::UseCase.new(use_case_config)
+  end
+
+  # Provides an instance of the next week PTO notifications from Notion to Discord use case implementation.
+  #
+  # <br>
+  # <b>Example</b>
+  #
+  #   options = {
+  #     fetch_options: {
+  #       database_id: NOTION_DATABASE_ID,
+  #       secret: NOTION_API_INTEGRATION_SECRET,
+  #     },
+  #     dispatch_options: {
+  #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
+  #       name: "Pto Bot"
+  #     }
+  #   }
+  #
+  #   use_case = UseCases.notify_next_week_pto_from_notion_to_discord(options)
+  #   use_case.perform
+  #
+  #   #################################################################################
+  #
+  #   Requirements:
+  #   * Notion database ID, from a database with the following structure:
+  #
+  #         ________________________________________________________________________________________________________
+  #         |    Person (person)   |        Desde? (date)                    |       Hasta? (date)                  |
+  #         | -------------------- | --------------------------------------- | ------------------------------------ |
+  #         |       John Doe       |       January 24, 2024                  |      January 27, 2024                |
+  #         |       Jane Doe       |       November 11, 2024 2:00 PM         |      November 11, 2024 6:00 PM       |
+  #         ---------------------------------------------------------------------------------------------------------
+  #
+  #   * A Notion secret, which can be obtained, by creating an integration here: `https://developers.notion.com/`,
+  #     browsing on the <View my integations> option, and selecting the <New Integration> or <Create new>
+  #     integration** buttons.
+  #   * A webhook key, which can be generated directly on discrod on the desired channel, following this instructions:
+  #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+  #
+  def self.notify_next_week_pto_from_notion_to_discord(options)
+    fetcher = Fetcher::Notion::PtoNextWeek.new(options[:fetch_options])
     mapper = Mapper::Notion::PtoToday.new
     formatter = Formatter::Pto.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
