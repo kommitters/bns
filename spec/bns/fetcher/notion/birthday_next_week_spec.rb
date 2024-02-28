@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Fetcher::Notion::BirthdayToday do
+RSpec.describe Fetcher::Notion::BirthdayNextWeek do
   before do
     @config = {
-      database_id: "c17e556d16c84272beb4ee73ab709631",
-      secret: "secret_BELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51B"
+      database_id: "5aebbdc871864f4fbab5596a41a81a01",
+      secret: "secret_K5UCqm27GvAscTlaGJmS2se4fyM1K7is3OIZMw03NaC"
     }
 
     @fetcher = described_class.new(@config)
@@ -19,7 +19,7 @@ RSpec.describe Fetcher::Notion::BirthdayToday do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/birthdays/fetch_with_filter") do
+      VCR.use_cassette("/notion/birthdays_next_week/fetch_with_filter") do
         birthdays_fetcher = described_class.new(@config)
         fetched_data = birthdays_fetcher.fetch
 
@@ -30,9 +30,9 @@ RSpec.describe Fetcher::Notion::BirthdayToday do
     end
 
     it "fetch empty data from the given configured notion database" do
-      VCR.use_cassette("/notion/birthdays/fetch_with_empty_database") do
+      VCR.use_cassette("/notion/birthdays_next_week/fetch_with_empty_database") do
         config = @config
-        config[:database_id] = "a3de68d2848a4eceb9418ff6bf44d086"
+        config[:database_id] = "8187370982134ed099f9d14385aa81c9"
 
         birthday_fetcher = described_class.new(config)
         fetched_data = birthday_fetcher.fetch
@@ -44,9 +44,9 @@ RSpec.describe Fetcher::Notion::BirthdayToday do
     end
 
     it "raises an exception caused by invalid database_id provided" do
-      VCR.use_cassette("/notion/birthdays/fetch_with_invalid_database_id") do
+      VCR.use_cassette("/notion/birthdays_next_week/fetch_with_invalid_database_id") do
         config = @config
-        config[:database_id] = "a17e556d16c84272beb4ee73ab709630"
+        config[:database_id] = "c17e556d16c84272beb4ee73ab709631"
         birthday_fetcher = described_class.new(@config)
 
         expected_exception = "Could not find database with ID: c17e556d-16c8-4272-beb4-ee73ab709631. " \
@@ -59,7 +59,7 @@ RSpec.describe Fetcher::Notion::BirthdayToday do
     end
 
     it "raise an exception caused by invalid or incorrect api_key provided" do
-      VCR.use_cassette("/notion/birthdays/fetch_with_invalid_api_key") do
+      VCR.use_cassette("/notion/birthdays_next_week/fetch_with_invalid_api_key") do
         config = @config
         config[:secret] = "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
         birthday_fetcher = described_class.new(config)
