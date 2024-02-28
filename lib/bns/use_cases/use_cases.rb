@@ -134,6 +134,10 @@ module UseCases
   #     dispatch_options: {
   #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
   #       name: "Pto Bot"
+  #     },
+  #     format_options: {
+  #       template: ":beach: individual_name its going to be on PTO next week,",
+  #       timezone: "-05:00"
   #     }
   #   }
   #

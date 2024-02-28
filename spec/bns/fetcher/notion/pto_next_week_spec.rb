@@ -19,7 +19,7 @@ RSpec.describe Fetcher::Notion::PtoNextWeek do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/pto_next_week/fetch_without_filter") do
+      VCR.use_cassette("/notion/pto_next_week/fetch_with_filter") do
         pto_fetcher = described_class.new(@config)
         fetched_data = pto_fetcher.fetch
 

@@ -19,41 +19,8 @@ RSpec.describe Fetcher::Notion::PtoToday do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/ptos/fetch_without_filter") do
-        pto_fetcher = described_class.new(@config)
-        fetched_data = pto_fetcher.fetch
-
-        expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
-        expect(fetched_data.results).to be_an_instance_of(Array)
-        expect(fetched_data.results.length).to eq(7)
-      end
-    end
-
-    it "fetch data from the given configured notion database using the provided filter" do
       VCR.use_cassette("/notion/ptos/fetch_with_filter") do
-        config = @config.merge(
-          filter: {
-            "filter": {
-              "and": [
-                {
-                  property: "Desde?",
-                  date: {
-                    "on_or_before": "2024-01-24"
-                  }
-                },
-                {
-                  property: "Hasta?",
-                  date: {
-                    "on_or_after": "2024-01-24"
-                  }
-                }
-              ]
-            },
-            "sorts": []
-          }
-        )
-
-        pto_fetcher = described_class.new(config)
+        pto_fetcher = described_class.new(@config)
         fetched_data = pto_fetcher.fetch
 
         expect(fetched_data).to be_an_instance_of(Fetcher::Notion::Types::Response)
