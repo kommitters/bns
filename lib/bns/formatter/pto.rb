@@ -48,8 +48,9 @@ module Formatter
 
       if date_start == date_end
         interval = same_day_interval(pto)
+        day_message = today?(date_start) ? "today" : "the day #{date_start}"
 
-        "#{built_template} #{interval}\n"
+        "#{built_template} #{day_message} #{interval}\n"
       else
         "#{built_template} from #{date_start} to #{date_end}\n"
       end
@@ -59,13 +60,17 @@ module Formatter
       time_start = format_timezone(pto.start_date).strftime("%I:%M %P")
       time_end = format_timezone(pto.end_date).strftime("%I:%M %P")
 
-      time_start == time_end ? "all day" : "today from #{time_start} to #{time_end}"
+      time_start == time_end ? "all day" : "from #{time_start} to #{time_end}"
     end
 
     def format_timezone(date)
-      time_date = Time.new(date, in: "+00:00")
+      @timezone.nil? ? Time.new(date) : Time.new(date, in: @timezone)
+    end
 
-      @timezone.nil? ? time_date : Time.at(time_date, in: @timezone)
+    def today?(date)
+      time_now = Time.now.strftime("%F")
+
+      date == format_timezone(time_now).strftime("%F")
     end
   end
 end

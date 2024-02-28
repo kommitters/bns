@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Fetcher::Notion::PtoToday do
+RSpec.describe Fetcher::Notion::PtoNextWeek do
   before do
     @config = {
-      database_id: "b68d11061aad43bd89f8f525ede2b598",
-      secret: "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
+      database_id: "8187370982134ed099f9d14385aa81c9",
+      secret: "secret_K5UCqm27GvAscTlaGJmS2se4fyM1K7is3OIZMw03NaC"
     }
 
     @fetcher = described_class.new(@config)
@@ -19,7 +19,7 @@ RSpec.describe Fetcher::Notion::PtoToday do
 
   describe ".fetch" do
     it "fetch data from the given configured notion database" do
-      VCR.use_cassette("/notion/ptos/fetch_with_filter") do
+      VCR.use_cassette("/notion/pto_next_week/fetch_with_filter") do
         pto_fetcher = described_class.new(@config)
         fetched_data = pto_fetcher.fetch
 
@@ -30,9 +30,9 @@ RSpec.describe Fetcher::Notion::PtoToday do
     end
 
     it "fetch empty data from the given configured notion database" do
-      VCR.use_cassette("/notion/ptos/fetch_with_empty_database") do
+      VCR.use_cassette("/notion/pto_next_week/fetch_with_empty_database") do
         config = @config
-        config[:database_id] = "86772de276d24ed986713640919edf96"
+        config[:database_id] = "68bcbb5f76e14e5eb00ff6726bd90f6c"
 
         pto_fetcher = described_class.new(config)
         fetched_data = pto_fetcher.fetch
@@ -44,7 +44,7 @@ RSpec.describe Fetcher::Notion::PtoToday do
     end
 
     it "raises an exception caused by invalid database_id provided" do
-      VCR.use_cassette("/notion/ptos/fetch_with_invalid_database_id") do
+      VCR.use_cassette("/notion/pto_next_week/fetch_with_invalid_database_id") do
         config = @config
         config[:database_id] = "b68d11061aad43bd89f8f525ede2b598"
         pto_fetcher = described_class.new(config)
@@ -57,7 +57,7 @@ RSpec.describe Fetcher::Notion::PtoToday do
     end
 
     it "raises an exception caused by invalid or incorrect api_key provided" do
-      VCR.use_cassette("/notion/ptos/fetch_with_invalid_api_key") do
+      VCR.use_cassette("/notion/pto_next_week/fetch_with_invalid_api_key") do
         config = @config
         config[:secret] = "secret_ZELfDH6cf4Glc9NLPLxvsvdl9iZVD4qBCyMDXqch51C"
         pto_fetcher = described_class.new(config)
