@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Formatter::Discord::BirthdayToday do
+RSpec.describe Formatter::Birthday do
   before do
-    @data = [Domain::Birthday.new("Jane Doe", "2024-01-11"), Domain::Birthday.new("John Doe", "2024-01-18")]
+    @data = [
+      Domain::Birthday.new("Jane Doe", "2024-01-11"),
+      Domain::Birthday.new("John Doe", "2024-01-18")
+    ]
     @formatter = described_class.new
   end
 
@@ -13,14 +16,15 @@ RSpec.describe Formatter::Discord::BirthdayToday do
 
   describe ".format with a custom template" do
     before do
-      config = { template: "individual_name, Wishing you a very happy birthday! :birthday: :gift:" }
-      @formatter = described_class.new(config)
+      template = "individual_name, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:"
+
+      @formatter = described_class.new({ template: template })
     end
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = "Jane Doe, Wishing you a very happy birthday! :birthday: :gift:\n" \
-                    "John Doe, Wishing you a very happy birthday! :birthday: :gift:\n"
+      expectation = "Jane Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n" \
+                    "John Doe, Wishing you a very happy birthday! Enjoy your special day! :birthday: :gift:\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)
@@ -30,7 +34,7 @@ RSpec.describe Formatter::Discord::BirthdayToday do
       invalid_data = [{ name: "John Doe", birth_date: "2024-01-18" },
                       { name: "Jane Doe", birth_date: "2024-01-19" }]
 
-      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Discord::Exceptions::InvalidData)
+      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Exceptions::InvalidData)
     end
   end
 end

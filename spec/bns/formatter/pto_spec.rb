@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Formatter::Discord::PtoToday do
+RSpec.describe Formatter::Pto do
   before do
     @data = [
       Domain::Pto.new("Range PTO", "2024-01-11", "2024-01-13"),
@@ -18,13 +18,17 @@ RSpec.describe Formatter::Discord::PtoToday do
 
   describe ".format with custom template" do
     before do
-      config = { template: ":beach: individual_name is on PTO" }
-      @formatter = described_class.new(config)
+      options = {
+        template: ":beach: individual_name is on PTO",
+        timezone: "-05:00"
+      }
+
+      @formatter = described_class.new(options)
     end
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = ":beach: Range PTO is on PTO from 2024-01-11 to 2024-01-13\n" \
+      expectation = ":beach: Range PTO is on PTO from 2024-01-10 to 2024-01-12\n" \
                     ":beach: Time PTO is on PTO today from 07:00 am to 12:00 pm\n" \
                     ":beach: Day PTO is on PTO all day\n"
 
@@ -36,7 +40,7 @@ RSpec.describe Formatter::Discord::PtoToday do
       invalid_data = [{ name: "John Doe", start: "2024-01-18", end: "2024-01-18" },
                       { name: "Jane Doe", start: "2024-01-19", end: "2024-01-23" }]
 
-      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Discord::Exceptions::InvalidData)
+      expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Exceptions::InvalidData)
     end
   end
 end
