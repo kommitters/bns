@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 (28.02.2024)
+## 0.2.0 (29.02.2024)
 - [Add a Postgres fetcher component](https://github.com/kommitters/bns/issues/28)
 - [Use case - PTO's Postgres-Slack implementation](https://github.com/kommitters/bns/issues/30)
 - [Slack dispatcher](https://github.com/kommitters/bns/issues/32)
