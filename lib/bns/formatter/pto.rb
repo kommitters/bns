@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "date"
+
 require_relative "../domain/pto"
 require_relative "./exceptions/invalid_data"
 require_relative "./base"
@@ -64,7 +66,9 @@ module Formatter
     end
 
     def format_timezone(date)
-      @timezone.nil? ? Time.new(date) : Time.new(date, in: @timezone)
+      date_time = DateTime.parse(date).to_time
+
+      @timezone.nil? ? date_time : Time.at(date_time, in: @timezone)
     end
 
     def today?(date)
