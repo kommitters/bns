@@ -17,7 +17,7 @@ module Formatter
     def initialize(config = {})
       super(config)
 
-      @timezone = config[:timezone]
+      @timezone = config[:timezone] || "00:00"
     end
 
     # Implements the logic for building a formatted payload with the given template for PTO's.
@@ -66,15 +66,21 @@ module Formatter
     end
 
     def format_timezone(date)
-      date_time = DateTime.parse(date).to_time
+      date_time = build_date(date)
 
-      @timezone.nil? ? date_time : Time.at(date_time, in: @timezone)
+      Time.at(date_time, in: @timezone)
     end
 
     def today?(date)
       time_now = Time.now.strftime("%F")
 
       date == format_timezone(time_now).strftime("%F")
+    end
+
+    def build_date(date)
+      date_time = date.include?("T") ? date : "#{date}T00:00:00.000#{@timezone}"
+
+      DateTime.parse(date_time).to_time
     end
   end
 end
