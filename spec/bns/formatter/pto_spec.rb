@@ -4,7 +4,8 @@ RSpec.describe Formatter::Pto do
   before do
     @data = [
       Domain::Pto.new("Range PTO", "2024-01-11", "2024-01-13"),
-      Domain::Pto.new("Time PTO", "2024-02-22T07:00:00.000", "2024-02-22T12:00:00.000"),
+      Domain::Pto.new("Time PTO", "2024-03-13T08:00:00.000-05:00", "2024-03-13T12:00:00.000-05:00"),
+      Domain::Pto.new("Time PTO", "2024-03-13T18:00:00.000", "2024-03-13T19:00:00.000"),
       Domain::Pto.new("Day PTO", "2024-01-11", "2024-01-11")
     ]
   end
@@ -29,7 +30,8 @@ RSpec.describe Formatter::Pto do
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
       expectation = ":beach: Range PTO is on PTO from 2024-01-11 to 2024-01-13\n" \
-                    ":beach: Time PTO is on PTO the day 2024-02-22 from 07:00 am to 12:00 pm\n" \
+                    ":beach: Time PTO is on PTO the day 2024-03-13 from 08:00 am to 12:00 pm\n" \
+                    ":beach: Time PTO is on PTO the day 2024-03-13 from 01:00 pm to 02:00 pm\n" \
                     ":beach: Day PTO is on PTO the day 2024-01-11 all day\n"
 
       expect(formatted_message).to be_an_instance_of(String)
