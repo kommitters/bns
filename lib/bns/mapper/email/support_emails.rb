@@ -15,16 +15,16 @@ module Mapper
       #
       # <br>
       # <b>Params:</b>
-      # * <tt>Fetcher::Imap::Types::Response</tt> iamp_response: Array of imap emails data.
+      # * <tt>Fetcher::Imap::Types::Response</tt> imap_response: Array of imap emails data.
       #
       # <br>
       # <b>return</b> <tt>List<Domain::SupportEmail></tt> support_emails_list, mapped support emails to be used by a
       # Formatter::Base implementation.
       #
-      def map(iamp_response)
-        return [] if iamp_response.empty?
+      def map(imap_response)
+        return [] if imap_response.results.empty?
 
-        normalized_email_data = normalize_response(iamp_response)
+        normalized_email_data = normalize_response(imap_response.results)
 
         normalized_email_data.map do |email|
           Domain::SupportEmail.new(email['subject'], email['sender'], email['date'])

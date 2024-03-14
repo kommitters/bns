@@ -1,21 +1,28 @@
 # frozen_string_literal: true
 
+# fetcher
 require_relative "../fetcher/notion/use_case/birthday_today"
 require_relative "../fetcher/notion/use_case/birthday_next_week"
 require_relative "../fetcher/notion/use_case/pto_today"
 require_relative "../fetcher/notion/use_case/pto_next_week"
 require_relative "../fetcher/notion/use_case/work_items_limit"
 require_relative "../fetcher/postgres/use_case/pto_today"
+require_relative "../fetcher/imap/use_case/support_emails"
 
+# mapper
 require_relative "../mapper/notion/birthday_today"
 require_relative "../mapper/notion/pto_today"
 require_relative "../mapper/notion/work_items_limit"
 require_relative "../mapper/postgres/pto_today"
+require_relative "../mapper/email/support_emails"
 
+# formatter
 require_relative "../formatter/birthday"
 require_relative "../formatter/pto"
 require_relative "../formatter/work_items_limit"
+require_relative "../formatter/support_emails"
 
+# dispatcher
 require_relative "../dispatcher/discord/implementation"
 require_relative "../dispatcher/slack/implementation"
 
@@ -320,6 +327,48 @@ module UseCases
     fetcher = Fetcher::Notion::WorkItemsLimit.new(options[:fetch_options])
     mapper = Mapper::Notion::WorkItemsLimit.new
     formatter = Formatter::WorkItemsLimit.new(options[:format_options])
+    dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
+    use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
+
+    UseCases::UseCase.new(use_case_config)
+  end
+
+  # Provides an instance of the support emails from an google IMAP server to Discord use case implementation.
+  #
+  # <br>
+  # <b>Example</b>
+  #
+  #   options = {
+  #     fetch_options: {
+  #       user: 'info@email.co',
+  #       refresh_token: REFRESH_TOKEN,
+  #       client_id: CLIENT_ID,
+  #       client_secret: CLIENT_SECRET,
+  #       inbox: 'INBOX',
+  #       search_email: 'support@email.co'
+  #     },
+  #     dispatch_options: {
+  #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
+  #       name: "emailSupport"
+  #     }
+  #   }
+  #
+  #   use_case = UseCases.notify_support_email_from_imap_to_discord(options)
+  #   use_case.perform
+  #
+  #   #################################################################################
+  #
+  #   Requirements:
+  #   * A google gmail account with IMAP support activated.
+  #   * A set of authorization parameters like a client_id, client_secret, and a resfresh_token. To
+  #     generate them, follow this instructions: https://developers.google.com/identity/protocols/oauth2
+  #   * A webhook key, which can be generated directly on discrod on the desired channel, following this instructions:
+  #     https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+  #
+  def self.notify_support_email_from_imap_to_discord(options)
+    fetcher = Fetcher::Imap::SupportEmails.new(options[:fetch_options])
+    mapper = Mapper::Imap::SupportEmails.new
+    formatter = Formatter::SupportEmails.new(options[:format_options])
     dispatcher = Dispatcher::Discord::Implementation.new(options[:dispatch_options])
     use_case_config = UseCases::Types::Config.new(fetcher, mapper, formatter, dispatcher)
 
