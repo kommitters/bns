@@ -18,3 +18,5 @@ gem "webmock"
 gem "httparty"
 
 gem "pg", "~> 1.5", ">= 1.5.4"
+
+gem "gmail_xoauth"
