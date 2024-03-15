@@ -4,7 +4,7 @@ require_relative "../../domain/support_email"
 require_relative "../base"
 
 module Mapper
-  module Email
+  module Imap
     ##
     # This class implementats the methods of the Mapper::Base module, specifically designed for
     # preparing or shaping support emails data coming from a Fetcher::Base implementation.

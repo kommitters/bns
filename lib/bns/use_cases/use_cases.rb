@@ -14,7 +14,7 @@ require_relative "../mapper/notion/birthday_today"
 require_relative "../mapper/notion/pto_today"
 require_relative "../mapper/notion/work_items_limit"
 require_relative "../mapper/postgres/pto_today"
-require_relative "../mapper/email/support_emails"
+require_relative "../mapper/imap/support_emails"
 
 # formatter
 require_relative "../formatter/birthday"
