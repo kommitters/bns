@@ -22,7 +22,13 @@ module Domain
     def initialize(subject, sender, date)
       @subject = subject
       @sender = sender
-      @date = date
+      @date = parse_to_datetime(date)
+    end
+
+    private
+
+    def parse_to_datetime(date)
+      DateTime.parse(date).to_time
     end
   end
 end

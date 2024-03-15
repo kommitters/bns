@@ -10,9 +10,8 @@ module Formatter
   # Domain::SupportEmail structure for a dispatcher.
   class SupportEmails < Base
     DEFAULT_TIME_ZONE = "+00:00"
-    DEFAULT_FRECUENCY = 0
 
-    # Initializes the Slack formatter with essential configuration parameters.
+    # Initializes the formatter with essential configuration parameters.
     #
     # <b>timezone</b> : expect an string with the time difference relative to the UTC. Example: "-05:00"
     def initialize(config = {})
@@ -48,18 +47,32 @@ module Formatter
 
     def process_emails(emails)
       emails = update_timezone(emails)
+      emails = filter_by_frecuency(emails) unless @frecuency.nil?
+      emails = format_timestamp(emails)
 
       emails
     end
 
     def update_timezone(emails)
-      emails.each { |email| email.date = set_timezone(email.date).strftime("%c") }
+      emails.each { |email| email.date = set_timezone(email.date) }
+    end
+
+    def filter_by_frecuency(emails)
+      emails.filter { |email| email.date > time_window }
+    end
+
+    def format_timestamp(emails)
+      emails.each { |email| email.date = email.date.strftime("%F %r") }
+    end
+
+    def time_window
+      date_time = Time.now - (60 * 60 * @frecuency)
+
+      set_timezone(date_time)
     end
 
     def set_timezone(date)
-      date_time = DateTime.parse(date).to_time
-
-      Time.at(date_time, in: @timezone)
+      Time.at(date, in: @timezone)
     end
   end
 end
