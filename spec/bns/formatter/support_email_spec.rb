@@ -26,8 +26,8 @@ RSpec.describe Formatter::SupportEmails do
 
     it "format the given data into a specific message" do
       formatted_message = @formatter.format(@data)
-      expectation = ":warning: The user1@mail.com has requested support the 2024-03-13T12:00:00.000-05:00\n" \
-                    ":warning: The user2@mail.com has requested support the 2024-03-13T12:00:00.000-05:00\n"
+      expectation = ":warning: The user1@mail.com has requested support the Wed Mar 13 17:00:00 2024\n" \
+                    ":warning: The user2@mail.com has requested support the Wed Mar 13 17:00:00 2024\n"
 
       expect(formatted_message).to be_an_instance_of(String)
       expect(formatted_message).to eq(expectation)

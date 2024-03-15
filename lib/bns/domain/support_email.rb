@@ -6,7 +6,8 @@ module Domain
   # It encapsulates information about a support email, including the subject, the sender, and the date.
   #
   class SupportEmail
-    attr_reader :subject, :sender, :date
+    attr_reader :subject, :sender
+    attr_accessor :date
 
     ATTRIBUTES = %w[subject sender date].freeze
 

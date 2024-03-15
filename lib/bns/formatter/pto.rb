@@ -11,13 +11,15 @@ module Formatter
   # This class implements methods from the Formatter::Base module, tailored to format the
   # Domain::Pto structure for a dispatcher.
   class Pto < Base
+    DEFAULT_TIME_ZONE = "+00:00"
+
     # Initializes the Slack formatter with essential configuration parameters.
     #
     # <b>timezone</b> : expect an string with the time difference relative to the UTC. Example: "-05:00"
     def initialize(config = {})
       super(config)
 
-      @timezone = config[:timezone] || "00:00"
+      @timezone = config[:timezone] || DEFAULT_TIME_ZONE
     end
 
     # Implements the logic for building a formatted payload with the given template for PTO's.
