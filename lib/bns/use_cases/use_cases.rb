@@ -348,7 +348,7 @@ module UseCases
   #       search_email: 'support@email.co'
   #     },
   #     dispatch_options: {
-  #       webhook: "https://discord.com/api/webhooks/1199213527672565760/KmpoIzBet9xYG16oFh8W1RWHbpIqT7UtTBRrhfLcvWZdNiVZCTM-gpil2Qoy4eYEgpdf",
+  #       webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
   #       name: "emailSupport"
   #     }
   #   }
