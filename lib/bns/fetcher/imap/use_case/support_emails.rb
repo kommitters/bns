@@ -16,8 +16,8 @@ module Fetcher
       # Implements the data fetching filter for support emails from Google Gmail.
       #
       def fetch
-        today = (Time.now - (60 * 60 * 24)).strftime("%e-%b-%Y")
-        query = ["TO", config[:search_email], "SINCE", today]
+        yesterday = (Time.now - (60 * 60 * 24)).strftime("%e-%b-%Y")
+        query = ["TO", config[:search_email], "SINCE", yesterday]
 
         execute(EMAIL_DOMAIN, EMAIL_PORT, TOKEN_URI, query)
       end
