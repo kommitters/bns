@@ -3,12 +3,12 @@
 RSpec.describe Fetcher::Imap::SupportEmails do
   before do
     config = {
-      user: 'user@mail.co',
-      refresh_token: '123456789',
-      client_id: '987654321',
+      user: "user@mail.co",
+      refresh_token: "123456789",
+      client_id: "987654321",
       client_secret: "secret123",
-      inbox: 'INBOX',
-      search_email: 'support@mail.co'
+      inbox: "INBOX",
+      search_email: "support@mail.co"
     }
 
     @fetcher = described_class.new(config)
@@ -23,7 +23,7 @@ RSpec.describe Fetcher::Imap::SupportEmails do
 
   describe ".fetch" do
     let(:body) { "{\"access_token\":\"ABCDEFG\"}" }
-    let(:response) { double('http_respose', body: body) }
+    let(:response) { double("http_respose", body: body) }
 
     let(:imap) do
       stub = {
@@ -32,7 +32,7 @@ RSpec.describe Fetcher::Imap::SupportEmails do
         logout: true,
         disconnect: true,
         search: [1, 2, 3, 4],
-        fetch: [double('email', attr: { "ENVELOPE" => "email_envelope" })]
+        fetch: [double("email", attr: { "ENVELOPE" => "email_envelope" })]
       }
 
       instance_double(Net::IMAP, stub)
@@ -43,7 +43,7 @@ RSpec.describe Fetcher::Imap::SupportEmails do
       allow(Net::IMAP).to receive(:new).and_return(imap)
     end
 
-    it 'fetch emails from the IMAP when there are results' do
+    it "fetch emails from the IMAP when there are results" do
       fetched_data = @fetcher.fetch
 
       expect(fetched_data).to be_an_instance_of(Fetcher::Imap::Types::Response)

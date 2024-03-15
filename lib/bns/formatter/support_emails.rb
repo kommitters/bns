@@ -46,19 +46,10 @@ module Formatter
     private
 
     def process_emails(emails)
-      emails = update_timezone(emails)
-      emails = filter_by_frecuency(emails) unless @frecuency.nil?
-      emails = format_timestamp(emails)
+      emails.each { |email| email.date = at_timezone(email.date) }
+      emails.filter! { |email| email.date > time_window } unless @frecuency.nil?
 
-      emails
-    end
-
-    def update_timezone(emails)
-      emails.each { |email| email.date = set_timezone(email.date) }
-    end
-
-    def filter_by_frecuency(emails)
-      emails.filter { |email| email.date > time_window }
+      format_timestamp(emails)
     end
 
     def format_timestamp(emails)
@@ -68,10 +59,10 @@ module Formatter
     def time_window
       date_time = Time.now - (60 * 60 * @frecuency)
 
-      set_timezone(date_time)
+      at_timezone(date_time)
     end
 
-    def set_timezone(date)
+    def at_timezone(date)
       Time.at(date, in: @timezone)
     end
   end

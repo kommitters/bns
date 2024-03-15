@@ -27,7 +27,7 @@ module Mapper
         normalized_email_data = normalize_response(imap_response.results)
 
         normalized_email_data.map do |email|
-          Domain::SupportEmail.new(email['subject'], email['sender'], email['date'])
+          Domain::SupportEmail.new(email["subject"], email["sender"], email["date"])
         end
       end
 
@@ -46,8 +46,8 @@ module Mapper
       end
 
       def extract_sender(value)
-        mailbox = value.sender[0]['mailbox']
-        host = value.sender[0]['host']
+        mailbox = value.sender[0]["mailbox"]
+        host = value.sender[0]["host"]
 
         "#{mailbox}@#{host}"
       end

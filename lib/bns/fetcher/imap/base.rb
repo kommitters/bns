@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'net/imap'
-require 'gmail_xoauth'
+require "net/imap"
+require "gmail_xoauth"
 
 require_relative "../base"
 require_relative "./types/response"
@@ -32,7 +32,7 @@ module Fetcher
       def imap_fetch(email_domain, email_port, query, access_token)
         imap = Net::IMAP.new(email_domain, port: email_port, ssl: true)
 
-        imap.authenticate('XOAUTH2', config[:user], access_token)
+        imap.authenticate("XOAUTH2", config[:user], access_token)
 
         imap.examine(config[:inbox])
 
@@ -59,10 +59,10 @@ module Fetcher
 
       def params
         {
-          'grant_type' => 'refresh_token',
-          'refresh_token' => config[:refresh_token],
-          'client_id' => config[:client_id],
-          'client_secret' => config[:client_secret]
+          "grant_type" => "refresh_token",
+          "refresh_token" => config[:refresh_token],
+          "client_id" => config[:client_id],
+          "client_secret" => config[:client_secret]
         }
       end
     end
