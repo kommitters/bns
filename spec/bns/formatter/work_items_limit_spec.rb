@@ -18,7 +18,8 @@ RSpec.describe Formatter::WorkItemsLimit do
   describe ".format with custom template" do
     before do
       options = {
-        template: "The domain work-board wip limit was exceeded, total of wip_limit"
+        template: "The domain work-board wip limit was exceeded",
+        limits: { "kommit.marketing": 4 }
       }
 
       @formatter = described_class.new(options)
