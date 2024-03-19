@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../domain/support_email"
+require_relative "../../domain/email"
 require_relative "../base"
 
 module Mapper
@@ -18,7 +18,7 @@ module Mapper
       # * <tt>Fetcher::Imap::Types::Response</tt> imap_response: Array of imap emails data.
       #
       # <br>
-      # <b>return</b> <tt>List<Domain::SupportEmail></tt> support_emails_list, mapped support emails to be used by a
+      # <b>return</b> <tt>List<Domain::Email></tt> support_emails_list, mapped support emails to be used by a
       # Formatter::Base implementation.
       #
       def map(imap_response)
@@ -27,7 +27,7 @@ module Mapper
         normalized_email_data = normalize_response(imap_response.results)
 
         normalized_email_data.map do |email|
-          Domain::SupportEmail.new(email["subject"], email["sender"], email["date"])
+          Domain::Email.new(email["subject"], email["sender"], email["date"])
         end
       end
 

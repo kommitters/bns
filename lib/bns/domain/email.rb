@@ -2,20 +2,20 @@
 
 module Domain
   ##
-  # The Domain::SupportEmail class provides a domain-specific representation of an SupporEmail object.
-  # It encapsulates information about a support email, including the subject, the sender, and the date.
+  # The Domain::Email class provides a domain-specific representation of an Email object.
+  # It encapsulates information about an email, including the subject, the sender, and the date.
   #
-  class SupportEmail
+  class Email
     attr_reader :subject, :sender
     attr_accessor :date
 
     ATTRIBUTES = %w[subject sender date].freeze
 
-    # Initializes a Domain::SupportEmail instance with the specified subject, sender, and date.
+    # Initializes a Domain::Email instance with the specified subject, sender, and date.
     #
     # <br>
     # <b>Params:</b>
-    # * <tt>String</tt> eamil subject.
+    # * <tt>String</tt> email subject.
     # * <tt>String</tt> Email of the sender.
     # * <tt>String</tt> Reception date
     #

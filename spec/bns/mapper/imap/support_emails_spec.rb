@@ -15,10 +15,10 @@ RSpec.describe Mapper::Imap::SupportEmails do
   end
 
   describe ".map" do
-    it "maps the given data into an array of Domain::SupportEmail instances" do
+    it "maps the given data into an array of Domain::Email instances" do
       mapped_data = @mapper.map(@imap_response)
 
-      are_emails = mapped_data.all? { |element| element.is_a?(Domain::SupportEmail) }
+      are_emails = mapped_data.all? { |element| element.is_a?(Domain::Email) }
 
       expect(mapped_data).to be_an_instance_of(Array)
       expect(mapped_data.length).to eq(1)

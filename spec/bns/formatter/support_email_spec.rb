@@ -3,8 +3,8 @@
 RSpec.describe Formatter::SupportEmails do
   before do
     @data = [
-      Domain::SupportEmail.new("error1", "user1@mail.com", "2024-03-13T12:00:00.000-05:00"),
-      Domain::SupportEmail.new("error2", "user2@mail.com", "2024-03-13T12:00:00.000-05:00")
+      Domain::Email.new("error1", "user1@mail.com", "2024-03-13T12:00:00.000-05:00"),
+      Domain::Email.new("error2", "user2@mail.com", "2024-03-13T12:00:00.000-05:00")
     ]
   end
 
@@ -33,7 +33,7 @@ RSpec.describe Formatter::SupportEmails do
       expect(formatted_message).to eq(expectation)
     end
 
-    it "raises an exception when data is not Domain::SupportEmail type" do
+    it "raises an exception when data is not Domain::Email type" do
       invalid_data = [{ subject: "error", sender: "user1@mail.com", date: "2024-01-18" }]
 
       expect { @formatter.format(invalid_data) }.to raise_exception(Formatter::Exceptions::InvalidData)
