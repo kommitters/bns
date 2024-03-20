@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 (19.03.2024)
+- [Add Component - Email fetcher](https://github.com/kommitters/bns/issues/40)
+- [Use case - Email based notifications](https://github.com/kommitters/bns/issues/45)
+- [Dynamic WIP limit value](https://github.com/kommitters/bns/issues/48)
+
 ## 0.2.0 (29.02.2024)
 - [Add a Postgres fetcher component](https://github.com/kommitters/bns/issues/28)
 - [Use case - PTO's Postgres-Slack implementation](https://github.com/kommitters/bns/issues/30)
