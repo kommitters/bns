@@ -34,4 +34,10 @@ Gem::Specification.new do |spec|
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+
+  spec.post_install_message = <<-MESSAGE
+  !    The 'BNS' gem has been deprecated and has been replaced by 'BAS'.
+  !    See: https://rubygems.org/gems/bas
+  !    And: https://github.com/kommitters/bas
+  MESSAGE
 end
